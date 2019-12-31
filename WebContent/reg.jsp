@@ -33,7 +33,7 @@
 
 <!-- Body -->
 <body>
-	<FORM METHOD=POST ACTION="register">
+	<FORM METHOD=POST ACTION="RegisterServlet">
 		<h1>普通用户注册</h1>
 		<div class="container w3layouts agileits">
 
@@ -55,7 +55,6 @@
 			</div>
 			<div class="register w3layouts agileits">
 				<h2>注 册</h2>
-
 				<input type="text" Name="username" placeholder="用户名" required>
 				<input type="text" Name="email" placeholder="邮箱" required> <input
 					type="password" Name="pwd" placeholder="密码" required> <input

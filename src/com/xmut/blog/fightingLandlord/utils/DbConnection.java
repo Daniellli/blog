@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @since 2019-12-30 14:18:51
  */
 public class DbConnection {
-	private static String url = "jdbc:mysql://localhost:3306/db_exam?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8"; // ���ݿ��ַ
+	private static String url = "jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8"; // ���ݿ��ַ
 	private static String userName = "root"; // 数据库账号
 	private static String passWord = "123456";// 数据库密码
 	private static Connection con = null;
@@ -93,7 +93,7 @@ public class DbConnection {
 		} finally {
 			closeAll();
 		}
-		return false;
+		return flag;
 	}
 
 	public ResultSet query(String sql, Object... obj) {

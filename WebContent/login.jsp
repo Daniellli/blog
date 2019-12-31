@@ -16,20 +16,7 @@
 
 <script type="application/x-javascript">
 	
-	
-	
-	
-	
-	
-	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-
-
-
-
-
-
-
 </script>
 <!-- //Meta-Tags -->
 
@@ -47,7 +34,7 @@
 		<div class="login w3layouts agileits">
 
 			<h2>登 录</h2>
-			<form action="checklogin.jsp" method="post">
+			<form action="LoginServlet" method="post">
 				<input type="text" Name="username" placeholder="用户名" required
 					lay-verify="required|identity" autocomplete="off"> <input
 					type="password" Name="pwd" placeholder="密码" required
