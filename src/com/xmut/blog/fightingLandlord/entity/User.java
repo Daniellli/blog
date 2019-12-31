@@ -14,13 +14,46 @@ public class User {
 	private Integer userAge;//用户年龄
 	private String userEmail;//用户邮箱
 	private Integer userType;//用户类型，用户、管理员
+	private String userQuestion;//密保问题
+	private String userAnswer;//密保答案
+	private String userTelephone;//密保答案
+	
+	
+
+	public String getUserQuestion() {
+		return userQuestion;
+	}
+
+	public String getUserTelephone() {
+		return userTelephone;
+	}
+
+	public void setUserTelephone(String userTelephone) {
+		this.userTelephone = userTelephone;
+	}
+
+	public void setUserQuestion(String userQuestion) {
+		this.userQuestion = userQuestion;
+	}
+
+	public String getUserAnswer() {
+		return userAnswer;
+	}
+
+	public void setUserAnswer(String userAnswer) {
+		this.userAnswer = userAnswer;
+	}
 
 	public User() {
 		super();
 	}
 
+
+
+
+
 	public User(Integer userId, String userName, String userPwd, Integer userSex, Integer userAge, String userEmail,
-			Integer userType) {
+			Integer userType, String userQuestion, String userAnswer, String userTelephone) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -29,6 +62,9 @@ public class User {
 		this.userAge = userAge;
 		this.userEmail = userEmail;
 		this.userType = userType;
+		this.userQuestion = userQuestion;
+		this.userAnswer = userAnswer;
+		this.userTelephone = userTelephone;
 	}
 
 	public Integer getUserId() {
