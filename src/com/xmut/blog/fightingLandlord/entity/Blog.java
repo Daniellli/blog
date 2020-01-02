@@ -8,6 +8,7 @@ package com.xmut.blog.fightingLandlord.entity;
 public class Blog {
 	private Integer blogId;  //博客id
 	private Integer userId;//用户id
+	private String blogName;
 	private Integer blogThumbup;//点赞数量
 	private String blogContent;//博客内容
 	private String blogAudio;//博客视频地址
@@ -59,6 +60,14 @@ public class Blog {
 	}
 	public void setBlogPhoto(String blogPhoto) {
 		this.blogPhoto = blogPhoto;
+	}
+
+	public String getBlogName() {
+		return blogName;
+	}
+
+	public void setBlogName(String blogName) {
+		this.blogName = blogName;
 	}
 	
 	
