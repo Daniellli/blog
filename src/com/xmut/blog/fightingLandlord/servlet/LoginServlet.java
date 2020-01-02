@@ -24,9 +24,6 @@ public class LoginServlet extends HttpServlet {
 
 		String username = request.getParameter("username");
 		String pwd = request.getParameter("pwd");
-
-		System.out.println(username + " " + pwd);
-
 		UserBiz userBiz = new UserBizImp();
 		User currentUser = userBiz.checkLogin(username, pwd);
 		PrintWriter out = response.getWriter();
