@@ -22,6 +22,11 @@ public class Category {
 		super();
 	}
 
+	public Category(Integer cId) {
+		super();
+		this.cId = cId;
+	}
+
 	public Integer getcId() {
 		return cId;
 	}

@@ -72,8 +72,8 @@
 								<a class="dropdown-item" href="http://localhost:8080/blog/GetCategoryServlet">PostBlog</a>
 								<a class="dropdown-item" href="content/single.html">Single</a> <a
 									class="dropdown-item" href="content/category.html">Category</a>
-								<a class="dropdown-item" href="content/search.html">Search</a> <a
-									class="dropdown-item" href="content/archive.html">Archive</a> <a
+								<a class="dropdown-item" href="content/search.jsp">Search</a> <a
+									class="dropdown-item" href="http://localhost:8080/blog/GetAllBlog">Refresh</a> <a
 									class="dropdown-item" href="content/generic.html">Generic</a> <a
 									class="dropdown-item" href="content/elements.html">Elements</a>
 								<c:choose>

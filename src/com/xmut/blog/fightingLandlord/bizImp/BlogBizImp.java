@@ -1,5 +1,7 @@
 package com.xmut.blog.fightingLandlord.bizImp;
 
+import java.util.List;
+
 import com.xmut.blog.fightingLandlord.biz.BlogBiz;
 import com.xmut.blog.fightingLandlord.dao.BlogDao;
 import com.xmut.blog.fightingLandlord.dao.UserDao;
@@ -32,6 +34,20 @@ public class BlogBizImp implements BlogBiz {
 			return false;
 		}
 		return dao.updateBlog(blog);
+	}
+
+	@Override
+	public List<Blog> autoComplete(String key) {
+		List<Blog> list = null;
+		if (key != null && !key.equals("")) {
+			list = dao.autoComplete(key);
+		}
+		return list;
+	}
+
+	@Override
+	public List<Blog> getAllBlog() {
+		return dao.getAllBlog();
 	}
 
 }

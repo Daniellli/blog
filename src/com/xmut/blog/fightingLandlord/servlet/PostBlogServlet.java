@@ -35,7 +35,7 @@ public class PostBlogServlet extends HttpServlet {
 		Blog b = new Blog();
 		b.setBlogContent(content);
 		b.setBlogName(title);
-		b.setCategoryId(category);
+		b.setCategory(new Category(category));
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("currentUser");
 		b.setUserId(user.getUserId());

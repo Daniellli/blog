@@ -1,27 +1,39 @@
 package com.xmut.blog.fightingLandlord.entity;
 
+import java.util.List;
+
 /**
- * blog table 
+ * blog table
+ * 
  * @author Daniel
  * @since 2019年12月31日 下午1:40:03
  */
 public class Blog {
-	private Integer blogId;  //博客id
-	private Integer userId;//用户id
+	private Integer blogId; // 博客id
+	private Integer userId;// 用户id
 	private String blogName;
-	private Integer blogThumbup;//点赞数量
-	private String blogContent;//博客内容
-	private String blogAudio;//博客视频地址
-	private String blogVideo;//博客音频地址
-	private String blogPhoto;//博客图片地址
-	private Integer categoryId;//博客分类
-	
+	private Integer blogThumbup;// 点赞数量
+	private String blogContent;// 博客内容
+	private String blogAudio;// 博客视频地址
+	private String blogVideo;// 博客音频地址
+	private String blogPhoto;// 博客图片地址
+	private Category category;// 博客分类
+	private List<Comment> comments;// 用戶评论
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	public Blog() {
 		super();
 	}
-	
+
 	public Blog(Integer blogId, Integer userId, String blogName, Integer blogThumbup, String blogContent,
-			String blogAudio, String blogVideo, String blogPhoto, Integer categoryId) {
+			String blogAudio, String blogVideo, String blogPhoto, Category category) {
 		super();
 		this.blogId = blogId;
 		this.userId = userId;
@@ -31,48 +43,69 @@ public class Blog {
 		this.blogAudio = blogAudio;
 		this.blogVideo = blogVideo;
 		this.blogPhoto = blogPhoto;
-		this.categoryId = categoryId;
+		this.category = category;
 	}
 
 	public Integer getBlogId() {
 		return blogId;
 	}
+
 	public void setBlogId(Integer blogId) {
 		this.blogId = blogId;
 	}
+
 	public Integer getUserId() {
 		return userId;
 	}
+
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+
 	public Integer getBlogThumbup() {
 		return blogThumbup;
 	}
+
 	public void setBlogThumbup(Integer blogThumbup) {
 		this.blogThumbup = blogThumbup;
 	}
+
 	public String getBlogContent() {
 		return blogContent;
 	}
+
 	public void setBlogContent(String blogContent) {
 		this.blogContent = blogContent;
 	}
+
 	public String getBlogAudio() {
 		return blogAudio;
 	}
+
 	public void setBlogAudio(String blogAudio) {
 		this.blogAudio = blogAudio;
 	}
+
 	public String getBlogVideo() {
 		return blogVideo;
 	}
+
 	public void setBlogVideo(String blogVideo) {
 		this.blogVideo = blogVideo;
 	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	public String getBlogPhoto() {
 		return blogPhoto;
 	}
+
 	public void setBlogPhoto(String blogPhoto) {
 		this.blogPhoto = blogPhoto;
 	}
@@ -85,17 +118,4 @@ public class Blog {
 		this.blogName = blogName;
 	}
 
-	public Integer getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
-	}
-	
-	
-	
-	
-	
-	
 }
