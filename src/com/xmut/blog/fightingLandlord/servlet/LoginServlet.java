@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 
 		if (currentUser != null) {
 			out.println("<script>alert('login successfully!')</script>");
-			out.println("<script>window.location.href='http://localhost:8080/blog/main.jsp'</script>");
+			out.println("<script>window.location.href='http://localhost:8080/blog/index.jsp'</script>");
 
 		} else {
 			out.println("<script>alert('fail to login,please check password and account number!')</script>");
