@@ -14,11 +14,26 @@ public class Blog {
 	private String blogAudio;//博客视频地址
 	private String blogVideo;//博客音频地址
 	private String blogPhoto;//博客图片地址
+	private Integer categoryId;//博客分类
 	
 	public Blog() {
 		super();
 	}
 	
+	public Blog(Integer blogId, Integer userId, String blogName, Integer blogThumbup, String blogContent,
+			String blogAudio, String blogVideo, String blogPhoto, Integer categoryId) {
+		super();
+		this.blogId = blogId;
+		this.userId = userId;
+		this.blogName = blogName;
+		this.blogThumbup = blogThumbup;
+		this.blogContent = blogContent;
+		this.blogAudio = blogAudio;
+		this.blogVideo = blogVideo;
+		this.blogPhoto = blogPhoto;
+		this.categoryId = categoryId;
+	}
+
 	public Integer getBlogId() {
 		return blogId;
 	}
@@ -68,6 +83,14 @@ public class Blog {
 
 	public void setBlogName(String blogName) {
 		this.blogName = blogName;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 	
 	

@@ -9,5 +9,6 @@ public interface BlogBiz {
 	public boolean deleteBlog (Integer id);
 	//修改博客
 	public boolean updateBlog (Blog blog);
+	
 
 }

@@ -1,6 +1,9 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
@@ -20,8 +23,8 @@
 <!-- Site Title -->
 <title>Blogger</title>
 <script>
-	if (window.location.href != "http://localhost:8080/blog/main/index.jsp")
-		window.location.href = "http://localhost:8080/blog/main/index.jsp";
+	if (window.location.href != "http://localhost:8080/blog/index.jsp")
+		window.location.href = "http://localhost:8080/blog/index.jsp";
 </script>
 
 <link
@@ -39,6 +42,7 @@
 <body>
 
 	<!-- Start Header Area -->
+
 	<header class="default-header">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container">
@@ -65,14 +69,38 @@
 						<li class="dropdown"><a class="dropdown-toggle" href="#"
 							id="navbardrop" data-toggle="dropdown"> Pages </a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="single.html">Single</a> <a
-									class="dropdown-item" href="category.html">Category</a> <a
-									class="dropdown-item" href="search.html">Search</a> <a
-									class="dropdown-item" href="archive.html">Archive</a> <a
-									class="dropdown-item" href="generic.html">Generic</a> <a
-									class="dropdown-item" href="elements.html">Elements</a> <a
-									class="dropdown-item" href="login.jsp">Login</a>
+								<a class="dropdown-item" href="http://localhost:8080/blog/GetCategoryServlet">PostBlog</a>
+								<a class="dropdown-item" href="content/single.html">Single</a> <a
+									class="dropdown-item" href="content/category.html">Category</a>
+								<a class="dropdown-item" href="content/search.html">Search</a> <a
+									class="dropdown-item" href="content/archive.html">Archive</a> <a
+									class="dropdown-item" href="content/generic.html">Generic</a> <a
+									class="dropdown-item" href="content/elements.html">Elements</a>
+								<c:choose>
+									<c:when test="${not empty sessionScope.currentUser  }">
+										<a class="dropdown-item" href="content/login.jsp">Logout</a>
+									</c:when>
+									<c:otherwise>
+										<a class="dropdown-item" href="content/login.jsp">Login</a>
+									</c:otherwise>
+								</c:choose>
 							</div></li>
+						<c:if
+							test="${not empty sessionScope.currentUser and sessionScope.currentUser.userType == 1 }">
+							<li class="dropdown"><a class="dropdown-toggle" href="#"
+								id="navbardrop" data-toggle="dropdown"> Welcome
+									${sessionScope.currentUser.userName } </a>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="content/postBlog.jsp">PostBlog</a>
+									<a class="dropdown-item" href="content/single.html">Single</a>
+									<a class="dropdown-item" href="content/category.html">Category</a>
+									<a class="dropdown-item" href="content/search.html">Search</a>
+									<a class="dropdown-item" href="content/archive.html">Archive</a>
+									<a class="dropdown-item" href="content/generic.html">Generic</a>
+									<a class="dropdown-item" href="content/newCategory.jsp">AddCategory</a>
+								</div></li>
+						</c:if>
+
 					</ul>
 				</div>
 			</div>

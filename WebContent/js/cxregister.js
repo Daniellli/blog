@@ -1,6 +1,6 @@
 		//获取验证码
         function backZhuye() {
-            window.location.href = "../page/index.jsp";
+            window.location.href = "../index.jsp";
         }
 		var num=60;
 		function clock(){	

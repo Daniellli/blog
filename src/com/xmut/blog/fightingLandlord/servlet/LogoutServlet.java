@@ -14,29 +14,21 @@ import com.xmut.blog.fightingLandlord.biz.UserBiz;
 import com.xmut.blog.fightingLandlord.bizImp.UserBizImp;
 import com.xmut.blog.fightingLandlord.entity.User;
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+/**
+ * Servlet implementation class LogoutServlet
+ */
+@WebServlet("/LogoutServlet")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-
-		String username = request.getParameter("username");
-		String pwd = request.getParameter("pwd");
-		UserBiz userBiz = new UserBizImp();
-		User currentUser = userBiz.checkLogin(username, pwd);
+		HttpSession session = request.getSession();
+		session.invalidate();
 		PrintWriter out = response.getWriter();
-	
-		if (currentUser != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("currentUser", currentUser);
-			out.println("<script>alert('login successfully!')</script>");
-			out.println("<script>window.location.href='http://localhost:8080/blog/index.jsp'</script>");
-		} else {
-			out.println("<script>alert('fail to login,please check password and account number!')</script>");
-			out.println("<script>window.history.go(-1)</script>");
-		}
+		out.println("<script>alert('logout successfully!')</script>");
+		out.println("<script>window.location.href='http://localhost:8080/blog/index.jsp'</script>");
 	}
 }

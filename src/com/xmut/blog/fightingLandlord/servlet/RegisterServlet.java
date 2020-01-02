@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.xmut.blog.fightingLandlord.biz.UserBiz;
 import com.xmut.blog.fightingLandlord.bizImp.UserBizImp;
@@ -25,34 +26,37 @@ public class RegisterServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
+		String telephone = request.getParameter("phoneNumber");
+		String username = request.getParameter("userName");
+		String pwd = request.getParameter("password");
+		String email = request.getParameter("email");
+		String age = request.getParameter("age");
+		String sex = request.getParameter("sex");
 		String question = request.getParameter("question");
 		String answer = request.getParameter("answer");
-		String username = request.getParameter("username");
-		String email = request.getParameter("email");
-		String pwd = request.getParameter("pwd");
-		String telephone = request.getParameter("phone");
 
 		User user = new User();
-		user.setUserAnswer(answer);
-		user.setUserEmail(email);
+		user.setUserTelephone(telephone);
 		user.setUserName(username);
 		user.setUserPwd(pwd);
+		user.setUserEmail(email);
+		user.setUserEmail(age);
+		user.setUserEmail(sex);
 		user.setUserQuestion(question);
-		user.setUserTelephone(telephone);
+		user.setUserAnswer(answer);
+		user.setUserType(0);
 		UserBiz userBiz = new UserBizImp();
 		PrintWriter out = response.getWriter();
+
 		if (userBiz.register(user)) {
+		
 			out.println("<script>alert('register successfully!')</script>");
-			out.println("<script>window.location.href='http://localhost:8080/blog/login.jsp'</script>");
-		}else {
+			out.println("<script>window.location.href='http://localhost:8080/blog/content/login.jsp'</script>");
+		} else {
 			out.println("<script>alert('fail to register!')</script>");
 			out.println("<script>window.history.go(-1)</script>");
 		}
 
-		// System.out.println(question + " " + answer + " " + username + " " + email + "
-		// " + pwd + " " + telephone);
-
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 }

@@ -21,8 +21,8 @@ public class BlogDaoImp implements BlogDao{
 		boolean flag = false;
 		try {
 			flag = util.update(
-					"insert into blog(b_id,b_name,u_id,b_thumbs_up,b_content,b_audio,b_video,b_phoyo)values(?,?,?,?,?,?,?)",
-					blog.getBlogId(),blog.getBlogName(),blog.getUserId(),blog.getBlogVideo(),blog.getBlogContent(),blog.getBlogAudio(),blog.getBlogVideo(),blog.getBlogPhoto() );
+					"insert into blog(b_id,b_name,u_id,b_thumbs_up,b_content,b_audio,b_video,b_photo,b_category_id)values(?,?,?,?,?,?,?,?,?)",
+					blog.getBlogId(),blog.getBlogName(),blog.getUserId(),blog.getBlogVideo(),blog.getBlogContent(),blog.getBlogAudio(),blog.getBlogVideo(),blog.getBlogPhoto(),blog.getCategoryId());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -57,8 +57,8 @@ public class BlogDaoImp implements BlogDao{
 		boolean flag = false;
 		try {
 			flag = util.update(
-					"update blog set b_name = ?  and b_content= ? and b_audio= ? and b_video = ? and b_photo =? where b_id = ?",
-					blog.getBlogName(),blog.getBlogContent(),blog.getBlogAudio(),blog.getBlogVideo(),blog.getBlogPhoto());
+					"update blog set b_name = ?  and b_content= ? and b_audio= ? and b_video = ? and b_photo =? and  b_category_id = ? where b_id = ?",
+					blog.getBlogName(),blog.getBlogContent(),blog.getBlogAudio(),blog.getBlogVideo(),blog.getBlogPhoto(),blog.getCategoryId(),blog.getBlogId());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.xmut.blog.fightingLandlord.biz.UserBiz;
+import com.xmut.blog.fightingLandlord.bizImp.CategoryBizImp;
 import com.xmut.blog.fightingLandlord.bizImp.UserBizImp;
+import com.xmut.blog.fightingLandlord.entity.Category;
 import com.xmut.blog.fightingLandlord.entity.User;
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/NewCategoryServlet")
+public class NewCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -23,20 +25,18 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		String username = request.getParameter("username");
-		String pwd = request.getParameter("pwd");
-		UserBiz userBiz = new UserBizImp();
-		User currentUser = userBiz.checkLogin(username, pwd);
+		String name = request.getParameter("name");
+
+		Category ca = new Category();
+		ca.setcName(name);
 		PrintWriter out = response.getWriter();
-	
-		if (currentUser != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("currentUser", currentUser);
-			out.println("<script>alert('login successfully!')</script>");
-			out.println("<script>window.location.href='http://localhost:8080/blog/index.jsp'</script>");
+		if (new CategoryBizImp().addCategory(ca)) {
+			out.print("<script>alert('add successfully ')</script>");
+			out.print("<script>window.location.href= 'http://localhost:8080/blog/content/newCategory.jsp'</script>");
 		} else {
-			out.println("<script>alert('fail to login,please check password and account number!')</script>");
-			out.println("<script>window.history.go(-1)</script>");
+			out.print("<script>alert('fail to add ')</script>");
+			out.print("<script>window.history.go(-1)</script>");
 		}
+
 	}
 }
