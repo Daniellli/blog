@@ -10,13 +10,15 @@
 <head>
     <meta charset="UTF-8">
     <title>用户注册</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/uGlobal.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/uRegiest.css"/>
-    <script src="../static/js/jquery-1.9.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="css/uGlobal.css"/>
+    <link rel="stylesheet" type="text/css" href="css/uRegiest.css"/>
+    
+       <script src="../tools/jquery-3.4.1.min.js"></script>
     <script src="../static/js/cxregister.js" type="text/javascript" charset="utf-8"></script>
+   
     <style>
         body{
-            background:url(../static/images/134.jpg) no-repeat center;
+            background:url(img/132.jpg) no-repeat center;
             background-size: cover;
         }
     </style>

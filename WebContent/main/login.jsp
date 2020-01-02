@@ -14,8 +14,9 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>用户登录</title>
-    <link href="../static/css/login.css" type="text/css" rel="stylesheet">
-    <script src="../static/js/jquery-1.9.0.min.js"></script>
+    
+    <link href="css/login.css" type="text/css" rel="stylesheet">
+    <script src="../tools/jquery-3.4.1.min.js"></script>
 
     <style type="text/css">
         *{margin:0;padding:0;list-style:none;}
@@ -55,9 +56,8 @@
     {
         alert(msge);
     }
-
     function Tozhuce() {
-        window.location.href = "./userRegiest.jsp"
+        window.location.href = "./register.jsp"
 
     }
 </script>
