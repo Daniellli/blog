@@ -17,6 +17,8 @@ public class User {
 	private String userQuestion;//密保问题
 	private String userAnswer;//密保答案
 	private String userTelephone;//密保答案
+	private String userPortrait;//密保答案
+	
 	
 	
 
@@ -50,7 +52,12 @@ public class User {
 
 
 
-
+	public User(Integer userId, String userName, String userPwd) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.userPwd = userPwd;
+	}
 
 	public User(Integer userId, String userName, String userPwd, Integer userSex, Integer userAge, String userEmail,
 			Integer userType, String userQuestion, String userAnswer, String userTelephone) {
@@ -69,6 +76,11 @@ public class User {
 
 	public Integer getUserId() {
 		return userId;
+	}
+
+	public User(Integer userId) {
+		super();
+		this.userId = userId;
 	}
 
 	public void setUserId(Integer userId) {
@@ -121,6 +133,20 @@ public class User {
 
 	public void setUserType(Integer userType) {
 		this.userType = userType;
+	}
+
+	/**
+	 * @return the userPortrait
+	 */
+	public String getUserPortrait() {
+		return userPortrait;
+	}
+
+	/**
+	 * @param userPortrait the userPortrait to set
+	 */
+	public void setUserPortrait(String userPortrait) {
+		this.userPortrait = userPortrait;
 	}
 
 }

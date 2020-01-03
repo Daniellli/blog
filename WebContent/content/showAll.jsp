@@ -105,8 +105,6 @@
 				<div class="row justify-content-center d-flex">
 					<div class="col-lg-8">
 						<div class="post-lists search-list">
-
-
 							<c:forEach var="blog" items="${sessionScope.blog }">
 								<div class="single-list flex-row d-flex">
 									<!-- 图片 -->
@@ -114,7 +112,15 @@
 										<!-- <div class="date">
 										<span>20</span><br>Dec
 									</div> -->
-										<img src="../img/asset/l1.jpg" alt="">
+										<img src="../img/asset/c3.jpg" alt="">
+										<p>
+											<a href="#">${blog.user.userName }</a>
+										</p>
+										<!-- 发布该博客的用户名、id、头像 -->
+
+										<%-- <div>${blog.user.userName }</div>
+										<div>${blog.user.userId }</div>
+										<div>${blog.user.userPortrait }</div> --%>
 									</div>
 									<div class="detail">
 										<a href="#"> <!-- 标题 -->
@@ -123,14 +129,18 @@
 										<p>${blog.blogContent }</p>
 										<!-- 喜欢和评论 -->
 										<p class="footer pt-20">
-											<i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#">${blog.blogThumbup }
-												Likes</a> <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i>
-											<a href="#">02 Comments ${blog.category.cName } </a>
+											<!-- 评论数和点赞数 -->
+											<i class="fa fa-heart-o" aria-hidden="true"></i> <a
+												href="javascript:void(0)"
+												onclick="priase(${blog.blogId },0,'${blog.blogId }')">Likes
+											</a><span id="${blog.blogId }">${blog.blogThumbup }</span> <i
+												class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a
+												href="http://localhost:8080/blog/GetBlogDetail?bid=${blog.blogId }">
+												Comments ${blog.blogCommentNumber } </a>
 										</p>
 									</div>
 								</div>
 							</c:forEach>
-
 							<div class="justify-content-center d-flex">
 								<a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"
 									href="#"> Load More Post</a>
@@ -263,17 +273,52 @@
 	</footer>
 	<!-- End footer Area -->
 
-	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="../js/vendor/jquery-2.2.4.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
 		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
 		crossorigin="anonymous"></script>
-	<script src="js/vendor/bootstrap.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/parallax.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/jquery.sticky.js"></script>
-	<script src="js/main.js"></script>
+	<script src="../js/vendor/bootstrap.min.js"></script>
+	<script src="../js/jquery.ajaxchimp.min.js"></script>
+	<script src="../js/parallax.min.js"></script>
+	<script src="../js/owl.carousel.min.js"></script>
+	<script src="../js/jquery.magnific-popup.min.js"></script>
+	<script src="../js/jquery.sticky.js"></script>
+	<script src="../js/main.js"></script>
+
+	<script>
+		//praiseN,pra为span的id 
+
+		function priase(articleid, commentid, praiseN) {
+			var type = "json";
+			var praiseNum = parseInt(document.getElementById(praiseN).innerHTML); //获取点赞数
+			$.ajax({
+						url : "http://localhost:8080/blog/RecivePraiseServlet?sendType=post&dataType="
+								+ type,
+						data : {
+							"anthorid" : '${sessionScope.currentUser.userId}',
+							"articleid" : articleid,
+							"commentid" : commentid
+						},
+						type : "post",
+						dataType : type,
+						success : function(data) {
+							if ("json" == type) {
+								if (data != undefined && data != null) {
+									var flag = data.praiseflag; // 1已点过赞
+									if (flag == 0) {
+										document.getElementById(praiseN).innerHTML = praiseNum + 1;
+									} else if (flag == 1) {
+										alert("你已经点过赞了！");
+									}
+								}
+							}
+
+						}
+					});
+
+		}
+	</script>
+
 </body>
 </html>

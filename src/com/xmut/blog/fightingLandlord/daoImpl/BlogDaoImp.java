@@ -5,9 +5,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.smartcardio.CommandAPDU;
+
 import com.xmut.blog.fightingLandlord.dao.BlogDao;
 import com.xmut.blog.fightingLandlord.entity.Blog;
 import com.xmut.blog.fightingLandlord.entity.Category;
+import com.xmut.blog.fightingLandlord.entity.Comment;
+import com.xmut.blog.fightingLandlord.entity.User;
 import com.xmut.blog.fightingLandlord.utils.DbConnection;
 
 /**
@@ -28,10 +32,13 @@ public class BlogDaoImp implements BlogDao {
 	public boolean addBlog(Blog blog) {
 		boolean flag = false;
 		try {
+
+			// thumbs-up无效
 			flag = util.update(
 					"insert into blog(b_id,b_name,u_id,b_thumbs_up,b_content,b_audio,b_video,b_photo,b_category_id)values(?,?,?,?,?,?,?,?,?)",
-					blog.getBlogId(), blog.getBlogName(), blog.getUserId(), blog.getBlogVideo(), blog.getBlogContent(),
-					blog.getBlogAudio(), blog.getBlogVideo(), blog.getBlogPhoto(), blog.getCategory().getcId());
+					blog.getBlogId(), blog.getBlogName(), blog.getUser().getUserId(), blog.getBlogVideo(),
+					blog.getBlogContent(), blog.getBlogAudio(), blog.getBlogVideo(), blog.getBlogPhoto(),
+					blog.getCategory().getcId());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -88,11 +95,6 @@ public class BlogDaoImp implements BlogDao {
 			ResultSet res = util.query("select * from blog where b_name like ? ", "%" + key + "%");
 			while (res.next()) {
 				Blog b = new Blog();
-				// res.getInt("b_id"), res.getInt("u_id"), res.getString("b_name"),
-				// res.getInt("b_thumbs_up"), res.getString("b_content"),
-				// res.getString("b_audio"),
-				// res.getString("b_video"), res.getString("b_photo"),
-				// res.getInt("b_category_id")
 				b.setBlogName(res.getString("b_name"));
 				b.setBlogContent(res.getString("b_content"));
 				b.setBlogId(res.getInt("b_id"));
@@ -110,12 +112,17 @@ public class BlogDaoImp implements BlogDao {
 	public List<Blog> getAllBlog() {
 		List<Blog> list = new ArrayList<Blog>();
 		try {
-			ResultSet res = util.query("select * from  blog as b,category as c where b.b_category_id = c.c_id  ");
+			ResultSet res = util.query("select * from  show_blog_with_like_comment ");
 			while (res.next()) {
-				Category cat = new Category(res.getInt("b_category_id"),res.getString("c_name"));
-				Blog b = new Blog(res.getInt("b_id"), res.getInt("u_id"), res.getString("b_name"),
-						res.getInt("b_thumbs_up"), res.getString("b_content"), res.getString("b_audio"),
-						res.getString("b_video"), res.getString("b_photo"), cat);
+				User u = new User();
+				u.setUserId(res.getInt("u_id"));
+				u.setUserName(res.getString("u_name"));
+				u.setUserPortrait(res.getString("portrait"));
+				Category cat = new Category();
+				cat.setcId(res.getInt("b_category_id"));
+				Blog b = new Blog(res.getInt("b_id"), u, res.getString("b_name"), res.getInt("like_number"),
+						res.getString("b_content"), res.getString("b_audio"), res.getString("b_video"),
+						res.getString("b_photo"), cat, res.getInt("comment_number"));
 				list.add(b);
 			}
 			util.closeAll();
@@ -124,6 +131,58 @@ public class BlogDaoImp implements BlogDao {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	/**
+	 * @author DixinFan
+	 * 
+	 */
+	@Override
+	public Blog getBlogById(Integer id) {
+		Blog b = null;
+		try {
+			ResultSet res = util.query("select * from  show_blog_with_like_comment where b_id = ? ", id);
+			if (res.next()) {
+				User u = new User();
+				u.setUserId(res.getInt("u_id"));
+				u.setUserName(res.getString("u_name"));
+				u.setUserPortrait(res.getString("portrait"));
+				Category cat = new Category();
+				cat.setcId(res.getInt("b_category_id"));
+				b = new Blog(res.getInt("b_id"), u, res.getString("b_name"), res.getInt("like_number"),
+						res.getString("b_content"), res.getString("b_audio"), res.getString("b_video"),
+						res.getString("b_photo"), cat, res.getInt("comment_number"));
+
+				res = util.query("select * from comment as c ,user as u  where c.u_id = u.u_id and c.b_id =?", id);
+				List<Comment> comment = new ArrayList<>();
+				while (res.next()) {
+					System.out.println("in dao imp");
+					User user = new User();
+					user.setUserName(res.getString("u_name"));
+					user.setUserId(res.getInt("u_id"));
+					user.setUserPortrait(res.getString("portrait"));
+					Comment c = new Comment(user, res.getInt("b_id"), res.getString("c_content"), res.getTime("c_time"),
+							res.getInt("c_thumbs_up"));
+					comment.add(c);
+				}
+				b.setComments(comment);
+			}
+			util.closeAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+
+	@Override
+	public boolean thumbsUp(Integer id) {
+		boolean flag = false;
+		try {
+			flag = util.update("update blog set b_thumbs_up =b_thumbs_up+1  where b_id = ?", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

@@ -20,4 +20,10 @@ public interface BlogDao {
 	// 刷博客
 	public List<Blog> getAllBlog();
 
+	// 点赞博客
+	public boolean thumbsUp(Integer id);
+
+	// 找博客
+	public Blog getBlogById(Integer id);
+
 }

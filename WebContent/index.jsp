@@ -100,14 +100,12 @@
 									<a class="dropdown-item" href="content/newCategory.jsp">AddCategory</a>
 								</div></li>
 						</c:if>
-
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	<!-- End Header Area -->
-
 	<!-- start banner Area -->
 	<section class="banner-area relative" id="home" data-parallax="scroll"
 		data-image-src="img/header-bg.jpg">

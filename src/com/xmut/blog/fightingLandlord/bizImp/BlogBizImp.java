@@ -50,4 +50,20 @@ public class BlogBizImp implements BlogBiz {
 		return dao.getAllBlog();
 	}
 
+	@Override
+	public Blog getBlogById(Integer id) {
+
+		if (id != null) {
+			return dao.getBlogById(id);
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
+	public boolean thumbsUp(Integer id) {
+		return dao.thumbsUp(id);
+	}
+
 }

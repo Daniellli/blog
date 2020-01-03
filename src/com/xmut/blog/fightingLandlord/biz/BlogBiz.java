@@ -19,4 +19,10 @@ public interface BlogBiz {
 
 	// 刷博客
 	public List<Blog> getAllBlog();
+
+	// 找博客
+	public Blog getBlogById(Integer id);
+
+	// 点赞博客
+	public boolean thumbsUp(Integer id);
 }

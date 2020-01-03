@@ -38,7 +38,7 @@ public class PostBlogServlet extends HttpServlet {
 		b.setCategory(new Category(category));
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("currentUser");
-		b.setUserId(user.getUserId());
+		b.setUser(user);
 		b.setBlogThumbup(0);
 		PrintWriter out = response.getWriter();
 		if (new BlogBizImp().addBlog(b)) {

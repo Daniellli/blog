@@ -10,22 +10,27 @@ import java.util.Date;
  */
 public class Comment {
 
-	private Integer userId;//用户id
+	private User user;//用户id
 	private Integer blogId;//博客id
 	private String commentContent;//评论内容
 	private Date commentTime;//评论内容
 	private Integer commentThumbup;//点赞数
 
-	public Integer getUserId() {
-		return userId;
-	}
+
+	
+	
 
 	public Comment() {
 		super();
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public Comment(User user, Integer blogId, String commentContent, Date commentTime, Integer commentThumbup) {
+		super();
+		this.user = user;
+		this.blogId = blogId;
+		this.commentContent = commentContent;
+		this.commentTime = commentTime;
+		this.commentThumbup = commentThumbup;
 	}
 
 	public Integer getBlogId() {
@@ -58,6 +63,24 @@ public class Comment {
 
 	public void setCommentThumbup(Integer commentThumbup) {
 		this.commentThumbup = commentThumbup;
+	}
+
+
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

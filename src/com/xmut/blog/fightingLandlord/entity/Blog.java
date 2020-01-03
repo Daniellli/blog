@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Blog {
 	private Integer blogId; // 博客id
-	private Integer userId;// 用户id
+	private User user;// 用户id
 	private String blogName;
 	private Integer blogThumbup;// 点赞数量
 	private String blogContent;// 博客内容
@@ -18,8 +18,8 @@ public class Blog {
 	private String blogVideo;// 博客音频地址
 	private String blogPhoto;// 博客图片地址
 	private Category category;// 博客分类
+	private Integer blogCommentNumber;// 评论数量
 	private List<Comment> comments;// 用戶评论
-
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -32,11 +32,15 @@ public class Blog {
 		super();
 	}
 
-	public Blog(Integer blogId, Integer userId, String blogName, Integer blogThumbup, String blogContent,
-			String blogAudio, String blogVideo, String blogPhoto, Category category) {
+	public Integer getBlogId() {
+		return blogId;
+	}
+
+	public Blog(Integer blogId, User user, String blogName, Integer blogThumbup, String blogContent, String blogAudio,
+			String blogVideo, String blogPhoto, Category category, Integer commentNumber) {
 		super();
 		this.blogId = blogId;
-		this.userId = userId;
+		this.user = user;
 		this.blogName = blogName;
 		this.blogThumbup = blogThumbup;
 		this.blogContent = blogContent;
@@ -44,22 +48,20 @@ public class Blog {
 		this.blogVideo = blogVideo;
 		this.blogPhoto = blogPhoto;
 		this.category = category;
-	}
+		this.blogCommentNumber = commentNumber;
 
-	public Integer getBlogId() {
-		return blogId;
 	}
 
 	public void setBlogId(Integer blogId) {
 		this.blogId = blogId;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Integer getBlogThumbup() {
@@ -116,6 +118,21 @@ public class Blog {
 
 	public void setBlogName(String blogName) {
 		this.blogName = blogName;
+	}
+
+	/**
+	 * @return the blogCommentNumber
+	 */
+	public Integer getBlogCommentNumber() {
+		return blogCommentNumber;
+	}
+
+	/**
+	 * @param blogCommentNumber
+	 *            the blogCommentNumber to set
+	 */
+	public void setBlogCommentNumber(Integer blogCommentNumber) {
+		this.blogCommentNumber = blogCommentNumber;
 	}
 
 }
