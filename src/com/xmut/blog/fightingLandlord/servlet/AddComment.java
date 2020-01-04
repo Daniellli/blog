@@ -40,22 +40,26 @@ public class AddComment extends HttpServlet {
 
 		Comment comment = new Comment(new User(Integer.parseInt(userId)), Integer.parseInt(blogId), message, new Date(),
 				0);
-
 		if (commentbiz.addComment(comment)) {// 添加成功
-			//更新当前的详情blog
+			// 更新当前的详情blog
 			HttpSession session = request.getSession();
 			Blog blog = (Blog) session.getAttribute("blogDetail");
 			blog.getComments().add(comment);
 			session.setAttribute("blogDetail", blog);
-			//comment result
-			sb.append("{");
+			// comment result
+			sb.append("[{");
 			sb.append("\"praiseflag\":0");
-			sb.append("}");
+			sb.append("},");
+			sb.append("{");
+			sb.append("\"bid\":" + blog.getBlogId());
+			sb.append("}]");
 		} else {// 添加失败
+			System.out.println("hello world in servlet3");
 			sb.append("{");
 			sb.append("\"praiseflag\":1");
 			sb.append("}");
 		}
+		System.out.println("hello world in servlet2");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println(sb.toString());// 输出

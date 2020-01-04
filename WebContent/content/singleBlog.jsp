@@ -149,8 +149,10 @@
 								<h5 class="text-uppercase pb-80">${ sessionScope.blogDetail.blogCommentNumber}
 									Comments</h5>
 								<br>
+
 								<c:forEach var="comment"
 									items="${ sessionScope.blogDetail.comments}">
+
 									<div class="comment-list">
 										<div class="single-comment justify-content-between d-flex">
 											<div class="user justify-content-between d-flex">
@@ -172,7 +174,10 @@
 											</div>
 										</div>
 									</div>
+
 								</c:forEach>
+
+
 								<!-- 往左偏移的评论 -->
 								<!--  <div class="comment-list left-padding">
                                             <div class="single-comment justify-content-between d-flex">
@@ -357,30 +362,39 @@
 	<script src="../js/main.js"></script>
 
 	<script>
-	function submitComment(userId,blogId,textareaId){
-		
-		var type="json";
-		var content = document.getElementById(textareaId).value;
-		alert(content);
+	
+	function getComment(bid){
 		$.ajax({
-		
-			url : "http://localhost:8080/blog/AddComment?sendType=post&dataType="+ type,
+			type: 'get',
+			url: 'http://localhost:8080/blog/AjaxRefreshComment?bid=' + bid,
+			dataType: 'json',
+			success: function (data){
+				$('.comment-list').remove()
+				let len = data.length
+				for (let i = 0; i < len; i++) {
+					$('<div class="comment-list"><div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="../img/asset/c1.jpg"alt=""></div><div class="desc"><h5><a href="#">' + data[i].user.userId+'</a></h5><p class="date">'+data[i].commentTime+'</p><p class="comment">'+data[i].commentContent+'</p></div></div><div class="reply-btn"><a href="" class="btn-reply text-uppercase">reply</a></div></div></div>').appendTo($('.flex-column'))
+				}
+			}
+		})
+	}
+	
+	function submitComment(userId,blogId,textareaId){
+		console.log(userId)
+		var content = document.getElementById(textareaId).value;
+		$.ajax({
+			type: 'post',
+			url : "http://localhost:8080/blog/AddComment",
 			data:{
 				"userId" : userId,
 				"bId" : blogId,
 				"message" : content
 			},
-			type : "post",
-			dataType : type,
-			success:function(data){
-				if ("json" == type) {
-					if (data != undefined && data != null) {
-						var flag = data.praiseflag; // 1已点过赞
-						if (flag == 0) {//comment successfully
-							alert("comment successfully");
-						} else if (flag == 1) {//fail to comment 
-							alert("fail to comment");
-						}
+			dataType: 'json',
+			success: function(data) {
+				if(data.length!=0){
+					if(data[0].praiseflag==0){
+						getComment(data[1].bid)
+						$('#'+textareaId).val("");
 					}
 				}
 			}
