@@ -52,17 +52,16 @@
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
 		<div
 			class="collapse navbar-collapse justify-content-end align-items-center"
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
-				<li><a href="#home">Home</a></li>
-				<li><a href="#news">News</a></li>
+				<li><a href="javascript:window.history.go(-1)">Back</a></li>
+			<!-- 	<li><a href="#news">News</a></li>
 				<li><a href="#travel">Travel</a></li>
 				<li><a href="#fashion">fashion</a></li>
 				<li><a href="#team">team</a></li>
-				<!-- Dropdown -->
+				Dropdown
 				<li class="dropdown"><a class="dropdown-toggle" href="#"
 					id="navbardrop" data-toggle="dropdown"> Pages </a>
 					<div class="dropdown-menu">
@@ -72,7 +71,7 @@
 							class="dropdown-item" href="archive.html">Archive</a> <a
 							class="dropdown-item" href="generic.html">Generic</a> <a
 							class="dropdown-item" href="elements.html">Elements</a>
-					</div></li>
+					</div></li> -->
 			</ul>
 		</div>
 	</div>
@@ -85,13 +84,13 @@
 		<div class="row justify-content-between align-items-center d-flex">
 			<div class="col-lg-8 top-left">
 				<h1 class="text-white mb-20">Post Details</h1>
-				<ul>
+				<!-- <ul>
 					<li><a href="index.html">Home</a><span
 						class="lnr lnr-arrow-right"></span></li>
 					<li><a href="category.html">Category</a><span
 						class="lnr lnr-arrow-right"></span></li>
 					<li><a href="single.html">Fashion</a></li>
-				</ul>
+				</ul> -->
 			</div>
 		</div>
 	</div>
@@ -362,8 +361,8 @@
 	<script src="../js/main.js"></script>
 
 	<script>
-	
-	function getComment(bid){
+	//刷新comment的ajax
+	/* function getComment(bid){
 		$.ajax({
 			type: 'get',
 			url: 'http://localhost:8080/blog/AjaxRefreshComment?bid=' + bid,
@@ -376,7 +375,7 @@
 				}
 			}
 		})
-	}
+	} */
 	
 	function submitComment(userId,blogId,textareaId){
 		console.log(userId)
@@ -392,10 +391,12 @@
 			dataType: 'json',
 			success: function(data) {
 				if(data.length!=0){
-					if(data[0].praiseflag==0){
-						getComment(data[1].bid)
-						$('#'+textareaId).val("");
-					}
+						$('.comment-list').remove()
+						let len = data.length
+						for (let i = 0; i < len; i++) {
+							$('<div class="comment-list"><div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="../img/asset/c1.jpg"alt="'+data[i].user.userId+'"></div><div class="desc"><h5><a href="#">' + data[i].user.userName+'</a></h5><p class="date">'+data[i].commentTime+'</p><p class="comment">'+data[i].commentContent+'</p></div></div><div class="reply-btn"><a href="" class="btn-reply text-uppercase">reply</a></div></div></div>').appendTo($('.flex-column'))
+						}
+						$('#'+textareaId).val(""); 
 				}
 			}
 		})

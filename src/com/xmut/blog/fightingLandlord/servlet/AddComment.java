@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.smartcardio.CommandAPDU;
 
+import com.google.gson.Gson;
 import com.xmut.blog.fightingLandlord.biz.CommentBiz;
 import com.xmut.blog.fightingLandlord.bizImp.CommentBizImp;
 import com.xmut.blog.fightingLandlord.entity.Blog;
@@ -32,38 +33,38 @@ public class AddComment extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 
 		CommentBiz commentbiz = new CommentBizImp();
-		StringBuffer sb = new StringBuffer("");
+		// StringBuffer sb = new StringBuffer("");
 
 		String blogId = request.getParameter("bId");
 		String userId = request.getParameter("userId");
 		String message = request.getParameter("message");
 
-		Comment comment = new Comment(new User(Integer.parseInt(userId)), Integer.parseInt(blogId), message, new Date(),
-				0);
+		String userName = ((User) (request.getSession().getAttribute("currentUser"))).getUserName();
+
+		Comment comment = new Comment(new User(Integer.parseInt(userId), userName), Integer.parseInt(blogId), message,
+				new Date(), 0);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
 		if (commentbiz.addComment(comment)) {// 添加成功
 			// 更新当前的详情blog
 			HttpSession session = request.getSession();
 			Blog blog = (Blog) session.getAttribute("blogDetail");
 			blog.getComments().add(comment);
+			blog.setBlogCommentNumber(blog.getBlogCommentNumber() + 1);
+			Gson gson = new Gson();
+			String newCommentJson = gson.toJson(blog.getComments());// comment json
 			session.setAttribute("blogDetail", blog);
-			// comment result
-			sb.append("[{");
-			sb.append("\"praiseflag\":0");
-			sb.append("},");
-			sb.append("{");
-			sb.append("\"bid\":" + blog.getBlogId());
-			sb.append("}]");
-		} else {// 添加失败
-			System.out.println("hello world in servlet3");
-			sb.append("{");
-			sb.append("\"praiseflag\":1");
-			sb.append("}");
+			out.println(newCommentJson);// 输出
+			out.flush();
+			out.close();
 		}
-		System.out.println("hello world in servlet2");
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println(sb.toString());// 输出
-		out.flush();
-		out.close();
+		// comment result
+		/*
+		 * sb.append("[{"); sb.append("\"praiseflag\":0"); sb.append("},");
+		 * sb.append("{"); sb.append("\"bid\":" + blog.getBlogId()); sb.append("}]"); }
+		 * else {// 添加失败 System.out.println("hello world in servlet3"); sb.append("{");
+		 * sb.append("\"praiseflag\":1"); sb.append("}"); }
+		 */
+
 	}
 }

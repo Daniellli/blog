@@ -83,6 +83,13 @@ public class User {
 		this.userId = userId;
 	}
 
+	
+	public User(Integer userId, String userName) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+	}
+
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}

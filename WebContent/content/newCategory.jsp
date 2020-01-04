@@ -56,12 +56,12 @@
 						class="collapse navbar-collapse justify-content-end align-items-center"
 						id="navbarSupportedContent">
 						<ul class="navbar-nav scrollable-menu">
-							<li><a href="index.html#home">Home</a></li>
-							<li><a href="index.html#news">News</a></li>
+							<li><a href="javascript:window.history.go(-1)">Back</a></li>
+							<!-- <li><a href="index.html#news">News</a></li>
 							<li><a href="index.html#travel">Travel</a></li>
 							<li><a href="index.html#fashion">fashion</a></li>
 							<li><a href="index.html#team">team</a></li>
-							<!-- Dropdown -->
+							Dropdown
 							<li class="dropdown"><a class="dropdown-toggle" href="#"
 								id="navbardrop" data-toggle="dropdown"> Pages </a>
 								<div class="dropdown-menu">
@@ -71,7 +71,7 @@
 										class="dropdown-item" href="archive.html">Archive</a> <a
 										class="dropdown-item" href="generic.html">Generic</a> <a
 										class="dropdown-item" href="elements.html">Elements</a>
-								</div></li>
+								</div></li> -->
 						</ul>
 					</div>
 				</div>

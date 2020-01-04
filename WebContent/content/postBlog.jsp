@@ -59,17 +59,17 @@
 			class="collapse navbar-collapse justify-content-end align-items-center"
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
-				<li><a href="index.jsp">主页</a></li>
-				<li><a href="category.jsp">分类</a></li>
+				<li><a href="javascript:window.history.go(-1)">Back</a></li>
+			<!-- 	<li><a href="category.jsp">分类</a></li>
 				<li><a href="#travel">热搜</a></li>
-				<!-- Dropdown -->
+				Dropdown
 				<li class="dropdown"><a class="dropdown-toggle" href="#"
 					id="navbardrop" data-toggle="dropdown"> 个人 </a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="single.jsp">个人主页</a> <a
 							class="dropdown-item" href="postBlog.jsp">发布博客</a>
 
-					</div></li>
+					</div></li> -->
 			</ul>
 		</div>
 	</div>

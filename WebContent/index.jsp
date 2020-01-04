@@ -69,13 +69,11 @@
 						<li class="dropdown"><a class="dropdown-toggle" href="#"
 							id="navbardrop" data-toggle="dropdown"> Pages </a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="http://localhost:8080/blog/GetCategoryServlet">PostBlog</a>
-								<a class="dropdown-item" href="content/single.html">Single</a> <a
-									class="dropdown-item" href="content/category.html">Category</a>
+								<a class="dropdown-item"
+									href="http://localhost:8080/blog/GetCategoryServlet">PostBlog</a>
 								<a class="dropdown-item" href="content/search.jsp">Search</a> <a
-									class="dropdown-item" href="http://localhost:8080/blog/GetAllBlog">Refresh</a> <a
-									class="dropdown-item" href="content/generic.html">Generic</a> <a
-									class="dropdown-item" href="content/elements.html">Elements</a>
+									class="dropdown-item"
+									href="http://localhost:8080/blog/GetAllBlog">Refresh</a>
 								<c:choose>
 									<c:when test="${not empty sessionScope.currentUser  }">
 										<a class="dropdown-item" href="content/login.jsp">Logout</a>
@@ -91,12 +89,6 @@
 								id="navbardrop" data-toggle="dropdown"> Welcome
 									${sessionScope.currentUser.userName } </a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="content/postBlog.jsp">PostBlog</a>
-									<a class="dropdown-item" href="content/single.html">Single</a>
-									<a class="dropdown-item" href="content/category.html">Category</a>
-									<a class="dropdown-item" href="content/search.html">Search</a>
-									<a class="dropdown-item" href="content/archive.html">Archive</a>
-									<a class="dropdown-item" href="content/generic.html">Generic</a>
 									<a class="dropdown-item" href="content/newCategory.jsp">AddCategory</a>
 								</div></li>
 						</c:if>

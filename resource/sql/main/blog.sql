@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80017
 File Encoding         : 65001
 
-Date: 2020-01-04 15:13:49
+Date: 2020-01-04 22:19:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -94,8 +94,8 @@ CREATE TABLE `comment` (
   `c_thumbs_up` int(11) DEFAULT '0',
   KEY `comment_refer_to_user_idx` (`u_id`),
   KEY `comment_refer_to_blog_idx` (`b_id`),
-  CONSTRAINT `comment_refer_to_blog` FOREIGN KEY (`b_id`) REFERENCES `blog` (`b_id`),
-  CONSTRAINT `comment_refer_to_user` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)
+  CONSTRAINT `comment_refer_to_blog` FOREIGN KEY (`b_id`) REFERENCES `blog` (`b_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `comment_refer_to_user` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
@@ -107,6 +107,16 @@ INSERT INTO `comment` VALUES ('1', '2', 'askjdhqwiu ibqwjnd qwidiu qdi nkjndj as
 INSERT INTO `comment` VALUES ('1', '1', 'asdasdasd', '2020-01-03 18:27:21', '0');
 INSERT INTO `comment` VALUES ('1', '1', 'kjhqwkjehkjahskjhdkjsahdkjawhkjdhwakjhdsm,ndm,asn,dnasdasdsa', '2020-01-03 18:35:35', '0');
 INSERT INTO `comment` VALUES ('1', '2', 'it is beautiful', '2020-01-04 15:12:56', '0');
+INSERT INTO `comment` VALUES ('1', '2', '阿斯顿', '2020-01-04 15:16:12', '0');
+INSERT INTO `comment` VALUES ('1', '1', '你好', '2020-01-04 15:21:33', '0');
+INSERT INTO `comment` VALUES ('1', '1', 'asdasd', '2020-01-04 21:47:56', '0');
+INSERT INTO `comment` VALUES ('1', '2', 'hello', '2020-01-04 21:53:44', '0');
+INSERT INTO `comment` VALUES ('1', '2', 'asdsa', '2020-01-04 21:54:25', '0');
+INSERT INTO `comment` VALUES ('1', '2', 'hello world\n', '2020-01-04 21:56:44', '0');
+INSERT INTO `comment` VALUES ('1', '3', 'Hello world\n', '2020-01-04 22:04:04', '0');
+INSERT INTO `comment` VALUES ('1', '3', '少聪', '2020-01-04 22:05:11', '0');
+INSERT INTO `comment` VALUES ('1', '3', '你好', '2020-01-04 22:06:28', '0');
+INSERT INTO `comment` VALUES ('1', '3', '您好哦', '2020-01-04 22:06:37', '0');
 
 -- ----------------------------
 -- Table structure for praise
@@ -120,7 +130,7 @@ CREATE TABLE `praise` (
   `p_time` datetime DEFAULT NULL,
   PRIMARY KEY (`p_id`),
   KEY `u_id` (`u_id`),
-  CONSTRAINT `praise_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)
+  CONSTRAINT `praise_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
@@ -145,8 +155,8 @@ CREATE TABLE `relationship` (
   `r_u_id` int(11) NOT NULL,
   PRIMARY KEY (`l_u_id`,`r_u_id`),
   KEY `relationship_refer_to_user2_idx` (`r_u_id`),
-  CONSTRAINT `relationship_refer_to_user1` FOREIGN KEY (`l_u_id`) REFERENCES `user` (`u_id`),
-  CONSTRAINT `relationship_refer_to_user2` FOREIGN KEY (`r_u_id`) REFERENCES `user` (`u_id`)
+  CONSTRAINT `relationship_refer_to_user1` FOREIGN KEY (`l_u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `relationship_refer_to_user2` FOREIGN KEY (`r_u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
@@ -190,4 +200,3 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- ----------------------------
 DROP VIEW IF EXISTS `show_blog_with_like_comment`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `show_blog_with_like_comment` AS select `show_blog_like`.`u_id` AS `u_id`,`show_blog_like`.`u_name` AS `u_name`,`show_blog_like`.`b_id` AS `b_id`,`show_blog_like`.`b_name` AS `b_name`,`show_blog_like`.`b_content` AS `b_content`,`show_blog_like`.`b_audio` AS `b_audio`,`show_blog_like`.`b_video` AS `b_video`,`show_blog_like`.`b_photo` AS `b_photo`,`show_blog_like`.`b_category_id` AS `b_category_id`,`show_blog_like`.`portrait` AS `portrait`,`show_blog_like`.`like_number` AS `like_number`,`dd`.`comment_number` AS `comment_number` from (`show_blog_like` left join (select `comment`.`b_id` AS `b_id`,count(0) AS `comment_number` from `comment` group by `comment`.`b_id`) `dd` on((`show_blog_like`.`b_id` = `dd`.`b_id`))) ;
-SET FOREIGN_KEY_CHECKS=1;
