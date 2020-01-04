@@ -372,7 +372,7 @@
 				$('.comment-list').remove()
 				let len = data.length
 				for (let i = 0; i < len; i++) {
-					$('<div class="comment-list"><div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="../img/asset/c1.jpg"alt=""></div><div class="desc"><h5><a href="#">' + data[i].user.userId+'</a></h5><p class="date">'+data[i].commentTime+'</p><p class="comment">'+data[i].commentContent+'</p></div></div><div class="reply-btn"><a href="" class="btn-reply text-uppercase">reply</a></div></div></div>').appendTo($('.flex-column'))
+					$('<div class="comment-list"><div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="../img/asset/c1.jpg"alt="'+data[i].user.userId+'"></div><div class="desc"><h5><a href="#">' + data[i].user.userName+'</a></h5><p class="date">'+data[i].commentTime+'</p><p class="comment">'+data[i].commentContent+'</p></div></div><div class="reply-btn"><a href="" class="btn-reply text-uppercase">reply</a></div></div></div>').appendTo($('.flex-column'))
 				}
 			}
 		})
