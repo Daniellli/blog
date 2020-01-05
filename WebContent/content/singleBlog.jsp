@@ -57,7 +57,7 @@
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
 				<li><a href="javascript:window.history.go(-1)">Back</a></li>
-			<!-- 	<li><a href="#news">News</a></li>
+				<!-- 	<li><a href="#news">News</a></li>
 				<li><a href="#travel">Travel</a></li>
 				<li><a href="#fashion">fashion</a></li>
 				<li><a href="#team">team</a></li>
@@ -122,7 +122,8 @@
 							</div>
 						</div>
 						<div class="single-page-post">
-							视频 <img class="img-fluid" src="../img/single.jpg" alt="">
+							视频 <img class="img-fluid"
+								src="${ sessionScope.blogDetail.blogPhoto}" alt="">
 						</div>
 						<div class="single-post-content">
 							<p>${sessionScope.blogDetail.blogContent }</p>

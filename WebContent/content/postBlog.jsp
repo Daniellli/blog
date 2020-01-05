@@ -60,7 +60,7 @@
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
 				<li><a href="javascript:window.history.go(-1)">Back</a></li>
-			<!-- 	<li><a href="category.jsp">分类</a></li>
+				<!-- 	<li><a href="category.jsp">分类</a></li>
 				<li><a href="#travel">热搜</a></li>
 				Dropdown
 				<li class="dropdown"><a class="dropdown-toggle" href="#"
@@ -90,8 +90,11 @@
 	</div>
 	</section>
 	<!-- 主要内容 -->
-	<form action="http://localhost:8080/blog/PostBlogServlet" method="post"
-		class="post-wrapper pt-100">
+	<form action="http://localhost:8080/blog/UploadServlet" method="post"
+		enctype="multipart/form-data" class="post-wrapper pt-100">
+		<input type="hidden" value="${sessionScope.currentUser.userName }"
+			name="userName">
+
 		<div class="post-wrapper pt-100">
 			<!-- Start post Area -->
 			<section class="post-area">
@@ -123,6 +126,11 @@
 								<p>
 									Content <input name="content" type="text" class="form-control"
 										id="" placeholder="Your article">
+								</p>
+							</div>
+							<div class="single-post-content">
+								<p>
+									Photo <input name="Photo" type="file" class="form-control">
 								</p>
 							</div>
 
