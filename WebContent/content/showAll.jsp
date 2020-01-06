@@ -83,13 +83,7 @@
 			<div class="row justify-content-start align-items-center d-flex">
 				<div class="col-lg-8 top-left">
 					<h1 class="text-white mb-20">Archive News</h1>
-					<ul>
-						<li><a href="index.html">Home</a><span
-							class="lnr lnr-arrow-right"></span></li>
-						<li><a href="category.html">Category</a><span
-							class="lnr lnr-arrow-right"></span></li>
-						<li><a href="single.html">Fashion</a></li>
-					</ul>
+					
 				</div>
 			</div>
 		</div>
