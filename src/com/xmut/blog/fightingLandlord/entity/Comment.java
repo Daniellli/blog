@@ -9,16 +9,12 @@ import java.util.Date;
  * @since 2019年12月31日 下午1:40:03
  */
 public class Comment {
-
-	private User user;//用户id
-	private Integer blogId;//博客id
-	private String commentContent;//评论内容
-	private Date commentTime;//评论内容
-	private Integer commentThumbup;//点赞数
-
-
-	
-	
+	private Integer commentId;
+	private User user;// 用户id
+	private Integer blogId;// 博客id
+	private String commentContent;// 评论内容
+	private Date commentTime;// 评论内容
+	private Integer commentThumbup;// 点赞数
 
 	public Comment() {
 		super();
@@ -26,6 +22,17 @@ public class Comment {
 
 	public Comment(User user, Integer blogId, String commentContent, Date commentTime, Integer commentThumbup) {
 		super();
+		this.user = user;
+		this.blogId = blogId;
+		this.commentContent = commentContent;
+		this.commentTime = commentTime;
+		this.commentThumbup = commentThumbup;
+	}
+
+	public Comment(Integer commentId, User user, Integer blogId, String commentContent, Date commentTime,
+			Integer commentThumbup) {
+		super();
+		this.commentId = commentId;
 		this.user = user;
 		this.blogId = blogId;
 		this.commentContent = commentContent;
@@ -65,8 +72,6 @@ public class Comment {
 		this.commentThumbup = commentThumbup;
 	}
 
-
-
 	/**
 	 * @return the user
 	 */
@@ -74,13 +79,27 @@ public class Comment {
 		return user;
 	}
 
-
-
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	/**
+	 * @return the commentId
+	 */
+	public Integer getCommentId() {
+		return commentId;
+	}
+
+	/**
+	 * @param commentId
+	 *            the commentId to set
+	 */
+	public void setCommentId(Integer commentId) {
+		this.commentId = commentId;
 	}
 
 }

@@ -184,11 +184,17 @@
 											</div>
 											<%-- ${comment.commentThumbup } --%>
 											<div class="reply-btn">
-												<a href="" class="btn-reply text-uppercase">reply</a>
+												<a href="javascript:void(0)" data-id="${comment.commentId }"
+													class="btn-reply text-uppercase">reply</a>
 											</div>
 										</div>
+										<div class="replace" data-id="${comment.commentId }"
+											style="display: none;">
+											<input class="form-control mb-10" id="replyContent"
+												type="text" /> <input type="button" style="float: right;"
+												value='reply' class="btn-reply text-uppercase" />
+										</div>
 									</div>
-
 								</c:forEach>
 
 
@@ -377,6 +383,26 @@
 	<script src="../js/main.js"></script>
 
 	<script>
+	
+	function popUpCommentFiled(){
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//刷新comment的ajax
 	/* function getComment(bid){
 		$.ajax({
@@ -443,6 +469,38 @@
 			}
 		})
 	}
+	
+	$('.reply-btn a').on('click', function () {
+		$(this).parent().fadeOut(200)
+		const data_id = $(this).attr('data-id')
+		$('.replace[data-id='+ data_id +']').slideDown(200)
+	})
+	
+	$('.replace input[type="button"]').on('click', function () {
+		const data_id = $(this).parent().attr('data-id')
+		var content = $('#replyContent').val();
+		$.ajax({
+			type:'post',
+			url:'http://localhost:8080/blog/ReplyServlet',
+			datatype:'json',
+			data:{
+				'content':content,
+				'commentId':data_id
+			},
+		success:function(data){
+			
+		}
+		
+		})
+	
+
+	//收起	
+		
+		$('.replace[data-id='+ data_id +']').slideUp(200)
+		$('.reply-btn a[data-id='+ data_id +']').parent().fadeIn(200)
+	})
+	
+	
 	
 	</script>
 </body>

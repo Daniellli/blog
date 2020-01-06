@@ -156,12 +156,11 @@ public class BlogDaoImp implements BlogDao {
 				res = util.query("select * from comment as c ,user as u  where c.u_id = u.u_id and c.b_id =?", id);
 				List<Comment> comment = new ArrayList<>();
 				while (res.next()) {
-					System.out.println("in dao imp");
 					User user = new User();
 					user.setUserName(res.getString("u_name"));
 					user.setUserId(res.getInt("u_id"));
 					user.setUserPortrait(res.getString("portrait"));
-					Comment c = new Comment(user, res.getInt("b_id"), res.getString("c_content"), res.getTime("c_time"),
+					Comment c = new Comment(res.getInt("c_id"),user, res.getInt("b_id"), res.getString("c_content"), res.getTime("c_time"),
 							res.getInt("c_thumbs_up"));
 					comment.add(c);
 				}
