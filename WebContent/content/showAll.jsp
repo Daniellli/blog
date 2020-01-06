@@ -68,6 +68,7 @@
 			<div class="row justify-content-start align-items-center d-flex">
 				<div class="col-lg-8 top-left">
 					<h1 class="text-white mb-20">BBBBBBBBBBBBlog</h1>
+
 				</div>
 			</div>
 		</div>
