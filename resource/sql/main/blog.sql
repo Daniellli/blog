@@ -1,4 +1,4 @@
-/*
+﻿/*
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
@@ -12,7 +12,7 @@ File Encoding         : 65001
 
 Date: 2020-01-04 22:19:32
 */
-
+use blog;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
