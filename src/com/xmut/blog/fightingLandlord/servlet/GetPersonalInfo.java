@@ -1,7 +1,6 @@
 package com.xmut.blog.fightingLandlord.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,13 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.xmut.blog.fightingLandlord.biz.UserBiz;
 import com.xmut.blog.fightingLandlord.bizImp.CategoryBizImp;
+import com.xmut.blog.fightingLandlord.bizImp.UserBizImp;
+import com.xmut.blog.fightingLandlord.entity.User;
 
 /**
- * Servlet implementation class GetCategoryServlet
+ * Servlet implementation class GetPersonalInfo
  */
-@WebServlet("/GetCategoryServlet")
-public class GetCategoryServlet extends HttpServlet {
+@WebServlet("/GetPersonalInfo")
+public class GetPersonalInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -25,12 +27,13 @@ public class GetCategoryServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
+		UserBiz user = new UserBizImp();
+
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		User userDetail = user.queryUserById(userId);
 		HttpSession session = request.getSession();
-
-		List list = new CategoryBizImp().queryAllCategory();
-
-		session.setAttribute("category", list);
-		response.sendRedirect("http://localhost:8080/blog/content/postBlog.jsp");
-
+		
+		session.setAttribute("userDetail", userDetail);
+		response.sendRedirect("http://localhost:8080/blog/content/personalDetail.jsp");
 	}
 }

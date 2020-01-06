@@ -121,13 +121,27 @@
 								</div>
 							</div>
 						</div>
-						<div class="single-page-post">
-							视频 <img class="img-fluid"
-								src="${ sessionScope.blogDetail.blogPhoto}" alt="">
-						</div>
 						<div class="single-post-content">
 							<p>${sessionScope.blogDetail.blogContent }</p>
 						</div>
+						<c:if test="${sessionScope.blogDetail.blogPhoto != null}">
+							<div class="single-page-post"
+								style="height: 400px; width: 700px; margin: 0 auto;">
+								<img class="img-fluid"
+									src="${ sessionScope.blogDetail.blogPhoto}">
+							</div>
+						</c:if>
+
+
+						<c:if test="${sessionScope.blogDetail.blogVideo !=null }">
+							<div class="single-page-post"
+								style="height: 400px; width: 700px; margin: 0 auto;">
+								<video src="${sessionScope.blogDetail.blogVideo}" autoplay loop
+									controls="controls"></video>
+							</div>
+						</c:if>
+
+
 						<!-- 点赞数和评论数 -->
 						<div class="bottom-wrapper">
 							<div class="row">
@@ -202,7 +216,6 @@
 						</div>
 						</section>
 						<!-- End comment-sec Area -->
-
 						<!-- Start commentform Area -->
 						<section class="commentform-area  pb-120 pt-80 mb-100">
 						<div class="container">
@@ -221,7 +234,6 @@
 										onblur="this.placeholder = 'Messege'" required></textarea>
 									<button class="primary-btn mt-20"
 										onclick="submitComment(${sessionScope.blogDetail.user.userId},${sessionScope.blogDetail.blogId},'message')">Comment</button>
-
 									<!-- <input type="submit" class="primary-btn mt-20" value="Comment"> -->
 									<!-- </form> -->
 								</div>
@@ -252,10 +264,13 @@
 						<h2 class="text-uppercase">${sessionScope.blogDetail.user.userName  }</h2>
 						<div class="social-link">
 							<a href="#"><button class="btn">
-									<i class="fa fa-facebook" aria-hidden="true"></i> Like
-								</button></a> <a href="#"><button class="btn">
-									<i class="fa fa-twitter" aria-hidden="true"></i> follow
-								</button></a>
+									<i class="fa fa-facebook" aria-hidden="true"></i> Private Chat
+								</button></a> <a href="#">
+								<button class="btn" id="followButton"
+									onclick="follow(${sessionScope.blogDetail.user.userId},${sessionScope.currentUser.userId })">
+									<i class="fa fa-twitter" aria-hidden="true"></i> Follow
+								</button>
+							</a>
 						</div>
 					</div>
 
@@ -401,7 +416,32 @@
 				}
 			}
 		})
-		
+	}
+
+	
+	//关注
+	function follow(followedUserId,mainUserId){
+		$.ajax({
+			type:'post',
+			url:'http://localhost:8080/blog/FollowServlet',
+			data:{
+				"followedUserId":followedUserId,
+				"mainUserId":mainUserId
+			},
+			datatype:'json',
+			success:function(data){
+				if(data.length>0){
+					var d= JSON.parse(data)
+					if(d[0].flag == 1){
+					 alert("关注成功");
+					  document.getElementById("followButton").innerText="Followed"; 
+					}else{
+						 alert("你已关注");
+						 document.getElementById("followButton").innerText="Followed";
+					}
+				}
+			}
+		})
 	}
 	
 	</script>

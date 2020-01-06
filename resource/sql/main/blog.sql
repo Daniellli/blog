@@ -12,7 +12,8 @@ File Encoding         : 65001
 
 Date: 2020-01-04 22:19:32
 */
-
+CREATE SCHEMA `blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
+use blog;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

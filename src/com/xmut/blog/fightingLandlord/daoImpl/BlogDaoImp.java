@@ -36,7 +36,7 @@ public class BlogDaoImp implements BlogDao {
 			// thumbs-up无效
 			flag = util.update(
 					"insert into blog(b_id,b_name,u_id,b_thumbs_up,b_content,b_audio,b_video,b_photo,b_category_id)values(?,?,?,?,?,?,?,?,?)",
-					blog.getBlogId(), blog.getBlogName(), blog.getUser().getUserId(), blog.getBlogVideo(),
+					blog.getBlogId(), blog.getBlogName(), blog.getUser().getUserId(), blog.getBlogThumbup(),
 					blog.getBlogContent(), blog.getBlogAudio(), blog.getBlogVideo(), blog.getBlogPhoto(),
 					blog.getCategory().getcId());
 		} catch (Exception ex) {
@@ -183,6 +183,63 @@ public class BlogDaoImp implements BlogDao {
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @author DixinFan
+	 * 
+	 */
+
+	@Override
+	public List<Blog> findBlogByCategoryId(Integer id) {
+		List<Blog> list = new ArrayList<Blog>();
+		try {
+			ResultSet res = util.query("select * from  show_blog_with_like_comment where b_category_id = ?", id);
+			while (res.next()) {
+				User u = new User();
+				u.setUserId(res.getInt("u_id"));
+				u.setUserName(res.getString("u_name"));
+				u.setUserPortrait(res.getString("portrait"));
+				Category cat = new Category();
+				cat.setcId(res.getInt("b_category_id"));
+				Blog b = new Blog(res.getInt("b_id"), u, res.getString("b_name"), res.getInt("like_number"),
+						res.getString("b_content"), res.getString("b_audio"), res.getString("b_video"),
+						res.getString("b_photo"), cat, res.getInt("comment_number"));
+				list.add(b);
+			}
+			util.closeAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Blog> findBlogByName(String name) {
+		List<Blog> list = new ArrayList<Blog>();
+		try {
+			ResultSet res = util.query("select * from  show_blog_with_like_comment where  b_name = ?", name);
+			while (res.next()) {
+				User u = new User();
+				u.setUserId(res.getInt("u_id"));
+				u.setUserName(res.getString("u_name"));
+				u.setUserPortrait(res.getString("portrait"));
+				Category cat = new Category();
+				cat.setcId(res.getInt("b_category_id"));
+				Blog b = new Blog(res.getInt("b_id"), u, res.getString("b_name"), res.getInt("like_number"),
+						res.getString("b_content"), res.getString("b_audio"), res.getString("b_video"),
+						res.getString("b_photo"), cat, res.getInt("comment_number"));
+				list.add(b);
+			}
+			util.closeAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

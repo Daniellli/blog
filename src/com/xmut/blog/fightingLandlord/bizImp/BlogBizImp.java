@@ -66,4 +66,26 @@ public class BlogBizImp implements BlogBiz {
 		return dao.thumbsUp(id);
 	}
 
+	@Override
+	public List<Blog> findBlogByCategoryId(Integer id) {
+
+		if (id != null) {
+			return dao.findBlogByCategoryId(id);
+		}
+		return null;
+	}
+
+	/**
+	 * @author DixinFan
+	 * 
+	 */
+	@Override
+	public List<Blog> findBlogByName(String name) {
+		if (name != null && name.length() != 0) {
+			return dao.findBlogByName(name);
+		}
+		return null;
+
+	}
+
 }

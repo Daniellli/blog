@@ -12,6 +12,11 @@ public class Relationship {
 	public Relationship() {
 		super();
 	}
+	public Relationship(Integer leftUserId, Integer rightUserId) {
+		super();
+		this.leftUserId = leftUserId;
+		this.rightUserId = rightUserId;
+	}
 	public Integer getLeftUserId() {
 		return leftUserId;
 	}

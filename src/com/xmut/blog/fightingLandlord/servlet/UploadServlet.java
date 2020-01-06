@@ -49,6 +49,14 @@ public class UploadServlet extends HttpServlet {
 		String content = null;
 		String userName = null;// 用来给图片命名
 		String realFileName = null;
+		String photoAddress = null;
+		String vedioAddress = null;
+
+		String scheme = request.getScheme(); // 获取请求协议(http)
+		String serverName = request.getServerName(); // 获取服务器名称(localhost)
+		int serverPort = request.getServerPort(); // 获取服务器端口号
+		String contextPath = request.getContextPath(); // 返回Web应用的URL入口
+
 		try {
 			// 调用 parseRequest（request）方法 获得上传文件 FileItem 的集合list 可实现多文件上传。
 			List<FileItem> list = (List<FileItem>) upload.parseRequest(request);
@@ -76,15 +84,37 @@ public class UploadServlet extends HttpServlet {
 				else {
 					// 获取路径名
 					String value = item.getName();// 获取文件名
-					// 取到最后一个反斜杠。
 					System.out.println("文件名" + value);
+					String fieldName = item.getFieldName();
+					realFileName = userName + new Date().getTime()
+							+ value.substring(value.lastIndexOf("."), value.length());// 对图片重新命名
+					if (fieldName.equals("Photo")) {
+						path = request.getSession().getServletContext().getRealPath("/upload/photo");// 存取路径
+						// 访问路径
+						photoAddress = scheme + "://" + serverName + ":" + serverPort + contextPath + "/upload/photo/"
+								+ realFileName;// 应用程序的入口+图片的路径==访问图片的地址
+					} else {
+						path = request.getSession().getServletContext().getRealPath("/upload/video");// 存取路径
+						vedioAddress = scheme + "://" + serverName + ":" + serverPort + contextPath + "/upload/video/"
+								+ realFileName;// 应用程序的入口+图片的路径==访问图片的地址
+					}
+					System.out.println("path" + path);
+					System.out.println("accessAddress" + photoAddress);
+					System.out.println("accessAddress" + vedioAddress);
+					
+					
+					
+
+
+					
+
+					// 取到最后一个反斜杠。
+
 					// int start = value.lastIndexOf("\\");
 					// 截取上传文件的 字符串名字。+1是去掉反斜杠。
 					// String filename = value.substring(start + 1);
-					realFileName = userName + new Date().getTime()
-							+ value.substring(value.lastIndexOf("."), value.length());// 对图片重新命名
 
-					System.out.println("realFileName" + realFileName);
+					// System.out.println("realFileName" + realFileName);
 
 					// request.setAttribute(name, realFileName);
 
@@ -92,6 +122,7 @@ public class UploadServlet extends HttpServlet {
 					 * 第三方提供的方法直接写到文件中。 item.write(new File(path,filename));
 					 */
 					// 收到写到接收的文件中。
+
 					OutputStream out = new FileOutputStream(new File(path, realFileName));// 将文件写入tomcat的编译路径下，以realFileName命名
 					InputStream in = item.getInputStream();// 以流的形式读取上传的文件
 					int length = 0;
@@ -111,21 +142,19 @@ public class UploadServlet extends HttpServlet {
 		// test
 		System.out.println(title);
 		System.out.println(content);
+		System.out.println(photoAddress);
+		System.out.println(vedioAddress);
 
 		// 将文件存取的路径和其他信息存到数据库
 		response.setContentType("text/html");
-		String scheme = request.getScheme(); // 获取请求协议(http)
-		String serverName = request.getServerName(); // 获取服务器名称(localhost)
-		int serverPort = request.getServerPort(); // 获取服务器端口号
-		String contextPath = request.getContextPath(); // 返回Web应用的URL入口
-		// 访问路径
-		String accessPath = scheme + "://" + serverName + ":" + serverPort + contextPath + "/upload/" + realFileName;// 应用程序的入口+图片的路径==访问图片的地址
+
 		// 存取在数据库
 		Blog b = new Blog();
 		b.setBlogContent(content);
 		b.setBlogName(title);
 		b.setCategory(new Category(category));
-		b.setBlogPhoto(accessPath);
+		b.setBlogPhoto(photoAddress);
+		b.setBlogVideo(vedioAddress);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("currentUser");
 		b.setUser(user);

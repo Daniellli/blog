@@ -2,9 +2,12 @@ package com.xmut.blog.fightingLandlord.daoImpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.xmut.blog.fightingLandlord.dao.UserDao;
+import com.xmut.blog.fightingLandlord.entity.Blog;
+import com.xmut.blog.fightingLandlord.entity.Category;
 import com.xmut.blog.fightingLandlord.entity.User;
 import com.xmut.blog.fightingLandlord.utils.*;
 
@@ -133,6 +136,22 @@ public class UserDaoImp implements UserDao {
 				user = new User(res.getInt("u_id"), res.getString("u_name"), res.getString("u_pwd"),
 						res.getInt("u_sex"), res.getInt("u_age"), res.getString("u_email"), res.getInt("u_type"),
 						res.getString("u_question"), res.getString("u_answer"), res.getString("u_telephone"));
+
+				res = util.query("SELECT * FROM show_blog_with_like_comment where u_id=?;", id);
+				List<Blog> blog = new ArrayList<Blog>();
+				while (res.next()) {
+					User u = new User();// User 对象
+					u.setUserId(res.getInt("u_id"));
+					u.setUserName(res.getString("u_name"));
+					u.setUserPortrait(res.getString("portrait"));
+					Category cat = new Category();// 分类对象
+					cat.setcId(res.getInt("b_category_id"));
+					Blog b = new Blog(res.getInt("b_id"), u, res.getString("b_name"), res.getInt("like_number"),
+							res.getString("b_content"), res.getString("b_audio"), res.getString("b_video"),
+							res.getString("b_photo"), cat, res.getInt("comment_number"));
+					blog.add(b);
+				}
+				user.setBlogs(blog);
 			}
 			util.closeAll();// 关闭连接
 		} catch (SQLException e) {

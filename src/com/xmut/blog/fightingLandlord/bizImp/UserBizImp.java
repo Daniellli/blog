@@ -43,8 +43,10 @@ public class UserBizImp implements UserBiz {
 
 	/**
 	 * 注册用户
-	 * @param user 要注册的用户对象
-	 *    @return 注册的结果，如果用户没有输入输入不合法数据都返回false        
+	 * 
+	 * @param user
+	 *            要注册的用户对象
+	 * @return 注册的结果，如果用户没有输入输入不合法数据都返回false
 	 * @author Daniel
 	 * @since 2019年12月31日 下午5:31:48
 	 */
@@ -75,7 +77,9 @@ public class UserBizImp implements UserBiz {
 
 	@Override
 	public User queryUserById(Integer id) {
-		// TODO Auto-generated method stub
+		if (id != null) {
+			return userdao.queryUserById(id);
+		}
 		return null;
 	}
 

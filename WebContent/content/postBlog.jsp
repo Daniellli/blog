@@ -133,14 +133,15 @@
 									Photo <input name="Photo" type="file" class="form-control">
 								</p>
 							</div>
-
+							<div class="single-post-content">
+								<p>
+									Photo <input name="video" type="file" class="form-control">
+								</p>
+							</div>
 							<button type="submit">POST</button>
 						</div>
 					</div>
 	</form>
-
-
-
 
 	<!-- 右边 -->
 	<div class="col-lg-4 sidebar-area ">

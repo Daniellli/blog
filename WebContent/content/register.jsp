@@ -23,7 +23,8 @@ body {
 }
 
 .g_register .g_r_style span.pwderror {
-	background: url(../img/ver_error.png) no-repeat center;
+	/* background: url(../img/ver_error.png) no-repeat center; */
+	
 }
 </style>
 </head>
@@ -31,9 +32,15 @@ body {
 
 	<!--用户注册-->
 	<form id="form" name="form" action="../RegisterServlet" method="post"
-		autocomplete="off">
+		autocomplete="off" enctype="multipart/form-data">
 		<div class="g_register posCenter" style="display: block;">
 			<div class="g_r_title">用户注册</div>
+			<!-- 	<div>
+				<div style="width: 50%; float: left;">头像</div>
+				<div style="width: 50%; float: left;">
+					<input type="file" name="portraits" class="form-control">
+				</div>
+			</div> -->
 			<div class="g_r_form">
 				<p class="g_r_tel">
 					<input class="g_tel" readonly type="tele" placeholder="手机号"
@@ -101,20 +108,8 @@ body {
 			</div>
 		</div>
 		<!--登录跳转-->
-		<div class="g_l_skip g_skip" style="display: none;">
-			<h6 class="g_skip_title">恭喜注册成功!</h6>
-			<p class="g_sikp_time">
-				（<i>3</i>） 秒后将自动跳转...
-			</p>
-		</div>
 
-		<input type="hidden" id="refer" value="http://localhost" />
-		<!--弹窗-->
-		<div class="g_dialog" style="display: none;" id="loginSkip">
-			<div class="g_tip_reg posCenter">
-				<p class="g_reg_title mt40">该账号已注册</p>
-			</div>
-		</div>
+
 	</form>
 </body>
 </html>

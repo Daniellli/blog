@@ -26,4 +26,10 @@ public interface BlogDao {
 	// 找博客
 	public Blog getBlogById(Integer id);
 
+	// find blog with category ID
+	public List<Blog> findBlogByCategoryId(Integer id);
+
+	// find blog with category ID
+	public List<Blog> findBlogByName(String name);
+
 }

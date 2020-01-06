@@ -11,13 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.xmut.blog.fightingLandlord.biz.BlogBiz;
 import com.xmut.blog.fightingLandlord.biz.UserBiz;
+import com.xmut.blog.fightingLandlord.bizImp.BlogBizImp;
 import com.xmut.blog.fightingLandlord.bizImp.CategoryBizImp;
 import com.xmut.blog.fightingLandlord.bizImp.UserBizImp;
+import com.xmut.blog.fightingLandlord.entity.Blog;
 import com.xmut.blog.fightingLandlord.entity.User;
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+/**
+ * Servlet implementation class GetBlogByName
+ */
+@WebServlet("/GetBlogByName")
+public class GetBlogByName extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -25,23 +32,21 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		String username = request.getParameter("username");
-		String pwd = request.getParameter("pwd");
-		UserBiz userBiz = new UserBizImp();
-		User currentUser = userBiz.checkLogin(username, pwd);
-		List list = new CategoryBizImp().queryAllCategory();
+		BlogBiz blog = new BlogBizImp();
 
+		String blogName = request.getParameter("bName");
+
+		List<Blog> blogs = blog.findBlogByName(blogName);
+
+		Gson gson = new Gson();
+
+		String json = gson.toJson(blogs);
+
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-	
-		if (currentUser != null && list!=null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("currentUser", currentUser);
-			session.setAttribute("category", list);
-			out.println("<script>alert('login successfully!')</script>");
-			out.println("<script>window.location.href='http://localhost:8080/blog/index.jsp'</script>");
-		} else {
-			out.println("<script>alert('fail to login,please check password and account number!')</script>");
-			out.println("<script>window.history.go(-1)</script>");
-		}
+		out.print(json);
+		out.flush();
+		out.close();
+
 	}
 }

@@ -21,6 +21,7 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <title>Blogger</title>
+<link rel="stylesheet" href="../tools/jsuggest/jsuggest.css">
 
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
@@ -49,27 +50,11 @@
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-
 				<div
 					class="collapse navbar-collapse justify-content-end align-items-center"
 					id="navbarSupportedContent">
 					<ul class="navbar-nav scrollable-menu">
 						<li><a href="javascript:window.history.go(-1)">Back</a></li>
-					<!-- 	<li><a href="#news">News</a></li>
-						<li><a href="#travel">Travel</a></li>
-						<li><a href="#fashion">fashion</a></li>
-						<li><a href="#team">team</a></li>
-						Dropdown
-						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							id="navbardrop" data-toggle="dropdown"> Pages </a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="single.html">Single</a> <a
-									class="dropdown-item" href="category.html">Category</a> <a
-									class="dropdown-item" href="search.html">Search</a> <a
-									class="dropdown-item" href="archive.html">Archive</a> <a
-									class="dropdown-item" href="generic.html">Generic</a> <a
-									class="dropdown-item" href="elements.html">Elements</a>
-							</div></li> -->
 					</ul>
 				</div>
 			</div>
@@ -82,14 +67,7 @@
 		<div class="container">
 			<div class="row justify-content-start align-items-center d-flex">
 				<div class="col-lg-8 top-left">
-					<h1 class="text-white mb-20">Archive News</h1>
-					<ul>
-						<li><a href="index.html">Home</a><span
-							class="lnr lnr-arrow-right"></span></li>
-						<li><a href="category.html">Category</a><span
-							class="lnr lnr-arrow-right"></span></li>
-						<li><a href="single.html">Fashion</a></li>
-					</ul>
+					<h1 class="text-white mb-20">BBBBBBBBBBBBlog</h1>
 				</div>
 			</div>
 		</div>
@@ -104,14 +82,12 @@
 			<div class="container">
 				<div class="row justify-content-center d-flex">
 					<div class="col-lg-8">
-						<div class="post-lists search-list">
+						<div class="post-lists search-list" id="showall">
 							<c:forEach var="blog" items="${sessionScope.blog }">
 								<div class="single-list flex-row d-flex">
 									<!-- 图片 -->
-									<div class="thumb">
-										<!-- <div class="date">
-										<span>20</span><br>Dec
-									</div> -->
+									<div class="thumb"
+										onclick="goPersonalInfo(${blog.user.userId})">
 										<img src="../img/asset/c3.jpg" alt="">
 										<p>
 											<a href="#">${blog.user.userName }</a>
@@ -122,9 +98,12 @@
 										<div>${blog.user.userId }</div>
 										<div>${blog.user.userPortrait }</div> --%>
 									</div>
-									<div class="detail">
-										<a href="#"> <!-- 标题 -->
-											<h4 class="pb-20">${blog.blogName }</h4></a>
+									<div class="detail" id="showDetail">
+										<a
+											href="http://localhost:8080/blog/GetBlogDetail?bid=${blog.blogId }">
+											<!-- 标题 -->
+											<h4 class="pb-20">${blog.blogName }</h4>
+										</a>
 										<!-- 文章内容 -->
 										<p>${blog.blogContent }</p>
 										<!-- 喜欢和评论 -->
@@ -151,30 +130,23 @@
 						<div class="single_widget search_widget">
 							<div id="imaginary_container">
 								<div class="input-group stylish-input-group">
-									<input type="text" class="form-control" placeholder="Search">
-									<span class="input-group-addon">
-										<button type="submit">
+									<input type="text" class="form-control" id="searchField"
+										placeholder="Search"> <span class="input-group-addon">
+										<button type="submit" onclick="searchByBlogName()">
 											<span class="lnr lnr-magnifier"></span>
 										</button>
 									</span>
 								</div>
 							</div>
 						</div>
-
 						<div class="single_widget cat_widget">
 							<h4 class="text-uppercase pb-20">post categories</h4>
 							<ul>
-								<li><a href="#">Technology <span>37</span></a></li>
-								<li><a href="#">Lifestyle <span>37</span></a></li>
-								<li><a href="#">Fashion <span>37</span></a></li>
-								<li><a href="#">Art <span>37</span></a></li>
-								<li><a href="#">Food <span>37</span></a></li>
-								<li><a href="#">Architecture <span>37</span></a></li>
-								<li><a href="#">Adventure <span>37</span></a></li>
+								<c:forEach var="category" items="${sessionScope.category }">
+									<li><a href="javascript:getByCategoryId(${category.cId })">${category.cName }<span>37</span></a></li>
+								</c:forEach>
 							</ul>
 						</div>
-
-
 					</div>
 				</div>
 			</div>
@@ -250,16 +222,6 @@
 			<div class="row footer-bottom d-flex justify-content-between">
 
 
-				<p class="col-lg-8 col-sm-12 footer-text">
-					Copyright &copy;
-					<script>
-						document.write(new Date().getFullYear());
-					</script>
-					All rights reserved | made with Colorlib - More Templates <a
-						href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
-					- Collect from <a href="http://www.cssmoban.com/" title="网页模板"
-						target="_blank">网页模板</a>
-				</p>
 
 
 				<div class="col-lg-4 col-sm-12 footer-social">
@@ -285,10 +247,32 @@
 	<script src="../js/jquery.magnific-popup.min.js"></script>
 	<script src="../js/jquery.sticky.js"></script>
 	<script src="../js/main.js"></script>
-
+	<script src="../tools/jsuggest/jSuggest.js"></script>
 	<script>
 		//praiseN,pra为span的id 
-
+		function searchByBlogName(){
+			var blogName =document.getElementById("searchField").value
+			$.ajax({
+				type:'get',
+				url:'http://localhost:8080/blog/GetBlogByName?bName='+blogName,
+				datatype:'json',
+				success:function(data){
+					if(data!=null){
+						$('.single-list').remove()
+						data=JSON.parse(data)
+						let len = data.length
+						for(let i = 0 ;i<len;i++){
+							$('<div class="single-list flex-row d-flex"><div class="thumb" onclick="goPersonalInfo('+data[i].user.userId+')">\<img src="../img/asset/c3.jpg" alt=""><p><a href="#">'+data[i].user.userName+'</a></p></div><div class="detail" id="showDetail"><a href="http://localhost:8080/blog/GetBlogDetail?bid='+data[i].blogId+'"><h4 class="pb-20">'+data[i].blogName+'</h4></a><p>'+data[i].blogContent+'</p><p class="footer pt-20"><i class="fa fa-heart-o" aria-hidden="true"></i> <a href="javascript:void(0)"onclick="priase('+data[i].blogId+',0,'+data[i].blogId+')">Likes</a><span id="'+data[i].blogId+'">'+data[i].blogThumbup+'</span> <iclass="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="http://localhost:8080/blog/GetBlogDetail?bid='+data[i].blogId+'">Comments '+data[i].blogCommentNumber+' </a></p></div></div>').prependTo($('#showall'))
+							}
+						
+					}
+				}
+			})
+			
+			
+		}
+		
+		
 		function priase(articleid, commentid, praiseN) {
 			var type = "json";
 			var praiseNum = parseInt(document.getElementById(praiseN).innerHTML); //获取点赞数
@@ -316,8 +300,62 @@
 
 						}
 					});
-
 		}
+		
+	
+		function goPersonalInfo(userId){
+			 let form = document.createElement('form');
+			  form.id = 'idForm';
+			  form.name = 'name_form';
+			  form.style.display = 'none';
+			  document.body.appendChild(form);
+			
+			   
+			      let input = document.createElement('input');
+			      input.type = 'text';
+			      input.name = 'userId';
+			      input.value = userId;
+			      form.appendChild(input);
+			  
+			  form.method = 'POST';
+			  form.action = "http://localhost:8080/blog/GetPersonalInfo";
+			  form.submit();
+			  document.body.removeChild(form);
+		}
+		
+		//按分类查询
+		function getByCategoryId(cId){
+			$.ajax({
+				type:'get',
+				url:"http://localhost:8080/blog/GetBlogByCategoryId?cid="+cId,
+				datatype:'json',
+				success:function(data){
+					if(data!=null){
+						$('.single-list').remove()
+						data=JSON.parse(data)
+						let len = data.length
+						for (let i = 0; i < len; i++) {
+							$('<div class="single-list flex-row d-flex"><div class="thumb" onclick="goPersonalInfo('+data[i].user.userId+')">\<img src="../img/asset/c3.jpg" alt=""><p><a href="#">'+data[i].user.userName+'</a></p></div><div class="detail" id="showDetail"><a href="http://localhost:8080/blog/GetBlogDetail?bid='+data[i].blogId+'"><h4 class="pb-20">'+data[i].blogName+'</h4></a><p>'+data[i].blogContent+'</p><p class="footer pt-20"><i class="fa fa-heart-o" aria-hidden="true"></i> <a href="javascript:void(0)"onclick="priase('+data[i].blogId+',0,'+data[i].blogId+')">Likes</a><span id="'+data[i].blogId+'">'+data[i].blogThumbup+'</span> <iclass="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="http://localhost:8080/blog/GetBlogDetail?bid='+data[i].blogId+'">Comments '+data[i].blogCommentNumber+' </a></p></div></div>').prependTo($('#showall'))
+						} 
+					}
+				}
+				
+			})
+		}
+			
+			//当文本加载完毕后触发
+			$(document).ready(function() {
+				//#textfield表示你输入框的id名称，比如当前输入框id是textfield
+				$("#searchField").jSuggest({
+					//url指的是后台的服务地址
+					url : "http://localhost:8080/blog/AutoComplete",
+					type : "post",
+					loadingImg : '../img/ajax-loader.gif',
+					data : "key",
+					delay : 500,
+					autoChange : true
+				});
+			});
 	</script>
 
 </body>

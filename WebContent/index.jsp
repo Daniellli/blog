@@ -69,9 +69,7 @@
 						<li class="dropdown"><a class="dropdown-toggle" href="#"
 							id="navbardrop" data-toggle="dropdown"> Pages </a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item"
-									href="http://localhost:8080/blog/GetCategoryServlet">PostBlog</a>
-								<a class="dropdown-item" href="content/search.jsp">Search</a> <a
+								<a class="dropdown-item" href="content/postBlog.jsp">PostBlog</a><a
 									class="dropdown-item"
 									href="http://localhost:8080/blog/GetAllBlog">Refresh</a>
 								<c:choose>

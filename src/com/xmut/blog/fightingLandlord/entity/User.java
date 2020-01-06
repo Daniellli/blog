@@ -1,5 +1,7 @@
 package com.xmut.blog.fightingLandlord.entity;
 
+import java.util.List;
+
 /**
  * User table 
  * @author Daniel
@@ -19,6 +21,7 @@ public class User {
 	private String userTelephone;//密保答案
 	private String userPortrait;//密保答案
 	
+	private List<Blog> blogs;//该用户发布的所有博客
 	
 	
 
@@ -154,6 +157,20 @@ public class User {
 	 */
 	public void setUserPortrait(String userPortrait) {
 		this.userPortrait = userPortrait;
+	}
+
+	/**
+	 * @return the blogs
+	 */
+	public List<Blog> getBlogs() {
+		return blogs;
+	}
+
+	/**
+	 * @param blogs the blogs to set
+	 */
+	public void setBlogs(List<Blog> blogs) {
+		this.blogs = blogs;
 	}
 
 }
