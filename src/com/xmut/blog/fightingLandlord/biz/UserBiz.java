@@ -23,4 +23,7 @@ public interface UserBiz {
 	// 查询所有用户
 	public List<User> queryAllUser();
 
+	// 查询所有关注的好友
+	public List<User> queryFriends(int id);
+
 }

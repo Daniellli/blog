@@ -18,27 +18,45 @@
 
 <style>
 body {
-	background: url(../img/header-bg.jpg) no-repeat center;
+	background: url(../img/header-bg.jpg)  center;
 	background-size: cover;
 }
 
 .g_register .g_r_style span.pwderror {
-	 background: url(../img/ver_error.png) no-repeat center; 
-	
+	background: url(../img/ver_error.png) center;
+}
+
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.file {
+	margin-bottom: 20px;
+}
+#form p {
+	margin: 0;
+	margin-bottom:10px;
 }
 </style>
 </head>
 <body>
-
 	<!--用户注册-->
 	<form id="form" name="form" action="../RegisterServlet" method="post"
-		autocomplete="off" >
+		autocomplete="off">
 		<div class="g_register posCenter" style="display: block;">
 			<div class="g_r_title">用户注册</div>
-			<!-- 	<div>
-				<div style="width: 50%; float: left;">头像</div>
+			<!-- <div class="clearfix file">
+				<div
+					style="width: 100px; height: 100px; background: rgba(0, 0, 0, 0.5); text-align: center; line-height: 100px; border-radius: 50%; float: left;"
+					id="showFrame">
+					<img id="imgFrame" src="" />
+
+				</div>
 				<div style="width: 50%; float: left;">
-					<input type="file" name="portraits" class="form-control">
+					<input accept="image/jpeg,image/png,image/jpg,image/gif"
+						type="file" name="portraits" style="display: none;" />
 				</div>
 			</div> -->
 			<div class="g_r_form">
@@ -111,5 +129,26 @@ body {
 
 
 	</form>
+
+	<script>
+		$("#showFrame").on('click', function() {
+			$("input[type=file]").click()
+
+		})
+
+		$("input[type=file]").on('change', function() {
+
+			console.log($(this).files[1])
+			/* var imageSrc = window.URL ? window.URL
+					.createObjectURL(imageA.files[0]) : imageA.value;
+			var imageTag = $("#imgFrame");
+			imageTag.src = imageSrc;
+			alert(imageA.files[0].size);
+			alert(imageA.files[0].type);
+			alert(imageA.files[0].lastModifiedDate); */
+
+		})
+	</script>
+
 </body>
 </html>

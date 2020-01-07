@@ -9,7 +9,7 @@ import com.xmut.blog.fightingLandlord.dao.UserDao;
 import com.xmut.blog.fightingLandlord.entity.Blog;
 import com.xmut.blog.fightingLandlord.entity.Category;
 import com.xmut.blog.fightingLandlord.entity.User;
-import com.xmut.blog.fightingLandlord.utils.*;
+import com.xmut.blog.fightingLandlord.utils.DbConnection;
 
 /**
  * UserDao 接口实现类
@@ -186,4 +186,29 @@ public class UserDaoImp implements UserDao {
 		return list;
 
 	}
+
+	/**
+	 * @author DixinFan
+	 */
+	@Override
+	public List<User> queryFriends(int id) {
+		// TODO Auto-generated method stub
+		List<User> list = new ArrayList<User>();
+		try {
+			ResultSet res = util
+					.query("SELECT * FROM user where u_id = (select r_u_id from relationship where l_u_id=?)", id);
+
+			while (res.next()) {
+				User user = new User(res.getInt("u_id"), res.getString("u_name"), res.getString("u_pwd"),
+						res.getInt("u_sex"), res.getInt("u_age"), res.getString("u_email"), res.getInt("u_type"),
+						res.getString("u_question"), res.getString("u_answer"), res.getString("u_telephone"));
+				list.add(user);
+			}
+			util.closeAll();// 关闭连接
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

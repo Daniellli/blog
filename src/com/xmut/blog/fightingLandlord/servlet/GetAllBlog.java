@@ -29,7 +29,7 @@ public class GetAllBlog extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("blog", list);
-		response.sendRedirect("http://localhost:8080/blog/content/moments.jsp");
+		response.sendRedirect("http://localhost:8080/blog/content/showAll.jsp");
 
 	}
 }

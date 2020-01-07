@@ -1,4 +1,4 @@
-
+下·
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -38,11 +38,24 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/owl.carousel.css">
 <link rel="stylesheet" href="css/main.css">
+
+<style>
+.post-lists {
+	width: 0px;
+	height: 100%;
+	background: yellow;
+	transition: all 0.3s linear;
+	position: fixed;
+	right: 0;
+	top: 75px;
+	z-index:9999;
+}
+</style>
 </head>
 <body>
-
+	<!-- 好友列表 -->
+	<div class="post-lists search-list"></div>
 	<!-- Start Header Area -->
-
 	<header class="default-header">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container">
@@ -70,6 +83,8 @@
 							<li><a href="GetMoments">Moments</a></li>
 						</c:if>
 						<li><a href="http://localhost:8080/blog/GetAllBlog">Refresh</a></li>
+						<li><a href="#" class="show">Following</a></li>
+
 						<!-- Dropdown -->
 						<li class="dropdown"><a class="dropdown-toggle" href="#"
 							id="navbardrop" data-toggle="dropdown"> Action </a>
@@ -538,5 +553,62 @@
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/jquery.sticky.js"></script>
 	<script src="js/main.js"></script>
+	<script>
+		$('.show')
+				.on(
+						'click',
+						function() {
+							if ($('.post-lists').width() == 200) {
+								$('.post-lists').width(0)
+							} else {
+								$
+										.ajax({
+											type : 'get',
+											datatype : 'json',
+											url : 'http://localhost:8080/blog/GetFrientList',
+											success : function(data) {
+												console.log(data)
+												$('.single-list').remove()
+												data = JSON.parse(data)
+												let len = data.length
+												for (let i = 0; i < len; i++) {
+													$(
+															'<div class="single-list flex-row d-flex"><div class="thumb" onclick="goPersonalInfo('
+																	+ data[i].userId
+																	+ ')"><img src="img/asset/c3.jpg" alt=""><p><a href="#">'
+																	+ data[i].userName
+																	+ '</a></p></div></div><hr />')
+															.appendTo(
+																	$('.post-lists'))
+												}
+
+											}
+
+										})
+								$('.post-lists').width(200) //显示出来
+							}
+
+						})
+
+		function goPersonalInfo(userId) {
+			let form = document.createElement('form');
+			form.id = 'idForm';
+			form.name = 'name_form';
+			form.style.display = 'none';
+			document.body.appendChild(form);
+
+			let input = document.createElement('input');
+			input.type = 'text';
+			input.name = 'userId';
+			input.value = userId;
+			form.appendChild(input);
+
+			form.method = 'POST';
+			form.action = "http://localhost:8080/blog/GetPersonalInfo";
+			form.submit();
+			document.body.removeChild(form);
+		}
+	</script>
+
 </body>
 </html>

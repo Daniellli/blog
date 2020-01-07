@@ -89,4 +89,12 @@ public class UserBizImp implements UserBiz {
 		return null;
 	}
 
+	@Override
+	public List<User> queryFriends(int id) {
+		if (id != 0) {
+			return userdao.queryFriends(id);
+		}
+		return null;
+	}
+
 }
