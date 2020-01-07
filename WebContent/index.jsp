@@ -63,15 +63,17 @@
 						<li><a href="#home">Home</a></li>
 						<li><a href="#news">News</a></li>
 						<li><a href="#travel">Travel</a></li>
-						<li><a href="#fashion">fashion</a></li>
-						<li><a href="#team">team</a></li>
+						<!-- <li><a href="#fashion">fashion</a></li>
+						<li><a href="#team">team</a></li> -->
+						<li><a href="content/postBlog.jsp">PostBlog</a></li>
+						<c:if test="${not empty sessionScope.currentUser}">
+							<li><a href="GetMoments">Moments</a></li>
+						</c:if>
+						<li><a href="http://localhost:8080/blog/GetAllBlog">Refresh</a></li>
 						<!-- Dropdown -->
 						<li class="dropdown"><a class="dropdown-toggle" href="#"
-							id="navbardrop" data-toggle="dropdown"> Pages </a>
+							id="navbardrop" data-toggle="dropdown"> Action </a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="content/postBlog.jsp">PostBlog</a><a
-									class="dropdown-item"
-									href="http://localhost:8080/blog/GetAllBlog">Refresh</a>
 								<c:choose>
 									<c:when test="${not empty sessionScope.currentUser  }">
 										<a class="dropdown-item" href="content/login.jsp">Logout</a>

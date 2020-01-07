@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.smartcardio.CommandAPDU;
-
 import com.xmut.blog.fightingLandlord.dao.BlogDao;
 import com.xmut.blog.fightingLandlord.entity.Blog;
 import com.xmut.blog.fightingLandlord.entity.Category;
@@ -115,7 +113,7 @@ public class BlogDaoImp implements BlogDao {
 		try {
 			ResultSet res = util.query("select * from  show_blog_with_like_comment ");
 			while (res.next()) {
-				if (res.getInt("b_id") > 0) {//有的用户没有发博客问题
+				if (res.getInt("b_id") > 0) {// 有的用户没有发博客问题
 					User u = new User();
 					u.setUserId(res.getInt("u_id"));
 					u.setUserName(res.getString("u_name"));
@@ -239,7 +237,8 @@ public class BlogDaoImp implements BlogDao {
 	public List<Blog> findBlogByName(String name) {
 		List<Blog> list = new ArrayList<Blog>();
 		try {
-			ResultSet res = util.query("select * from  show_blog_with_like_comment where  b_name like ?", "%"+name+"%");
+			ResultSet res = util.query("select * from  show_blog_with_like_comment where  b_name like ?",
+					"%" + name + "%");
 			while (res.next()) {
 				User u = new User();
 				u.setUserId(res.getInt("u_id"));
@@ -251,6 +250,36 @@ public class BlogDaoImp implements BlogDao {
 						res.getString("b_content"), res.getString("b_audio"), res.getString("b_video"),
 						res.getString("b_photo"), cat, res.getInt("comment_number"));
 				list.add(b);
+			}
+			util.closeAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Blog> Moments(int userId) {
+		List<Blog> list = new ArrayList<Blog>();
+		try {
+			ResultSet res = util.query(
+					"select * from show_blog_with_like_comment  full join  (select r_u_id from relationship where l_u_id = ?) u on r_u_id = u_id",
+					userId);
+			while (res.next()) {
+				if (res.getInt("b_id") > 0) {// 有的用户没有发博客问题
+					User u = new User();
+					u.setUserId(res.getInt("u_id"));
+					u.setUserName(res.getString("u_name"));
+					u.setUserPortrait(res.getString("portrait"));
+					Category cat = new Category();
+					cat.setcId(res.getInt("b_category_id"));
+					Blog b = new Blog(res.getInt("b_id"), u, res.getString("b_name"), res.getInt("like_number"),
+							res.getString("b_content"), res.getString("b_audio"), res.getString("b_video"),
+							res.getString("b_photo"), cat, res.getInt("comment_number"));
+					list.add(b);
+				}
+
 			}
 			util.closeAll();
 		} catch (SQLException e) {

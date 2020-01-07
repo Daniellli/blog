@@ -25,13 +25,14 @@ public interface BlogBiz {
 
 	// 点赞博客
 	public boolean thumbsUp(Integer id);
-	
 
-	//find blog with category ID
+	// find blog with category ID
 	public List<Blog> findBlogByCategoryId(Integer id);
-	
+
 	// find blog with category ID
 	public List<Blog> findBlogByName(String name);
-	
-	
+
+	// moments 朋友圈
+	public List<Blog> Moments(int userId);
+
 }

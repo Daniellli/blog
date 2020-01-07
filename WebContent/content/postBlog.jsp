@@ -59,7 +59,7 @@
 			class="collapse navbar-collapse justify-content-end align-items-center"
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
-				<li><a href="javascript:window.history.go(-1)">Back</a></li>
+				<li><a href="../index.jsp">Back</a></li>
 				<!-- 	<li><a href="category.jsp">分类</a></li>
 				<li><a href="#travel">热搜</a></li>
 				Dropdown

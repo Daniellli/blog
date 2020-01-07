@@ -32,4 +32,7 @@ public interface BlogDao {
 	// find blog with category ID
 	public List<Blog> findBlogByName(String name);
 
+	// moments 朋友圈
+	public List<Blog> Moments(int userId);
+
 }

@@ -56,22 +56,7 @@
 			class="collapse navbar-collapse justify-content-end align-items-center"
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
-				<li><a href="javascript:window.history.go(-1)">Back</a></li>
-				<!-- 	<li><a href="#news">News</a></li>
-				<li><a href="#travel">Travel</a></li>
-				<li><a href="#fashion">fashion</a></li>
-				<li><a href="#team">team</a></li>
-				Dropdown
-				<li class="dropdown"><a class="dropdown-toggle" href="#"
-					id="navbardrop" data-toggle="dropdown"> Pages </a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="single.html">Single</a> <a
-							class="dropdown-item" href="category.html">Category</a> <a
-							class="dropdown-item" href="search.html">Search</a> <a
-							class="dropdown-item" href="archive.html">Archive</a> <a
-							class="dropdown-item" href="generic.html">Generic</a> <a
-							class="dropdown-item" href="elements.html">Elements</a>
-					</div></li> -->
+				<li><a href="showAll.jsp">Back</a></li>
 			</ul>
 		</div>
 	</div>
@@ -84,13 +69,6 @@
 		<div class="row justify-content-between align-items-center d-flex">
 			<div class="col-lg-8 top-left">
 				<h1 class="text-white mb-20">Post Details</h1>
-				<!-- <ul>
-					<li><a href="index.html">Home</a><span
-						class="lnr lnr-arrow-right"></span></li>
-					<li><a href="category.html">Category</a><span
-						class="lnr lnr-arrow-right"></span></li>
-					<li><a href="single.html">Fashion</a></li>
-				</ul> -->
 			</div>
 		</div>
 	</div>
@@ -166,7 +144,6 @@
 
 								<c:forEach var="comment"
 									items="${ sessionScope.blogDetail.comments}">
-
 									<div class="comment-list">
 										<div class="single-comment justify-content-between d-flex">
 											<div class="user justify-content-between d-flex">
@@ -192,12 +169,10 @@
 											style="display: none;">
 											<input class="form-control mb-10" type="text" /> <input
 												type="button" style="float: right;" value='reply'
-												class="btn-reply text-uppercase"/>
+												class="btn-reply text-uppercase" />
 										</div>
 									</div>
-
 									<!-- 往左偏移的评论----reply -->
-
 									<div class="comment-list left-padding"
 										id="${ comment.commentId}">
 										<c:forEach var="reply" items="${comment.replys }">
@@ -214,16 +189,10 @@
 														<p class="comment">${reply.replyContent }</p>
 													</div>
 												</div>
-												<!-- <div class="reply-btn">
-													<a href="" class="btn-reply text-uppercase">reply</a>
-												</div> -->
 											</div>
 										</c:forEach>
 									</div>
-
 								</c:forEach>
-
-
 							</div>
 						</div>
 						</section>
@@ -256,43 +225,69 @@
 					</div>
 				</div>
 				<div class="col-lg-4 sidebar-area ">
-					<!-- 搜索框 -->
-					<div class="single_widget search_widget">
-						<div id="imaginary_container">
-							<div class="input-group stylish-input-group">
-								<input type="text" class="form-control" placeholder="Search">
-								<span class="input-group-addon">
-									<button type="submit">
-										<span class="lnr lnr-magnifier"></span>
-									</button>
-								</span>
-							</div>
-						</div>
-					</div>
 					<!-- 用户详情 -->
 					<div class="single_widget about_widget">
 						<img src="../img/asset/s-img.jpg"
 							alt="${sessionScope.blogDetail.user.userPortrait  }">
 						<h2 class="text-uppercase">${sessionScope.blogDetail.user.userName  }</h2>
 						<div class="social-link">
-							<a href="#"><button class="btn">
-									<i class="fa fa-facebook" aria-hidden="true"></i> Private Chat
-								</button></a> <a href="#">
-								<button class="btn" id="followButton"
-									onclick="follow(${sessionScope.blogDetail.user.userId},${sessionScope.currentUser.userId })">
-									<i class="fa fa-twitter" aria-hidden="true"></i> Follow
-								</button>
-							</a>
+
+
+							<c:choose>
+								<c:when test="${ not empty sessionScope.currentUser }">
+									<a onclick="chat()"><button class="btn">
+											<i class="fa fa-facebook" aria-hidden="true"></i> Private
+											Chat
+										</button> </a>
+									<script>
+												var b=null;
+													function chat(){
+														b=window.open("Clientchart.jsp","","width=750 height=550");
+													}
+													function chatclose(){
+														b.close();
+													
+													}
+											</script>
+								</c:when>
+								<c:otherwise>
+									<a href="javascript:alert('Login first ,thank you !')"><button
+											class="btn">
+											<i class="fa fa-facebook" aria-hidden="true"></i> Private
+											Chat
+										</button> </a>
+								</c:otherwise>
+							</c:choose>
+
+
+							<c:choose>
+								<c:when test="${ not empty sessionScope.currentUser }">
+									<a href="#">
+										<button class="btn" id="followButton"
+											onclick="follow(${sessionScope.blogDetail.user.userId},${sessionScope.currentUser.userId })">
+											<i class="fa fa-twitter" aria-hidden="true"></i> Follow
+										</button>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a href="javascript:alert('Login first ,thank you !')"><button
+											class="btn">
+											<i class="fa fa-facebook" aria-hidden="true"></i> Follow
+										</button> </a>
+								</c:otherwise>
+							</c:choose>
+
+
 						</div>
 					</div>
 
 
-					<div class="single_widget tag_widget">
+					<!-- <div class="single_widget tag_widget">
 						<h4 class="text-uppercase pb-20">Category</h4>
 						<ul>
 							<li><a href="#">Lifestyle</a></li>
 						</ul>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -389,26 +384,6 @@
 	<script src="../js/main.js"></script>
 
 	<script>
-	
-	function popUpCommentFiled(){
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//刷新comment的ajax
 	/* function getComment(bid){
 		$.ajax({
@@ -425,6 +400,7 @@
 		})
 	} */
 	
+	//添加评论
 	function submitComment(userId,blogId,textareaId){
 		console.log(userId)
 		var content = document.getElementById(textareaId).value;
@@ -439,19 +415,14 @@
 			dataType: 'json',
 			success: function(data) {
 				if(data.length!=0){
-						$('.comment-list').remove()
-						let len = data.length
-						for (let i = 0; i < len; i++) {
-							$('<div class="comment-list"><div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="../img/asset/c1.jpg"alt="'+data[i].user.userId+'"></div><div class="desc"><h5><a href="#">' + data[i].user.userName+'</a></h5><p class="date">'+data[i].commentTime+'</p><p class="comment">'+data[i].commentContent+'</p></div></div><div class="reply-btn"><a href="" class="btn-reply text-uppercase">reply</a></div></div></div>').appendTo($('.flex-column'))
-						}
-						$('#'+textareaId).val(""); 
+					$('<div class="comment-list"><div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="../img/asset/c1.jpg"alt="'+data.user.userId+'"></div><div class="desc"><h5><a href="#">' + data.user.userName+'</a></h5><p class="date">'+data.commentTime+'</p><p class="comment">'+data.commentContent+'</p></div></div><div class="reply-btn"><a href="" class="btn-reply text-uppercase">reply</a></div></div></div>').appendTo($('.flex-column'))
+					$('#'+textareaId).val(""); 
 				}
 			}
 		})
 	}
-
 	
-	//关注
+	//点击了关注按钮
 	function follow(followedUserId,mainUserId){
 		$.ajax({
 			type:'post',
@@ -476,39 +447,47 @@
 		})
 	}
 	
-	$('.reply-btn a').on('click', function () {
-		$(this).parent().fadeOut(200)
-		const data_id = $(this).attr('data-id')
-		$('.replace[data-id='+ data_id +']').slideDown(200)
+	//jquery代码
+	$(document).ready(function(){
+		//点击了回复按钮，显示回复框
+		$('.reply-btn a').on('click', function () {
+			$(this).parent().fadeOut(200)
+			const data_id = $(this).attr('data-id')
+			$('.replace[data-id='+ data_id +']').slideDown(200)
+		})
+		
+		//提交回复
+		 $('.replace input[type="button"]').on('click', function () { 
+			const data_id = $(this).parent().attr('data-id')
+			 var content =$(this).parent().find("input[type='text']").val() 
+			console.log(content)
+			
+	 	 	$.ajax({
+				type:'post',
+				url:'http://localhost:8080/blog/ReplyServlet',
+				datatype:'json',
+				data:{
+					'content':content,
+					'commentId':data_id
+				},
+			success:function(data){
+				if(data!=null){
+					data = JSON.parse(data)
+					$('<div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="../img/asset/c2.jpg" alt=""></div><div class="desc"><h5><a href="#">'+data.user.userName+'</a></h5><p class="date">'+data.replyTime+'</p><p class="comment">'+data.replyContent +'</p></div></div></div>').appendTo($('#'+data_id))
+				}
+			}
+			
+			})  
+		
+		//收起	
+			$('.replace[data-id='+ data_id +']').slideUp(200);
+			$('.reply-btn a[data-id='+ data_id +']').parent().fadeIn(200)
+			$('.replace[data-id='+ data_id +']').find($('input[type="text"]')).val("")
+		 }) 
+		 
+ 
 	})
 	
-	 $('.replace input[type="button"]').on('click', function () { 
-		const data_id = $(this).parent().attr('data-id')
-		 var content =$(this).parent().find("input[type='text']").val() 
-		console.log(content)
-		
- 	 	$.ajax({
-			type:'post',
-			url:'http://localhost:8080/blog/ReplyServlet',
-			datatype:'json',
-			data:{
-				'content':content,
-				'commentId':data_id
-			},
-		success:function(data){
-			if(data!=null){
-				data = JSON.parse(data)
-				$('<div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="../img/asset/c2.jpg" alt=""></div><div class="desc"><h5><a href="#">'+data.user.userName+'</a></h5><p class="date">'+data.replyTime+'</p><p class="comment">'+data.replyContent +'</p></div></div></div>').appendTo($('#'+data_id))
-			}
-		}
-		
-		})  
-	
-	//收起	
-		$('.replace[data-id='+ data_id +']').slideUp(200)
-		$('.reply-btn a[data-id='+ data_id +']').parent().fadeIn(200)
-	
-	 }) 
 	
 	
 	

@@ -56,7 +56,7 @@
 						class="collapse navbar-collapse justify-content-end align-items-center"
 						id="navbarSupportedContent">
 						<ul class="navbar-nav scrollable-menu">
-							<li><a href="javascript:window.history.go(-1)">Back</a></li>
+							<li><a href="../index.jsp">Back</a></li>
 							<!-- <li><a href="index.html#news">News</a></li>
 							<li><a href="index.html#travel">Travel</a></li>
 							<li><a href="index.html#fashion">fashion</a></li>

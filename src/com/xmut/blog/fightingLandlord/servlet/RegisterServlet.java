@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.xmut.blog.fightingLandlord.biz.UserBiz;
 import com.xmut.blog.fightingLandlord.bizImp.UserBizImp;
@@ -49,7 +48,6 @@ public class RegisterServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		if (userBiz.register(user)) {
-		
 			out.println("<script>alert('register successfully!')</script>");
 			out.println("<script>window.location.href='http://localhost:8080/blog/content/login.jsp'</script>");
 		} else {

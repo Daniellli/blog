@@ -23,7 +23,7 @@ body {
 }
 
 .g_register .g_r_style span.pwderror {
-	/* background: url(../img/ver_error.png) no-repeat center; */
+	 background: url(../img/ver_error.png) no-repeat center; 
 	
 }
 </style>
@@ -32,7 +32,7 @@ body {
 
 	<!--用户注册-->
 	<form id="form" name="form" action="../RegisterServlet" method="post"
-		autocomplete="off" enctype="multipart/form-data">
+		autocomplete="off" >
 		<div class="g_register posCenter" style="display: block;">
 			<div class="g_r_title">用户注册</div>
 			<!-- 	<div>

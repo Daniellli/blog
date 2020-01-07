@@ -60,7 +60,7 @@
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
 				<li><a href="javascript:window.history.go(-1)">Back</a></li>
-			
+
 			</ul>
 		</div>
 	</div>
@@ -93,29 +93,46 @@
 				alt="${sessionScope.userDetail.userId }">
 			<h2 class="text-uppercase">${sessionScope.userDetail.userName }</h2>
 			<div class="social-link">
-				<a href="#"><button class="btn">
-						<i class="fa fa-facebook" aria-hidden="true"></i> Private Chat
-					</button></a> <a href="#"><button class="btn">
-						<i class="fa fa-twitter" aria-hidden="true"></i>Follow
-					</button></a>
+
+				<c:if test="${sessionScope.currentUser.userName!=null}">
+					<a onclick="chat()"><button class="btn">
+							<i class="fa fa-facebook" aria-hidden="true"></i> Private Chat
+						</button></a>
+					<script>
+						var b=null;
+							function chat(){
+								b=window.open("Clientchart.jsp","","width=750 height=550");
+							}
+							function chatclose(){
+								b.close();
+							
+							}
+					</script>
+				</c:if>
+				<c:if test="${sessionScope.currentUser.userName==null}">
+					<a onclick="javascript:alert('Please Login First')"><button
+							class="btn">
+							<i class="fa fa-facebook" aria-hidden="true"></i> Private Chat
+						</button></a>
+				</c:if>
+
+				<c:choose>
+					<c:when test="${not empty sessionScope.currentUser }">
+						<a href="javascript:follow(${sessionScope.userDetail.userId},${sessionScope.currentUser.userId })"><button id="followButton" class="btn">
+								<i class="fa fa-twitter" aria-hidden="true"></i>Follow
+							</button></a>
+					</c:when>
+					<c:otherwise>
+						<a href="javascript:alert('login first ,thank you !')" ><button id="followButton" class="btn">
+								<i class="fa fa-twitter" aria-hidden="true"></i>Follow
+							</button></a>
+					</c:otherwise>
+				</c:choose>
+
+
 			</div>
 		</div>
 		<div class="container">
-			<%-- <c:forEach var="blog" items="${sessionScope.userDetail.blogs }">
-				<div class="row justify-content-center">
-					<div class="col-lg-8">
-						<div class="single-page-post">
-							<!-- <img class="img-fluid" src="../img/single.jpg" alt=""> -->
-							<div class="top-wrapper ">
-								<div class="row d-flex justify-content-between">
-									<h2 class="col-lg-8 col-md-12 text-uppercase">${blog. }</h2>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</c:forEach> --%>
 			<div class="post-lists search-list">
 				<c:forEach var="blog" items="${sessionScope.userDetail.blogs }">
 					<div class="single-list flex-row d-flex">
@@ -141,10 +158,7 @@
 						</div>
 					</div>
 				</c:forEach>
-				<div class="justify-content-center d-flex">
-					<a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"
-						href="#"> Load More Post</a>
-				</div>
+
 			</div>
 		</div>
 		</section>
@@ -152,11 +166,6 @@
 	<!-- End post Area -->
 
 	<!-- End post Area -->
-
-
-
-
-
 	<!-- start footer Area -->
 	<footer class="footer-area section-gap">
 	<div class="container">
@@ -223,18 +232,6 @@
 		</div>
 
 		<div class="row footer-bottom d-flex justify-content-between">
-
-			<p class="col-lg-8 col-sm-12 footer-text">
-				Copyright &copy;
-				<script>
-					document.write(new Date().getFullYear());
-				</script>
-				All rights reserved | made with Colorlib - More Templates <a
-					href="http://www.cssmoban.com/" target="_blank" title="妯℃澘涔嬪">妯℃澘涔嬪</a>
-				- Collect from <a href="http://www.cssmoban.com/" title="缃戦〉妯℃澘"
-					target="_blank">缃戦〉妯℃澘</a>
-			</p>
-
 			<div class="col-lg-4 col-sm-12 footer-social">
 				<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
 					class="fa fa-twitter"></i></a> <a href="#"><i
@@ -286,6 +283,30 @@
 
 					}
 				});
+	}
+	
+	function follow(followedUserId,mainUserId){
+		$.ajax({
+			type:'post',
+			url:'http://localhost:8080/blog/FollowServlet',
+			data:{
+				"followedUserId":followedUserId,
+				"mainUserId":mainUserId
+			},
+			datatype:'json',
+			success:function(data){
+				if(data.length>0){
+					var d= JSON.parse(data)
+					if(d[0].flag == 1){
+					 alert("关注成功");
+					  document.getElementById("followButton").innerText="Followed"; 
+					}else{
+						 alert("你已关注");
+						 document.getElementById("followButton").innerText="Followed";
+					}
+				}
+			}
+		})
 	}
 	
 	</script>

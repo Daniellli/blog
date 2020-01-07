@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.smartcardio.CommandAPDU;
 
 import com.google.gson.Gson;
 import com.xmut.blog.fightingLandlord.biz.CommentBiz;
@@ -52,19 +51,12 @@ public class AddComment extends HttpServlet {
 			blog.getComments().add(comment);
 			blog.setBlogCommentNumber(blog.getBlogCommentNumber() + 1);
 			Gson gson = new Gson();
-			String newCommentJson = gson.toJson(blog.getComments());// comment json
+			// String newCommentJson = gson.toJson(blog.getComments());// comment json
+			String newCommentJson = gson.toJson(comment);
 			session.setAttribute("blogDetail", blog);
 			out.println(newCommentJson);// 输出
 			out.flush();
 			out.close();
 		}
-		// comment result
-		/*
-		 * sb.append("[{"); sb.append("\"praiseflag\":0"); sb.append("},");
-		 * sb.append("{"); sb.append("\"bid\":" + blog.getBlogId()); sb.append("}]"); }
-		 * else {// 添加失败 System.out.println("hello world in servlet3"); sb.append("{");
-		 * sb.append("\"praiseflag\":1"); sb.append("}"); }
-		 */
-
 	}
 }

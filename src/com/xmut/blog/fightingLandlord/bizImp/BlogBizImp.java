@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.xmut.blog.fightingLandlord.biz.BlogBiz;
 import com.xmut.blog.fightingLandlord.dao.BlogDao;
-import com.xmut.blog.fightingLandlord.dao.UserDao;
 import com.xmut.blog.fightingLandlord.daoImpl.BlogDaoImp;
-import com.xmut.blog.fightingLandlord.daoImpl.UserDaoImp;
 import com.xmut.blog.fightingLandlord.entity.Blog;
 
 public class BlogBizImp implements BlogBiz {
@@ -88,4 +86,12 @@ public class BlogBizImp implements BlogBiz {
 
 	}
 
+	@Override
+	public List<Blog> Moments(int userId) {
+
+		if (userId != 0) {
+			return dao.Moments(userId);
+		}
+		return null;
+	}
 }

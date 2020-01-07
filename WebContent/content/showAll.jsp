@@ -54,7 +54,7 @@
 					class="collapse navbar-collapse justify-content-end align-items-center"
 					id="navbarSupportedContent">
 					<ul class="navbar-nav scrollable-menu">
-						<li><a href="javascript:window.history.go(-1)">Back</a></li>
+						<li><a href="../index.jsp">Back</a></li>
 					</ul>
 				</div>
 			</div>
@@ -121,10 +121,10 @@
 									</div>
 								</div>
 							</c:forEach>
-							<div class="justify-content-center d-flex">
+							<!-- <div class="justify-content-center d-flex">
 								<a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"
 									href="#"> Load More Post</a>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<div class="col-lg-4 sidebar-area">
