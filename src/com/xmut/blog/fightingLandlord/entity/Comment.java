@@ -1,6 +1,8 @@
 package com.xmut.blog.fightingLandlord.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Comment table
@@ -15,6 +17,7 @@ public class Comment {
 	private String commentContent;// 评论内容
 	private Date commentTime;// 评论内容
 	private Integer commentThumbup;// 点赞数
+	private List<Reply> replys = new ArrayList<Reply>();
 
 	public Comment() {
 		super();
@@ -100,6 +103,21 @@ public class Comment {
 	 */
 	public void setCommentId(Integer commentId) {
 		this.commentId = commentId;
+	}
+
+	/**
+	 * @return the replys
+	 */
+	public List<Reply> getReplys() {
+		return replys;
+	}
+
+	/**
+	 * @param replys
+	 *            the replys to set
+	 */
+	public void setReplys(List<Reply> replys) {
+		this.replys = replys;
 	}
 
 }

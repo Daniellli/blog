@@ -11,6 +11,7 @@ import com.xmut.blog.fightingLandlord.dao.BlogDao;
 import com.xmut.blog.fightingLandlord.entity.Blog;
 import com.xmut.blog.fightingLandlord.entity.Category;
 import com.xmut.blog.fightingLandlord.entity.Comment;
+import com.xmut.blog.fightingLandlord.entity.Reply;
 import com.xmut.blog.fightingLandlord.entity.User;
 import com.xmut.blog.fightingLandlord.utils.DbConnection;
 
@@ -114,16 +115,19 @@ public class BlogDaoImp implements BlogDao {
 		try {
 			ResultSet res = util.query("select * from  show_blog_with_like_comment ");
 			while (res.next()) {
-				User u = new User();
-				u.setUserId(res.getInt("u_id"));
-				u.setUserName(res.getString("u_name"));
-				u.setUserPortrait(res.getString("portrait"));
-				Category cat = new Category();
-				cat.setcId(res.getInt("b_category_id"));
-				Blog b = new Blog(res.getInt("b_id"), u, res.getString("b_name"), res.getInt("like_number"),
-						res.getString("b_content"), res.getString("b_audio"), res.getString("b_video"),
-						res.getString("b_photo"), cat, res.getInt("comment_number"));
-				list.add(b);
+				if (res.getInt("b_id") > 0) {//有的用户没有发博客问题
+					User u = new User();
+					u.setUserId(res.getInt("u_id"));
+					u.setUserName(res.getString("u_name"));
+					u.setUserPortrait(res.getString("portrait"));
+					Category cat = new Category();
+					cat.setcId(res.getInt("b_category_id"));
+					Blog b = new Blog(res.getInt("b_id"), u, res.getString("b_name"), res.getInt("like_number"),
+							res.getString("b_content"), res.getString("b_audio"), res.getString("b_video"),
+							res.getString("b_photo"), cat, res.getInt("comment_number"));
+					list.add(b);
+				}
+
 			}
 			util.closeAll();
 		} catch (SQLException e) {
@@ -155,14 +159,29 @@ public class BlogDaoImp implements BlogDao {
 
 				res = util.query("select * from comment as c ,user as u  where c.u_id = u.u_id and c.b_id =?", id);
 				List<Comment> comment = new ArrayList<>();
+
 				while (res.next()) {
 					User user = new User();
 					user.setUserName(res.getString("u_name"));
 					user.setUserId(res.getInt("u_id"));
 					user.setUserPortrait(res.getString("portrait"));
-					Comment c = new Comment(res.getInt("c_id"),user, res.getInt("b_id"), res.getString("c_content"), res.getTime("c_time"),
-							res.getInt("c_thumbs_up"));
+					Comment c = new Comment(res.getInt("c_id"), user, res.getInt("b_id"), res.getString("c_content"),
+							res.getTime("c_time"), res.getInt("c_thumbs_up"));
 					comment.add(c);
+				}
+
+				for (int i = 0; i < comment.size(); i++) {
+					Comment c = comment.get(i);
+					List temp = new ArrayList<>();// 该条评论的所有回复
+					res = util.query("select * from reply ,user where  reply.u_id = user.u_id and  c_id = ? ",
+							c.getCommentId());
+					while (res.next()) {
+						User t = new User(res.getInt("u_id"), res.getString("u_name"));
+						Reply reply = new Reply(res.getInt("c_id"), t, res.getString("r_content"),
+								res.getDate("r_time"));
+						temp.add(reply);
+					}
+					c.setReplys(temp);// 将回复添加到该条评论里
 				}
 				b.setComments(comment);
 			}
@@ -220,7 +239,7 @@ public class BlogDaoImp implements BlogDao {
 	public List<Blog> findBlogByName(String name) {
 		List<Blog> list = new ArrayList<Blog>();
 		try {
-			ResultSet res = util.query("select * from  show_blog_with_like_comment where  b_name = ?", name);
+			ResultSet res = util.query("select * from  show_blog_with_like_comment where  b_name like ?", "%"+name+"%");
 			while (res.next()) {
 				User u = new User();
 				u.setUserId(res.getInt("u_id"));

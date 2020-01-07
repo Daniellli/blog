@@ -190,34 +190,40 @@
 										</div>
 										<div class="replace" data-id="${comment.commentId }"
 											style="display: none;">
-											<input class="form-control mb-10" id="replyContent"
-												type="text" /> <input type="button" style="float: right;"
-												value='reply' class="btn-reply text-uppercase" />
+											<input class="form-control mb-10" type="text" /> <input
+												type="button" style="float: right;" value='reply'
+												class="btn-reply text-uppercase"/>
 										</div>
 									</div>
+
+									<!-- 往左偏移的评论----reply -->
+
+									<div class="comment-list left-padding"
+										id="${ comment.commentId}">
+										<c:forEach var="reply" items="${comment.replys }">
+											<div class="single-comment justify-content-between d-flex">
+												<div class="user justify-content-between d-flex">
+													<div class="thumb">
+														<img src="../img/asset/c2.jpg" alt="">
+													</div>
+													<div class="desc">
+														<h5>
+															<a href="#">${reply.user.userName }</a>
+														</h5>
+														<p class="date">${reply.replyTime }</p>
+														<p class="comment">${reply.replyContent }</p>
+													</div>
+												</div>
+												<!-- <div class="reply-btn">
+													<a href="" class="btn-reply text-uppercase">reply</a>
+												</div> -->
+											</div>
+										</c:forEach>
+									</div>
+
 								</c:forEach>
 
 
-								<!-- 往左偏移的评论 -->
-								<!--  <div class="comment-list left-padding">
-                                            <div class="single-comment justify-content-between d-flex">
-                                                <div class="user justify-content-between d-flex">
-                                                    <div class="thumb">
-                                                        <img src="../img/asset/c2.jpg" alt="">
-                                                    </div>
-                                                    <div class="desc">
-                                                        <h5><a href="#">评论name</a></h5>
-                                                        <p class="date">time </p>
-                                                        <p class="comment">
-                                                            article
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="reply-btn">
-                                                       <a href="" class="btn-reply text-uppercase">reply</a> 
-                                                </div>
-                                            </div>
-                                        </div>  -->
 							</div>
 						</div>
 						</section>
@@ -476,10 +482,12 @@
 		$('.replace[data-id='+ data_id +']').slideDown(200)
 	})
 	
-	$('.replace input[type="button"]').on('click', function () {
+	 $('.replace input[type="button"]').on('click', function () { 
 		const data_id = $(this).parent().attr('data-id')
-		var content = $('#replyContent').val();
-		$.ajax({
+		 var content =$(this).parent().find("input[type='text']").val() 
+		console.log(content)
+		
+ 	 	$.ajax({
 			type:'post',
 			url:'http://localhost:8080/blog/ReplyServlet',
 			datatype:'json',
@@ -488,17 +496,19 @@
 				'commentId':data_id
 			},
 		success:function(data){
-			
+			if(data!=null){
+				data = JSON.parse(data)
+				$('<div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="../img/asset/c2.jpg" alt=""></div><div class="desc"><h5><a href="#">'+data.user.userName+'</a></h5><p class="date">'+data.replyTime+'</p><p class="comment">'+data.replyContent +'</p></div></div></div>').appendTo($('#'+data_id))
+			}
 		}
 		
-		})
+		})  
 	
-
 	//收起	
-		
 		$('.replace[data-id='+ data_id +']').slideUp(200)
 		$('.reply-btn a[data-id='+ data_id +']').parent().fadeIn(200)
-	})
+	
+	 }) 
 	
 	
 	

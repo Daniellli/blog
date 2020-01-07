@@ -1,5 +1,6 @@
 package com.xmut.blog.fightingLandlord.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,8 @@ public class Blog {
 	private String blogPhoto;// 博客图片地址
 	private Category category;// 博客分类
 	private Integer blogCommentNumber;// 评论数量
-	private List<Comment> comments;// 用戶评论
+	private List<Comment> comments = new ArrayList<Comment>();// 用戶评论
+
 	public List<Comment> getComments() {
 		return comments;
 	}
