@@ -16,13 +16,14 @@
 </head>
 
 <body>
+
 	<table align="center">
 		<tr>
 			<td>
-				<form action="ChartServlet?method=receive" name="frm" method="post">
+				<form action="${basePath }ChartServlet?method=receive" name="frm"
+					method="post">
 					<textarea rows="20" cols="80">${message }</textarea>
-					<br>
-					<br>
+					<br> <br>
 					<textarea rows="7" cols="80" name="message" id="tx1"
 						onfocus="moveEnd(this);">${content }</textarea>
 					<br> <input type="submit" value="发送 ">
@@ -38,7 +39,8 @@
 		function refresh() {
 			//刷新之前获取值
 			var str = document.frm.message.value;
-			location.href = "ChartServlet?method=saveclient&content=" + str;
+			location.href = "${basePath}ChartServlet?method=saveclient&content="
+					+ str;
 		}
 		function moveEnd(obj) {
 			obj.focus();

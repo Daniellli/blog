@@ -60,6 +60,7 @@
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
 				<li><a href="javascript:window.history.go(-1)">Back</a></li>
+				<li><a href="index.jsp">home</a></li>
 
 			</ul>
 		</div>
@@ -260,7 +261,7 @@
 		var type = "json";
 		var praiseNum = parseInt(document.getElementById(praiseN).innerHTML); //获取点赞数
 		$.ajax({
-					url : "http://localhost:8080/blog/RecivePraiseServlet?sendType=post&dataType="
+					url : "${basePath }RecivePraiseServlet?sendType=post&dataType="
 							+ type,
 					data : {
 						"anthorid" : '${sessionScope.currentUser.userId}',
@@ -288,7 +289,7 @@
 	function follow(followedUserId,mainUserId){
 		$.ajax({
 			type:'post',
-			url:'http://localhost:8080/blog/FollowServlet',
+			url:'${basePath }FollowServlet',
 			data:{
 				"followedUserId":followedUserId,
 				"mainUserId":mainUserId

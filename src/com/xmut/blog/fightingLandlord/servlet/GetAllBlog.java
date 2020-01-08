@@ -24,12 +24,16 @@ public class GetAllBlog extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-
+		
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ path + "/";
+		
 		List<Blog> list = new BlogBizImp().getAllBlog();
 
 		HttpSession session = request.getSession();
 		session.setAttribute("blog", list);
-		response.sendRedirect("http://localhost:8080/blog/content/showAll.jsp");
+		response.sendRedirect(basePath+"content/showAll.jsp");
 
 	}
 }

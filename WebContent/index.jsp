@@ -3,7 +3,11 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
@@ -22,10 +26,10 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <title>Blogger</title>
-<script>
+<!-- <script>
 	if (window.location.href != "http://localhost:8080/blog/index.jsp")
 		window.location.href = "http://localhost:8080/blog/index.jsp";
-</script>
+</script> -->
 
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
@@ -43,12 +47,12 @@
 .post-lists {
 	width: 0px;
 	height: 100%;
-	background: yellow;
+	background-color: #b0c4de;
 	transition: all 0.3s linear;
 	position: fixed;
 	right: 0;
 	top: 75px;
-	z-index:9999;
+	z-index: 9999;
 }
 </style>
 </head>
@@ -74,15 +78,15 @@
 					id="navbarSupportedContent">
 					<ul class="navbar-nav">
 						<li><a href="#home">Home</a></li>
-						<li><a href="#news">News</a></li>
-						<li><a href="#travel">Travel</a></li>
+						<!-- <li><a href="#news">News</a></li>
+						<li><a href="#travel">Travel</a></li> -->
 						<!-- <li><a href="#fashion">fashion</a></li>
 						<li><a href="#team">team</a></li> -->
 						<li><a href="content/postBlog.jsp">PostBlog</a></li>
 						<c:if test="${not empty sessionScope.currentUser}">
 							<li><a href="GetMoments">Moments</a></li>
 						</c:if>
-						<li><a href="http://localhost:8080/blog/GetAllBlog">Refresh</a></li>
+						<li><a href="${basePath}GetAllBlog">Refresh</a></li>
 						<li><a href="#" class="show">Following</a></li>
 
 						<!-- Dropdown -->
@@ -91,20 +95,22 @@
 							<div class="dropdown-menu">
 								<c:choose>
 									<c:when test="${not empty sessionScope.currentUser  }">
-										<a class="dropdown-item" href="content/login.jsp">Logout</a>
+										<a class="dropdown-item" href="${basePath}content/login.jsp">Logout</a>
 									</c:when>
 									<c:otherwise>
-										<a class="dropdown-item" href="content/login.jsp">Login</a>
+										<a class="dropdown-item" href="${basePath}content/login.jsp">Login</a>
 									</c:otherwise>
 								</c:choose>
-							</div></li>
+								<a href="${basePath}">personal</a>
+							</div>
+						</li>
 						<c:if
 							test="${not empty sessionScope.currentUser and sessionScope.currentUser.userType == 1 }">
 							<li class="dropdown"><a class="dropdown-toggle" href="#"
 								id="navbardrop" data-toggle="dropdown"> Welcome
 									${sessionScope.currentUser.userName } </a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="content/newCategory.jsp">AddCategory</a>
+									<a class="dropdown-item" href="${basePath}content/newCategory.jsp">AddCategory</a>
 								</div></li>
 						</c:if>
 					</ul>
@@ -122,7 +128,7 @@
 				<div
 					class="banner-content d-flex align-items-center col-lg-12 col-md-12">
 					<h1>
-						A Discount Toner Cartridge <br> Is Better Than Ever.
+						A Better You <br> A Bigger World.
 					</h1>
 				</div>
 				<div
@@ -565,7 +571,7 @@
 										.ajax({
 											type : 'get',
 											datatype : 'json',
-											url : 'http://localhost:8080/blog/GetFrientList',
+											url : '${basePath}GetFrientList',
 											success : function(data) {
 												console.log(data)
 												$('.single-list').remove()
@@ -604,7 +610,7 @@
 			form.appendChild(input);
 
 			form.method = 'POST';
-			form.action = "http://localhost:8080/blog/GetPersonalInfo";
+			form.action = "${basePath}GetPersonalInfo";
 			form.submit();
 			document.body.removeChild(form);
 		}

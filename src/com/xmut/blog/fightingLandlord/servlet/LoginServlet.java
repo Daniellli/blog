@@ -25,6 +25,10 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ path + "/";
+		
 		String username = request.getParameter("username");
 		String pwd = request.getParameter("pwd");
 		UserBiz userBiz = new UserBizImp();
@@ -38,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("currentUser", currentUser);
 			session.setAttribute("category", list);
 			out.println("<script>alert('login successfully!')</script>");
-			out.println("<script>window.location.href='http://localhost:8080/blog/index.jsp'</script>");
+			out.println("<script>window.location.href='${basePath }index.jsp'</script>");
 		} else {
 			out.println("<script>alert('fail to login,please check password and account number!')</script>");
 			out.println("<script>window.history.go(-1)</script>");

@@ -21,9 +21,14 @@ public class ChartServlet extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("UTF-8");
 
 		String method = request.getParameter("method");
+		
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ path + "/";
 
 		if (method.equals("receive")) {
 
@@ -35,8 +40,11 @@ public class ChartServlet extends HttpServlet {
 			String userName = user.getUserName();
 
 			String amessage = (String) sc.getAttribute("message");
-			sc.setAttribute("message", amessage + userName + ":" + request.getParameter("message") + "\r\n");
-			response.sendRedirect("\r\n" + "content/Clientchart.jsp");
+			if (amessage != null)
+				sc.setAttribute("message", amessage + userName + ":" + request.getParameter("message") + "\r\n");
+			else
+				sc.setAttribute("message", userName + ":" + request.getParameter("message") + "\r\n");
+			response.sendRedirect("\r\n" + basePath+"content/Clientchart.jsp");
 
 		} else if (method.equals("send")) {
 			ServletContext sc = this.getServletContext();
@@ -47,7 +55,7 @@ public class ChartServlet extends HttpServlet {
 
 			sc.setAttribute("message", amessage + userName + ":" + request.getParameter("message") + "\r\n");
 
-			response.sendRedirect("content/Serverchart.jsp");
+			response.sendRedirect(basePath+"content/Serverchart.jsp");
 
 		} else if (method.equals("saveclient")) {
 
@@ -57,7 +65,7 @@ public class ChartServlet extends HttpServlet {
 
 			request.setAttribute("content", outStr);
 
-			request.getRequestDispatcher("content/Clientchart.jsp").forward(request, response);
+			request.getRequestDispatcher(basePath+"content/Clientchart.jsp").forward(request, response);
 
 		} else if (method.equals("saveserver")) {
 			String content = request.getParameter("content");
@@ -66,7 +74,7 @@ public class ChartServlet extends HttpServlet {
 
 			request.setAttribute("content", outStr);
 
-			request.getRequestDispatcher("content/Serverchart.jsp").forward(request, response);
+			request.getRequestDispatcher(basePath+"content/Serverchart.jsp").forward(request, response);
 
 		}
 	}

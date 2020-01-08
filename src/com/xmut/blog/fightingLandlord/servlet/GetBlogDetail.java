@@ -34,12 +34,19 @@ public class GetBlogDetail extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
+		
 		String bid = request.getParameter("bid");
 
+		
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ path + "/";
+		
+		
 		Blog blogDetail = biz.getBlogById(Integer.parseInt(bid));
 		// PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		session.setAttribute("blogDetail", blogDetail);
-		response.sendRedirect("http://localhost:8080/blog/content/singleBlog.jsp");
+		response.sendRedirect(basePath+"content/singleBlog.jsp");
 	}
 }

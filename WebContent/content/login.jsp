@@ -9,6 +9,11 @@
 <%
 	String msg = (String) request.getSession().getAttribute("msg");
 %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,7 +42,7 @@ body {
 		<div class="message">宁大生活助手-用户登录</div>
 		<div id="darkbannerwrap"></div>
 
-		<form method="post" action="http://localhost:8080/blog/LoginServlet"
+		<form method="post" action="${basePath }LoginServlet"
 			autocomplete="off">
 			<input name="action" value="login" type="hidden"> 
 			<input
@@ -50,7 +55,7 @@ body {
 			<input value="登录" style="width: 100%;" type="submit">
 			<!-- 此处type可以写button ,加上函数onClick="xx"  script写xx函数$("#form").submit();-->
 			<hr class="hr20">
-			<a href="register.jsp">无账号?立即注册</a>
+			<a href="${basePath }register.jsp">无账号?立即注册</a>
 			<!-- 帮助 <a onClick="alert('请联系管理员')">忘记密码</a> -->
 		</form>
 	</div>

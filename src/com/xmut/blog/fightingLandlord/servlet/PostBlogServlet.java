@@ -32,6 +32,10 @@ public class PostBlogServlet extends HttpServlet {
 		int category = Integer.parseInt(request.getParameter("category"));
 		String content = request.getParameter("content");
 
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ path + "/";
+		
 		Blog b = new Blog();
 		b.setBlogContent(content);
 		b.setBlogName(title);
@@ -43,7 +47,7 @@ public class PostBlogServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if (new BlogBizImp().addBlog(b)) {
 			out.print("<script>alert('post successfully')</script>");
-			out.print("<script>window.location.href='http://localhost:8080/blog/content/postBlog.jsp'</script>");
+			out.print("<script>window.location.href='${basePath }content/postBlog.jsp'</script>");
 		} else {
 			out.print("<script>alert('fail to post')</script>");
 			out.print("<script>window.history.go(-1)</script>");

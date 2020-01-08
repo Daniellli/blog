@@ -2,6 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -54,8 +59,10 @@
 					class="collapse navbar-collapse justify-content-end align-items-center"
 					id="navbarSupportedContent">
 					<ul class="navbar-nav scrollable-menu">
-						<li><a href="../index.jsp">Back</a></li>
-					</ul>
+						<li><a href="javascript:window.history.go(-1)">Back</a></li>
+						<li><a href="personalDetail.jsp">personal</a></li>
+				
+						</ul>
 				</div>
 			</div>
 		</nav>
@@ -87,8 +94,7 @@
 							<c:forEach var="blog" items="${sessionScope.blog }">
 								<div class="single-list flex-row d-flex">
 									<!-- 图片 -->
-									<div class="thumb"
-										onclick="goPersonalInfo(${blog.user.userId})">
+								<div class="thumb" onclick="goPersonalInfo(${blog.user.userId})">
 										<img src="../img/asset/c3.jpg" alt="">
 										<p>
 											<a href="#">${blog.user.userName }</a>
@@ -108,23 +114,26 @@
 										<!-- 文章内容 -->
 										<p>${blog.blogContent }</p>
 										<!-- 喜欢和评论 -->
-										<p class="footer pt-20">
+									
+										
+										
+										<p class="social-link">
 											<!-- 评论数和点赞数 -->
-											<i class="fa fa-heart-o" aria-hidden="true"></i> <a
-												href="javascript:void(0)"
-												onclick="priase(${blog.blogId },0,'${blog.blogId }')">Likes
+											<button class="btn"><i class="fa fa-facebook" aria-hidden="true"> 
+											<a href="javascript:void(0)"
+												onclick="priase(${blog.blogId },0,'${blog.blogId }')">Likes</i></button>
 											</a><span id="${blog.blogId }">${blog.blogThumbup }</span> <i
-												class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a
+												class="fa fa-twitter" aria-hidden="true"><a
 												href="http://localhost:8080/blog/GetBlogDetail?bid=${blog.blogId }">
-												Comments ${blog.blogCommentNumber } </a>
+												Comments ${blog.blogCommentNumber } </a></i>
 										</p>
 									</div>
 								</div>
 							</c:forEach>
-							<!-- <div class="justify-content-center d-flex">
+							<div class="justify-content-center d-flex">
 								<a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"
 									href="#"> Load More Post</a>
-							</div> -->
+							</div>
 						</div>
 					</div>
 					<div class="col-lg-4 sidebar-area">
@@ -155,6 +164,9 @@
 		<!-- End post Area -->
 	</div>
 	<!-- End post Area -->
+	
+	
+	
 	<!-- start footer Area -->
 	<footer class="footer-area section-gap">
 		<div class="container">
@@ -255,7 +267,7 @@
 			var blogName =document.getElementById("searchField").value
 			$.ajax({
 				type:'get',
-				url:'http://localhost:8080/blog/GetBlogByName?bName='+blogName,
+				url:'${basePath}GetBlogByName?bName='+blogName,
 				datatype:'json',
 				success:function(data){
 					if(data!=null){
@@ -278,7 +290,7 @@
 			var type = "json";
 			var praiseNum = parseInt(document.getElementById(praiseN).innerHTML); //获取点赞数
 			$.ajax({
-						url : "http://localhost:8080/blog/RecivePraiseServlet?sendType=post&dataType="
+						url : "${basePath}RecivePraiseServlet?sendType=post&dataType="
 								+ type,
 						data : {
 							"anthorid" : '${sessionScope.currentUser.userId}',
@@ -319,7 +331,7 @@
 			      form.appendChild(input);
 			  
 			  form.method = 'POST';
-			  form.action = "http://localhost:8080/blog/GetPersonalInfo";
+			  form.action = "${basePath}GetPersonalInfo";
 			  form.submit();
 			  document.body.removeChild(form);
 		}
@@ -328,7 +340,7 @@
 		function getByCategoryId(cId){
 			$.ajax({
 				type:'get',
-				url:"http://localhost:8080/blog/GetBlogByCategoryId?cid="+cId,
+				url:"${basePath}GetBlogByCategoryId?cid="+cId,
 				datatype:'json',
 				success:function(data){
 					if(data!=null){
@@ -349,7 +361,7 @@
 				//#textfield表示你输入框的id名称，比如当前输入框id是textfield
 				$("#searchField").jSuggest({
 					//url指的是后台的服务地址
-					url : "http://localhost:8080/blog/AutoComplete",
+					url : "${basePath}AutoComplete",
 					type : "post",
 					loadingImg : '../img/ajax-loader.gif',
 					data : "key",

@@ -242,7 +242,7 @@
 									<script>
 												var b=null;
 													function chat(){
-														b=window.open("Clientchart.jsp","","width=750 height=550");
+														b=window.open("${basePath}Clientchart.jsp","","width=750 height=550");
 													}
 													function chatclose(){
 														b.close();
@@ -406,7 +406,7 @@
 		var content = document.getElementById(textareaId).value;
 		$.ajax({
 			type: 'post',
-			url : "http://localhost:8080/blog/AddComment",
+			url : "${basePath}AddComment",
 			data:{
 				"userId" : userId,
 				"bId" : blogId,
@@ -464,7 +464,7 @@
 			
 	 	 	$.ajax({
 				type:'post',
-				url:'http://localhost:8080/blog/ReplyServlet',
+				url:'${basePath}ReplyServlet',
 				datatype:'json',
 				data:{
 					'content':content,

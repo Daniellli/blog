@@ -6,6 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -43,7 +48,7 @@ body {
 </head>
 <body>
 	<!--用户注册-->
-	<form id="form" name="form" action="../RegisterServlet" method="post"
+	<form id="form" name="form" action="${basePath }RegisterServlet" method="post"
 		autocomplete="off">
 		<div class="g_register posCenter" style="display: block;">
 			<div class="g_r_title">用户注册</div>

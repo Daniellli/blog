@@ -59,9 +59,9 @@
 			class="collapse navbar-collapse justify-content-end align-items-center"
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
-				<li><a href="../index.jsp">Back</a></li>
-				<!-- 	<li><a href="category.jsp">分类</a></li>
-				<li><a href="#travel">热搜</a></li>
+				<li><a href="javascript:window.history.go(-1)">Back</a></li>
+				<li><a href="content/personalDetail.jsp">personal</a></li>
+				<!-- 	<li><a href="#travel">热搜</a></li>
 				Dropdown
 				<li class="dropdown"><a class="dropdown-toggle" href="#"
 					id="navbardrop" data-toggle="dropdown"> 个人 </a>
@@ -80,7 +80,7 @@
 	<div class="container">
 		<div class="row justify-content-between align-items-center d-flex">
 			<div class="col-lg-8 top-left">
-				<h1 class="text-white mb-20">发布博客</h1>
+				<h1 class="text-white mb-20">Post Blog</h1>
 				<!-- <ul>
 					<li><a href="">分类</a><span class="lnr lnr-arrow-right"></span></li>
 					<li><a href="">内容</a></li>
@@ -90,8 +90,8 @@
 	</div>
 	</section>
 	<!-- 主要内容 -->
-	<form action="http://localhost:8080/blog/UploadServlet" method="post"
-		enctype="multipart/form-data" class="post-wrapper pt-100">
+	<form action="${basePath }UploadServlet" method="post"
+	       	enctype="multipart/form-data" class="post-wrapper pt-100">
 		<input type="hidden" value="${sessionScope.currentUser.userName }"
 			name="userName">
 
@@ -101,20 +101,18 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-8">
-						<div class="single-page-post">
+						<div class="single-page-content">
 							<img class="img-fluid" src="../img/single.jpg" alt="">
-							<div class="top-wrapper ">
-								<div class="row d-flex justify-content-between">
-									<h2 class="col-lg-8 col-md-12 text-uppercase">
-										<p>
-											标题： <input type="text" placeholder="标题" name="title">
-										</p>
-									</h2>
-
-								</div>
+								<div class="top-wrapper ">
+								
 							</div>
+							
 
 							<!-- 分类 -->
+						
+							<div class="single-post-content">
+								TITLE<input type="text" placeholder="Your title" name="title"class="common-input mb-20 form-control">
+							</div>
 							<div class="category">
 								<label for="">category</label> <select name="category">
 									<c:forEach var="cat" items="${sessionScope.category }">
@@ -146,28 +144,6 @@
 	<!-- 右边 -->
 	<div class="col-lg-4 sidebar-area ">
 
-		<div class="single_widget about_widget">
-			<img src="../img/asset/s-img.jpg" alt="">
-			<!--<h2 class="text-uppercase"></h2>
-			<p>hello world</p>
-			 <div class="social-link">
-				<a href="#"><button class="btn">
-						<i class="fa fa-facebook" aria-hidden="true"></i> Like
-					</button></a> <a href="#"><button class="btn">
-						<i class="fa fa-twitter" aria-hidden="true"></i> follow
-					</button></a>
-			</div> -->
-		</div>
-		<div class="single_widget cat_widget">
-			<h4 class="text-uppercase pb-20">分类</h4>
-			<ul>
-				<c:forEach var="cat" items="${sessionScope.category }">
-					<li><a href="#">${cat.cName }<span>37</span></a></li>
-				</c:forEach>
-			</ul>
-		</div>
-	</div>
-	</div>
 	</div>
 	</section>
 

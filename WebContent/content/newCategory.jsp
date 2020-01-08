@@ -1,7 +1,11 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -57,6 +61,7 @@
 						id="navbarSupportedContent">
 						<ul class="navbar-nav scrollable-menu">
 							<li><a href="../index.jsp">Back</a></li>
+							<li><a href="${basePath }">personal</a></li>
 							<!-- <li><a href="index.html#news">News</a></li>
 							<li><a href="index.html#travel">Travel</a></li>
 							<li><a href="index.html#fashion">fashion</a></li>
@@ -101,7 +106,7 @@
 				<div class="row">
 					<div class="col-lg-8 col-md-8">
 						<h3 class="mb-30">New Category</h3>
-						<form action="http://localhost:8080/blog/NewCategoryServlet">
+						<form action="${basePath }NewCategoryServlet">
 							<div class="mt-10">
 								<input type="text" name="name" placeholder="Category Name"
 									onfocus="this.placeholder = ''"
