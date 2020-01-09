@@ -71,7 +71,9 @@ public class UserBizImp implements UserBiz {
 
 	@Override
 	public boolean updateUser(User user) {
-		// TODO Auto-generated method stub
+		if (user != null) {
+			return userdao.updateUser(user);
+		}
 		return false;
 	}
 

@@ -107,10 +107,9 @@ public class UserDaoImp implements UserDao {
 		boolean flag = false;
 		try {
 			flag = util.update(
-					"update user set u_name = ? and u_pwd=? and u_sex= ? and u_age= ? and u_email = ? and u_type=? u_question = ? u_answer = ? u_telephone=? where u_id = ?",
+					"update user set u_name = ? , u_pwd=? , u_sex= ? , u_age= ? , u_email = ? , u_question = ? , u_answer = ? , u_telephone=? where u_id = ?",
 					user.getUserName(), user.getUserPwd(), user.getUserSex(), user.getUserAge(), user.getUserEmail(),
-					user.getUserType(), user.getUserId(), user.getUserQuestion(), user.getUserAnswer(),
-					user.getUserTelephone());
+					user.getUserQuestion(), user.getUserAnswer(), user.getUserTelephone(), user.getUserId());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

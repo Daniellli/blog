@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80017
 File Encoding         : 65001
 
-Date: 2020-01-07 16:32:59
+Date: 2020-01-09 22:10:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,15 +34,19 @@ CREATE TABLE `blog` (
   KEY `blog_refer_category_idx` (`b_category_id`),
   CONSTRAINT `blog_refer_category` FOREIGN KEY (`b_category_id`) REFERENCES `category` (`c_id`),
   CONSTRAINT `refer_to_user` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of blog
 -- ----------------------------
-INSERT INTO `blog` VALUES ('2', '1', '毒液', '我国面积最大的淡水湖鄱阳湖位于____省。', '16', null, null, null, '4');
-INSERT INTO `blog` VALUES ('3', '1', '超人', '2018年11月，中共中央印发了《中国共产党支部工作条例（试行）》。它是我们党历史上第一部关于党支部工作的基础主干法规,是新时代党支部建设的基本遵循。那么，第一次将支部明确为党的基本组织的是____。（出题单位：中共上海市虹口区委党校 推荐单位：上海学习平台）', '2', null, null, null, '1');
-INSERT INTO `blog` VALUES ('4', '1', '钢铁侠', '遇森林火灾发生时，应迅速拨打森林火警电话____报警。', '3', null, null, null, '1');
-INSERT INTO `blog` VALUES ('7', '1', '超级玛丽', '2018年11月，中共中央印发了《中国共产党支部工作条例（试行）》。它是我们党历史上第一部关于党支部工作的基础主干法规,是新时代党支部建设的基本遵循。那么，第一次将支部明确为党的基本组织的是____。（出题单位：中共上海市虹口区委党校 推荐单位：上海学习平台）', '1', null, null, null, '1');
+INSERT INTO `blog` VALUES ('2', '1', '毒液', '我国面积最大的淡水湖鄱阳湖位于____省。', '17', null, null, null, '4');
+INSERT INTO `blog` VALUES ('3', '1', '超人', '2018年11月，中共中央印发了《中国共产党支部工作条例（试行）》。它是我们党历史上第一部关于党支部工作的基础主干法规,是新时代党支部建设的基本遵循。那么，第一次将支部明确为党的基本组织的是____。（出题单位：中共上海市虹口区委党校 推荐单位：上海学习平台）', '4', null, null, null, '1');
+INSERT INTO `blog` VALUES ('4', '1', '钢铁侠', '遇森林火灾发生时，应迅速拨打森林火警电话____报警。', '4', null, null, null, '1');
+INSERT INTO `blog` VALUES ('7', '1', '超级玛丽', '2018年11月，中共中央印发了《中国共产党支部工作条例（试行）》。它是我们党历史上第一部关于党支部工作的基础主干法规,是新时代党支部建设的基本遵循。那么，第一次将支部明确为党的基本组织的是____。（出题单位：中共上海市虹口区委党校 推荐单位：上海学习平台）', '3', null, null, null, '1');
+INSERT INTO `blog` VALUES ('15', '9', '舒克舒克', '舒克开飞机', '1', null, null, null, '7');
+INSERT INTO `blog` VALUES ('16', '9', '瑞克瑞克', '瑞克牛逼', '1', null, null, null, '7');
+INSERT INTO `blog` VALUES ('17', '8', '强强强强', '强强强强', '1', null, null, 'http://localhost:8080/blog/upload/photo/强强强强1578560842710.jpg', '9');
+INSERT INTO `blog` VALUES ('18', '1', 'Test', 'test stetsttsasyasdhk刷卡機電話卡是打算打算打算的', '1', null, 'http://localhost:8080/blog/upload/video/Daniel1578578953838.mp4', 'http://localhost:8080/blog/upload/photo/Daniel1578578953834.jpg', '8');
 
 -- ----------------------------
 -- Table structure for category
@@ -60,8 +64,6 @@ CREATE TABLE `category` (
 INSERT INTO `category` VALUES ('1', 'technology');
 INSERT INTO `category` VALUES ('3', 'Histroy');
 INSERT INTO `category` VALUES ('4', 'Beautiful');
-INSERT INTO `category` VALUES ('5', 'Technology');
-INSERT INTO `category` VALUES ('6', 'History');
 INSERT INTO `category` VALUES ('7', 'Cartoon');
 INSERT INTO `category` VALUES ('8', 'Romantic');
 INSERT INTO `category` VALUES ('9', 'Story');
@@ -100,12 +102,46 @@ CREATE TABLE `comment` (
   KEY `comment_refer_to_blog_idx` (`b_id`),
   CONSTRAINT `comment_refer_to_blog` FOREIGN KEY (`b_id`) REFERENCES `blog` (`b_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `comment_refer_to_user` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
 INSERT INTO `comment` VALUES ('28', '1', '2', 'Hello ,can i meke you as my friend', '2020-01-07 16:06:42', '0');
+INSERT INTO `comment` VALUES ('29', '1', '4', '你好', '2020-01-09 09:09:54', '0');
+INSERT INTO `comment` VALUES ('30', '1', '4', '哇啊哈哈', '2020-01-09 09:10:15', '0');
+INSERT INTO `comment` VALUES ('31', '1', '2', 'Hello ', '2020-01-09 09:46:47', '0');
+INSERT INTO `comment` VALUES ('32', '1', '2', 'jerry', '2020-01-09 09:48:15', '0');
+INSERT INTO `comment` VALUES ('33', '1', '2', '你好', '2020-01-09 09:50:31', '0');
+INSERT INTO `comment` VALUES ('34', '1', '2', 'Hello', '2020-01-09 09:50:59', '0');
+INSERT INTO `comment` VALUES ('35', '1', '3', 'Hello', '2020-01-09 09:52:43', '0');
+INSERT INTO `comment` VALUES ('36', '1', '2', 'Hey', '2020-01-09 10:05:58', '0');
+INSERT INTO `comment` VALUES ('37', '1', '2', 'Hello', '2020-01-09 10:08:11', '0');
+INSERT INTO `comment` VALUES ('38', '9', '15', '开坦克把', '2020-01-09 13:36:36', '0');
+INSERT INTO `comment` VALUES ('39', '9', '15', '舒克好帅', '2020-01-09 13:38:04', '0');
+INSERT INTO `comment` VALUES ('40', '9', '15', 'yess', '2020-01-09 13:49:01', '0');
+INSERT INTO `comment` VALUES ('41', '9', '15', '舒克舒克', '2020-01-09 14:03:59', '0');
+INSERT INTO `comment` VALUES ('42', '9', '15', '舒克舒克', '2020-01-09 14:04:01', '0');
+INSERT INTO `comment` VALUES ('43', '9', '15', '舒克舒克', '2020-01-09 14:04:05', '0');
+INSERT INTO `comment` VALUES ('44', '9', '15', '舒克舒克', '2020-01-09 14:04:33', '0');
+INSERT INTO `comment` VALUES ('45', '9', '15', '貝塔', '2020-01-09 14:07:14', '0');
+INSERT INTO `comment` VALUES ('46', '9', '15', '貝達', '2020-01-09 14:09:19', '0');
+INSERT INTO `comment` VALUES ('47', '9', '15', '貝達', '2020-01-09 14:09:43', '0');
+INSERT INTO `comment` VALUES ('48', '9', '15', '誤會誤會誤會', '2020-01-09 14:10:46', '0');
+INSERT INTO `comment` VALUES ('49', '9', '15', 'lalal 撒阿斯頓', '2020-01-09 14:12:22', '0');
+INSERT INTO `comment` VALUES ('50', '1', '3', '你好', '2020-01-09 14:15:08', '0');
+INSERT INTO `comment` VALUES ('51', '1', '3', '你好', '2020-01-09 14:15:19', '0');
+INSERT INTO `comment` VALUES ('52', '5', '4', 'hello', '2020-01-09 14:18:59', '0');
+INSERT INTO `comment` VALUES ('53', '5', '4', '误会误会误会', '2020-01-09 14:19:14', '0');
+INSERT INTO `comment` VALUES ('54', '5', '4', '哇哈哈哈哈', '2020-01-09 14:20:49', '0');
+INSERT INTO `comment` VALUES ('55', '5', '4', '啦啦啦啦', '2020-01-09 14:25:04', '0');
+INSERT INTO `comment` VALUES ('56', '5', '4', '黑', '2020-01-09 14:28:17', '0');
+INSERT INTO `comment` VALUES ('57', '5', '4', '问候问候和武汉', '2020-01-09 14:31:50', '0');
+INSERT INTO `comment` VALUES ('58', '5', '4', 'final', '2020-01-09 14:35:34', '0');
+INSERT INTO `comment` VALUES ('59', '5', '2', 'SJJJJ', '2020-01-09 14:41:31', '0');
+INSERT INTO `comment` VALUES ('60', '5', '2', '巧克力', '2020-01-09 14:43:08', '0');
+INSERT INTO `comment` VALUES ('61', '1', '18', '你好', '2020-01-09 22:09:41', '0');
+INSERT INTO `comment` VALUES ('62', '1', '18', '哇哈哈哇哈哈和', '2020-01-09 22:09:51', '0');
 
 -- ----------------------------
 -- Table structure for praise
@@ -120,7 +156,7 @@ CREATE TABLE `praise` (
   PRIMARY KEY (`p_id`),
   KEY `u_id` (`u_id`),
   CONSTRAINT `praise_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of praise
@@ -128,6 +164,16 @@ CREATE TABLE `praise` (
 INSERT INTO `praise` VALUES ('4', '1', '2', null, '2020-01-03 16:18:28');
 INSERT INTO `praise` VALUES ('14', '5', '2', null, '2020-01-07 15:25:15');
 INSERT INTO `praise` VALUES ('15', '1', '4', null, '2020-01-07 16:30:50');
+INSERT INTO `praise` VALUES ('16', '1', '7', null, '2020-01-08 15:08:36');
+INSERT INTO `praise` VALUES ('17', '1', '3', null, '2020-01-08 15:08:39');
+INSERT INTO `praise` VALUES ('18', '9', '2', null, '2020-01-09 13:30:36');
+INSERT INTO `praise` VALUES ('19', '9', '4', null, '2020-01-09 13:30:40');
+INSERT INTO `praise` VALUES ('20', '9', '7', null, '2020-01-09 13:30:44');
+INSERT INTO `praise` VALUES ('21', '9', '16', null, '2020-01-09 13:36:22');
+INSERT INTO `praise` VALUES ('22', '9', '15', null, '2020-01-09 13:36:23');
+INSERT INTO `praise` VALUES ('23', '5', '3', null, '2020-01-09 14:46:34');
+INSERT INTO `praise` VALUES ('24', '8', '17', null, '2020-01-09 17:07:52');
+INSERT INTO `praise` VALUES ('25', '1', '18', null, '2020-01-09 22:09:31');
 
 -- ----------------------------
 -- Table structure for relationship
@@ -147,6 +193,8 @@ CREATE TABLE `relationship` (
 -- ----------------------------
 INSERT INTO `relationship` VALUES ('1', '1');
 INSERT INTO `relationship` VALUES ('5', '1');
+INSERT INTO `relationship` VALUES ('6', '1');
+INSERT INTO `relationship` VALUES ('9', '1');
 
 -- ----------------------------
 -- Table structure for reply
@@ -159,7 +207,7 @@ CREATE TABLE `reply` (
   `r_content` varchar(255) COLLATE utf8_bin NOT NULL,
   `r_time` datetime DEFAULT NULL,
   PRIMARY KEY (`r_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of reply
@@ -193,6 +241,24 @@ INSERT INTO `reply` VALUES ('35', '18', '1', '牛逼', '2020-01-07 13:15:01');
 INSERT INTO `reply` VALUES ('36', '18', '1', '', '2020-01-07 13:28:31');
 INSERT INTO `reply` VALUES ('37', '11', '1', 'hello', '2020-01-07 13:30:56');
 INSERT INTO `reply` VALUES ('38', '28', '1', 'of course', '2020-01-07 16:28:34');
+INSERT INTO `reply` VALUES ('39', '29', '5', '你号', '2020-01-09 09:10:08');
+INSERT INTO `reply` VALUES ('40', '36', '1', 'Hey', '2020-01-09 10:08:04');
+INSERT INTO `reply` VALUES ('41', '37', '5', 'asd', '2020-01-09 11:09:50');
+INSERT INTO `reply` VALUES ('42', '38', '9', '开火箭', '2020-01-09 13:37:06');
+INSERT INTO `reply` VALUES ('43', '38', '9', '开什么', '2020-01-09 13:37:17');
+INSERT INTO `reply` VALUES ('44', '40', '9', 'not', '2020-01-09 14:03:48');
+INSERT INTO `reply` VALUES ('45', '40', '9', 'lalala', '2020-01-09 14:03:51');
+INSERT INTO `reply` VALUES ('46', '35', '5', 'Hello', '2020-01-09 14:15:04');
+INSERT INTO `reply` VALUES ('47', '52', '5', '你好', '2020-01-09 14:20:44');
+INSERT INTO `reply` VALUES ('48', '53', '5', '', '2020-01-09 14:22:35');
+INSERT INTO `reply` VALUES ('49', '53', '5', '', '2020-01-09 14:22:38');
+INSERT INTO `reply` VALUES ('50', '54', '5', '', '2020-01-09 14:25:13');
+INSERT INTO `reply` VALUES ('51', '54', '5', '', '2020-01-09 14:27:33');
+INSERT INTO `reply` VALUES ('52', '56', '5', '', '2020-01-09 14:30:49');
+INSERT INTO `reply` VALUES ('53', '28', '5', '', '2020-01-09 14:41:10');
+INSERT INTO `reply` VALUES ('54', '31', '5', '', '2020-01-09 14:41:21');
+INSERT INTO `reply` VALUES ('55', '32', '5', 'asAS', '2020-01-09 14:41:26');
+INSERT INTO `reply` VALUES ('56', '59', '5', 'hello', '2020-01-09 14:42:40');
 
 -- ----------------------------
 -- Table structure for user
@@ -212,15 +278,17 @@ CREATE TABLE `user` (
   `portrait` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `u_name_UNIQUE` (`u_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'Daniel', '123', null, null, '1', '1', 'who am i ?', 'Daniel', '18750910084', null);
+INSERT INTO `user` VALUES ('1', 'Daniel', '123', '0', '12', '1', '1', 'who am i ?', 'Daniel', '18750910084', null);
 INSERT INTO `user` VALUES ('5', 'Dany', '123', null, null, '1', '0', 'asd', '123', '18750910084', null);
 INSERT INTO `user` VALUES ('6', 'Jerry', '123', null, null, null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('7', 'Isabella', '123', null, null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('8', '强强强强', 'qqqq1111', null, null, '1', '0', '111', '111', '15953098092', null);
+INSERT INTO `user` VALUES ('9', 'huiqiong', 'a123456789', null, null, '0', '0', 'Who am i ?', 'huiqiong', '13063028603', null);
 
 -- ----------------------------
 -- View structure for show_blog_like
