@@ -60,7 +60,7 @@
 			class="collapse navbar-collapse justify-content-end align-items-center"
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
-				<li><a href="javascript:window.history.go(-1)">Back</a></li>
+				<li><a href="${basePath }index.jsp">Back</a></li>
 
 				<c:if test="${not empty sessionScope.currentUser }">
 					<li><a
@@ -138,7 +138,7 @@
 							</div>
 							<div class="single-post-content">
 								<p>
-									Photo <input name="video" type="file" class="form-control">
+									Video <input name="video" type="file" class="form-control" value="choose file">
 								</p>
 							</div>
 							<button type="submit">POST</button>

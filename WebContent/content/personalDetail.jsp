@@ -58,7 +58,7 @@
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
 				<li><a href="javascript:window.history.go(-1)">Back</a></li>
-				<li><a href="index.jsp">home</a></li>
+				<li><a href="${basePath }index.jsp">home</a></li>
 
 			</ul>
 		</div>
@@ -102,7 +102,7 @@
 							<script>
 								var b=null;
 									function chat(){
-										b=window.open("Clientchart.jsp","","width=750 height=550");
+										b=window.open("${basePath}content/Clientchart.jsp","","width=750 height=550");
 									}
 									function chatclose(){
 										b.close();
@@ -143,30 +143,34 @@
 		</div>
 		<div class="container">
 			<div class="post-lists search-list">
+
 				<c:forEach var="blog" items="${sessionScope.userDetail.blogs }">
-					<div class="single-list flex-row d-flex">
-						<div class="detail" id="showDetail">
-							<a
-								href="http://localhost:8080/blog/GetBlogDetail?bid=${blog.blogId }">
-								<!-- 标题 -->
-								<h4 class="pb-20">${blog.blogName }</h4>
-							</a>
-							<!-- 文章内容 -->
-							<p>${blog.blogContent }</p>
-							<!-- 喜欢和评论 -->
-							<p class="footer pt-20">
-								<!-- 评论数和点赞数 -->
-								<i class="fa fa-heart-o" aria-hidden="true"></i> <a
-									href="javascript:void(0)"
-									onclick="priase(${blog.blogId },0,'${blog.blogId }')">Likes
-								</a><span id="${blog.blogId }">${blog.blogThumbup }</span> <i
-									class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a
+					<c:if test="${  blog.blogId != 0}">
+						<div class="single-list flex-row d-flex">
+							<div class="detail" id="showDetail">
+								<a
 									href="http://localhost:8080/blog/GetBlogDetail?bid=${blog.blogId }">
-									Comments ${blog.blogCommentNumber } </a>
-							</p>
+									<!-- 标题 -->
+									<h4 class="pb-20">${blog.blogName }</h4>
+								</a>
+								<!-- 文章内容 -->
+								<p>${blog.blogContent }</p>
+								<!-- 喜欢和评论 -->
+								<p class="footer pt-20">
+									<!-- 评论数和点赞数 -->
+									<i class="fa fa-heart-o" aria-hidden="true"></i> <a
+										href="javascript:void(0)"
+										onclick="priase(${blog.blogId },0,'${blog.blogId }')">Likes
+									</a><span id="${blog.blogId }">${blog.blogThumbup }</span> <i
+										class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a
+										href="http://localhost:8080/blog/GetBlogDetail?bid=${blog.blogId }">
+										Comments ${blog.blogCommentNumber } </a>
+								</p>
+							</div>
 						</div>
-					</div>
+					</c:if>
 				</c:forEach>
+
 
 			</div>
 		</div>

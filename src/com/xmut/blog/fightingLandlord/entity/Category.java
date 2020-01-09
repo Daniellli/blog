@@ -9,13 +9,21 @@ package com.xmut.blog.fightingLandlord.entity;
 
 public class Category {
 
-	private Integer cId;//分类id
-	private String cName;//分类名字
+	private Integer cId;// 分类id
+	private String cName;// 分类名字
+	private Integer cNumber;// total
 
 	public Category(Integer cId, String cName) {
 		super();
 		this.cId = cId;
 		this.cName = cName;
+	}
+
+	public Category(Integer cId, String cName, Integer cNumber) {
+		super();
+		this.cId = cId;
+		this.cName = cName;
+		this.cNumber = cNumber;
 	}
 
 	public Category() {
@@ -41,6 +49,21 @@ public class Category {
 
 	public void setcName(String cName) {
 		this.cName = cName;
+	}
+
+	/**
+	 * @return the cNumber
+	 */
+	public Integer getcNumber() {
+		return cNumber;
+	}
+
+	/**
+	 * @param cNumber
+	 *            the cNumber to set
+	 */
+	public void setcNumber(Integer cNumber) {
+		this.cNumber = cNumber;
 	}
 
 }

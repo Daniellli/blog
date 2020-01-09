@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.xmut.blog.fightingLandlord.dao.CategoryDao;
 import com.xmut.blog.fightingLandlord.entity.Category;
-import com.xmut.blog.fightingLandlord.entity.User;
 import com.xmut.blog.fightingLandlord.utils.DbConnection;
 
 public class CategoryDaoImp implements CategoryDao {
@@ -54,6 +53,27 @@ public class CategoryDaoImp implements CategoryDao {
 				Category cat = new Category();
 				cat.setcId(res.getInt("c_id"));
 				cat.setcName(res.getString("c_name"));
+				list.add(cat);
+			}
+			util.closeAll();// 关闭连接
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Category> queryAllCategoryWithSum() {
+		List<Category> list = new ArrayList<Category>();
+		try {
+			ResultSet res = util.query(
+					"select c_id,c_name,total  from (select b_category_id  ,COUNT(*) as total from blog GROUP BY b_category_id  )  cc  ,category where cc.b_category_id = category.c_id ");
+
+			while (res.next()) {
+				Category cat = new Category();
+				cat.setcId(res.getInt("c_id"));
+				cat.setcName(res.getString("c_name"));
+				cat.setcNumber(res.getInt("total"));
 				list.add(cat);
 			}
 			util.closeAll();// 关闭连接

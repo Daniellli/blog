@@ -31,4 +31,12 @@ public class CommentBizImp implements CommentBiz {
 		return null;
 	}
 
+	@Override
+	public Comment queryCommentForId(Comment entity) {
+		if (entity != null) {
+			return dao.queryCommentForId(entity);
+		}
+		return null;
+	}
+
 }

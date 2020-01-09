@@ -46,7 +46,7 @@ body {
 </head>
 <body>
 	<!--用户注册-->
-	<form id="form" name="form" action="../RegisterServlet" method="post"
+	<form id="form" name="form" action="${basePath }RegisterServlet" method="post"
 		autocomplete="off">
 		<div class="g_register posCenter" style="display: block;">
 			<div class="g_r_title">用户注册</div>

@@ -41,7 +41,7 @@
 .post-lists {
 	width: 0px;
 	height: 100%;
-	background-color: lightblue;
+	background-color: #b0c4de;
 	background-size: cover;
 	transition: all 0.3s linear;
 	position: fixed;
@@ -77,12 +77,20 @@
 						<li><a href="#travel">Travel</a></li> -->
 						<!-- <li><a href="#fashion">fashion</a></li>
 						<li><a href="#team">team</a></li> -->
-						<li><a href="${basePath }content/postBlog.jsp">PostBlog</a></li>
+
 						<c:if test="${not empty sessionScope.currentUser}">
+							<li><a href="${basePath }content/postBlog.jsp">PostBlog</a></li>
 							<li><a href="${basePath }GetMoments">Moments</a></li>
 						</c:if>
+
+
+
 						<li><a href="${basePath }GetAllBlog">Refresh</a></li>
-						<li><a href="#" class="show">Following</a></li>
+
+						<c:if test="${not empty sessionScope.currentUser}">
+							<li><a href="javascript:void()" class="show">Following</a></li>
+						</c:if>
+
 
 						<!-- Dropdown -->
 						<li class="dropdown"><a class="dropdown-toggle" href="#"
@@ -98,8 +106,7 @@
 								</c:choose>
 
 								<c:if test="${not empty sessionScope.currentUser }">
-									<a
-										href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">Personal</a>
+									<a href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">Personal</a>
 								</c:if>
 							</div></li>
 						<c:if
@@ -109,7 +116,8 @@
 									${sessionScope.currentUser.userName } </a>
 								<div class="dropdown-menu">
 									<a class="dropdown-item"
-										href="${basePath }content/newCategory.jsp">AddCategory</a>
+										href="${basePath }content/newCategory.jsp">AddCategory</a> <a
+										class="dropdown-item" href="${basePath }content/report.jsp">Report</a>
 								</div></li>
 						</c:if>
 					</ul>

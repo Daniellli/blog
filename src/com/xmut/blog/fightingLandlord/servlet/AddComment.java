@@ -30,7 +30,7 @@ public class AddComment extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-
+		HttpSession session = request.getSession();
 		CommentBiz commentbiz = new CommentBizImp();
 		// StringBuffer sb = new StringBuffer("");
 
@@ -38,15 +38,18 @@ public class AddComment extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String message = request.getParameter("message");
 
-		String userName = ((User) (request.getSession().getAttribute("currentUser"))).getUserName();
-
-		Comment comment = new Comment(new User(Integer.parseInt(userId), userName), Integer.parseInt(blogId), message,
+		Comment comment = new Comment(((User) session.getAttribute("currentUser")), Integer.parseInt(blogId), message,
 				new Date(), 0);
+
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if (commentbiz.addComment(comment)) {// 添加成功
 			// 更新当前的详情blog
-			HttpSession session = request.getSession();
+			comment = commentbiz.queryCommentForId(comment);
+			comment.setUser(((User) session.getAttribute("currentUser")));
+			System.out.println(comment.getCommentContent());
+			System.out.println("hello world");
+
 			Blog blog = (Blog) session.getAttribute("blogDetail");
 			blog.getComments().add(comment);
 			blog.setBlogCommentNumber(blog.getBlogCommentNumber() + 1);

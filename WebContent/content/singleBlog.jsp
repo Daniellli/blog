@@ -125,10 +125,25 @@
 						<!-- 点赞数和评论数 -->
 						<div class="bottom-wrapper">
 							<div class="row">
-								<div class="col-lg-4 single-b-wrap col-md-12">
+								<%-- <div class="col-lg-4 single-b-wrap col-md-12">
 									<i class="fa fa-heart-o" aria-hidden="true"></i>
 									${sessionScope.blogDetail.blogThumbup } like this
-								</div>
+								</div> --%>
+
+
+								<button class="btn">
+									<i class="fa fa-facebook" aria-hidden="true"> <a
+										href="javascript:void(0)"
+										onclick="priase(${sessionScope.blogDetail.blogId },0,'${sessionScope.blogDetail.blogId }')"><span
+											id="${sessionScope.blogDetail.blogId }">${sessionScope.blogDetail.blogThumbup }
+										</span>Likes</a>
+									</i>
+								</button>
+
+
+
+
+
 								<div class="col-lg-4 single-b-wrap col-md-12">
 									<i class="fa fa-comment-o" aria-hidden="true"></i> ${ sessionScope.blogDetail.blogCommentNumber}
 									comments
@@ -244,7 +259,7 @@
 									<script>
 												var b=null;
 													function chat(){
-														b=window.open("Clientchart.jsp","","width=750 height=550");
+														b=window.open("${basePath }content/Clientchart.jsp","","width=750 height=550");
 													}
 													function chatclose(){
 														b.close();
@@ -264,7 +279,7 @@
 
 							<c:choose>
 								<c:when test="${ not empty sessionScope.currentUser }">
-									<a href="#">
+									<a href="javascript:void()">
 										<button class="btn" id="followButton"
 											onclick="follow(${sessionScope.blogDetail.user.userId},${sessionScope.currentUser.userId })">
 											<i class="fa fa-twitter" aria-hidden="true"></i> Follow
@@ -417,7 +432,7 @@
 			dataType: 'json',
 			success: function(data) {
 				if(data.length!=0){
-					$('<div class="comment-list"><div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="${basePath }img/asset/c1.jpg"alt="'+data.user.userId+'"></div><div class="desc"><h5><a href="#">' + data.user.userName+'</a></h5><p class="date">'+data.commentTime+'</p><p class="comment">'+data.commentContent+'</p></div></div><div class="reply-btn"><a href="" class="btn-reply text-uppercase">reply</a></div></div></div>').appendTo($('.flex-column'))
+					$('<div class="comment-list"><div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb"><img src="${basePath }img/asset/c1.jpg"alt="'+data.user.userId+'"></div><div class="desc"><h5><a href="#">' + data.user.userName+'</a></h5><p class="date">'+data.commentTime+'</p><p class="comment">'+data.commentContent+'</p></div> </div><div class="reply-btn" ><a href="javascript:void(0)" data-id="'+data.commentId+'" class="btn-reply text-uppercase">reply</a></div></div>  <div class="replace" data-id="'+data.commentId+'" style="display: none;"><input class="form-control mb-10" type="text" /> <input type="button" style="float: right;" value="reply" class="btn-reply text-uppercase" /></div></div><div class="comment-list left-padding" id="'+data.commentId+'"></div>').appendTo($('.flex-column'))
 					$('#'+textareaId).val(""); 
 				}
 			}
@@ -453,6 +468,7 @@
 	$(document).ready(function(){
 		//点击了回复按钮，显示回复框
 		$('.reply-btn a').on('click', function () {
+			console.log(this)
 			$(this).parent().fadeOut(200)
 			const data_id = $(this).attr('data-id')
 			$('.replace[data-id='+ data_id +']').slideDown(200)
@@ -489,6 +505,37 @@
 		 
  
 	})
+	
+	
+	function priase(articleid, commentid, praiseN) {
+			var type = "json";
+			var praiseNum = parseInt(document.getElementById(praiseN).innerHTML); //获取点赞数
+			$.ajax({
+						url : "${basePath }RecivePraiseServlet?sendType=post&dataType="
+								+ type,
+						data : {
+							"anthorid" : '${sessionScope.currentUser.userId}',
+							"articleid" : articleid,
+							"commentid" : commentid
+						},
+						type : "post",
+						dataType : type,
+						success : function(data) {
+							if ("json" == type) {
+								if (data != undefined && data != null) {
+									var flag = data.praiseflag; // 1已点过赞
+									if (flag == 0) {
+										document.getElementById(praiseN).innerHTML = praiseNum + 1;
+									} else if (flag == 1) {
+										alert("你已经点过赞了！");
+									}
+								}
+							}
+
+						}
+					});
+		}
+		
 	
 	
 	

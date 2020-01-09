@@ -64,7 +64,7 @@ public class ChartServlet extends HttpServlet {
 
 			request.setAttribute("content", outStr);
 
-			request.getRequestDispatcher(basePath + "content/Clientchart.jsp").forward(request, response);
+			request.getRequestDispatcher("content/Clientchart.jsp").forward(request, response);
 
 		} else if (method.equals("saveserver")) {
 			String content = request.getParameter("content");
@@ -73,7 +73,7 @@ public class ChartServlet extends HttpServlet {
 
 			request.setAttribute("content", outStr);
 
-			request.getRequestDispatcher(basePath + "content/Serverchart.jsp").forward(request, response);
+			request.getRequestDispatcher("content/Serverchart.jsp").forward(request, response);
 
 		}
 	}

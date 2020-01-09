@@ -60,7 +60,7 @@
 					class="collapse navbar-collapse justify-content-end align-items-center"
 					id="navbarSupportedContent">
 					<ul class="navbar-nav scrollable-menu">
-						<li><a href="javascript:window.history.go(-1)">Back</a></li>
+						<li><a href="${basePath }index.jsp">Back</a></li>
 						<li><a
 							href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">Personal</a></li>
 					</ul>
@@ -75,7 +75,7 @@
 		<div class="container">
 			<div class="row justify-content-start align-items-center d-flex">
 				<div class="col-lg-8 top-left">
-					<h1 class="text-white mb-20">BBBBBBBBBBBBlog</h1>
+					<h1 class="text-white mb-20">Blog</h1>
 
 				</div>
 			</div>
@@ -122,9 +122,11 @@
 											<button class="btn">
 												<i class="fa fa-facebook" aria-hidden="true"> <a
 													href="javascript:void(0)"
-													onclick="priase(${blog.blogId },0,'${blog.blogId }')">Likes</i>
+													onclick="priase(${blog.blogId },0,'${blog.blogId }')">Likes</a>
+													</i>
 											</button>
-											</a><span id="${blog.blogId }">${blog.blogThumbup }</span> <i
+											<span id="${blog.blogId }">${blog.blogThumbup }</span> 
+											<i
 												class="fa fa-twitter" aria-hidden="true"><a
 												href="${basePath }GetBlogDetail?bid=${blog.blogId }">
 													Comments ${blog.blogCommentNumber } </a></i>

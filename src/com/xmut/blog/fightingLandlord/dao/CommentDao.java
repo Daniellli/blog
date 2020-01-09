@@ -13,4 +13,8 @@ public interface CommentDao {
 
 	// hunting for all Comment
 	public List<Comment> queryAllComment();
+
+	// 拿到评论id
+	public Comment queryCommentForId(Comment entity);
+
 }
