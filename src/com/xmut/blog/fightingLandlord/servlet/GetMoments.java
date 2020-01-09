@@ -35,12 +35,22 @@ public class GetMoments extends HttpServlet {
 
 		BlogBiz blog = new BlogBizImp();
 
+		
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ path + "/";
+		
+		
 		User user = (User) session.getAttribute("currentUser");
 
 		List<Blog> list = blog.Moments(user.getUserId());
 
 		session.setAttribute("blog", list);
+<<<<<<< HEAD
 		response.sendRedirect(basePath + "content/showAll.jsp");
+=======
+		response.sendRedirect(basePath+"content/showAll.jsp");
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 
 	}
 }

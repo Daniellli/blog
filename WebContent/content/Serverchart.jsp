@@ -16,8 +16,12 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 	<form action="${basePath }ChartServlet?method=send" method="post"
 		name="frm">
+=======
+	<form action="${basePath }ChartServlet?method=send" method="post" name="frm">
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 		<textarea rows="20" cols="80">${message }</textarea>
 		<br> <br>
 		<textarea rows="7" cols="80" name="message" id="tx1"
@@ -33,8 +37,12 @@
 			var str = document.frm.message.value;
 			//location.reload();
 			//去后台
+<<<<<<< HEAD
 			location.href = "${basePath }ChartServlet?method=saveserver&content="
 					+ str;
+=======
+			location.href = "${basePath}ChartServlet?method=saveserver&content=" + str;
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 			;
 		}
 		function moveEnd(obj) {
