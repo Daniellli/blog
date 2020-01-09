@@ -16,10 +16,10 @@
 </head>
 
 <body>
-	<form action="ChartServlet?method=send" method="post" name="frm">
+	<form action="${basePath }ChartServlet?method=send" method="post"
+		name="frm">
 		<textarea rows="20" cols="80">${message }</textarea>
-		<br>
-		<br>
+		<br> <br>
 		<textarea rows="7" cols="80" name="message" id="tx1"
 			onfocus="moveEnd(this);">${content }</textarea>
 		<br> <input type="submit" value="发送 ">
@@ -33,7 +33,8 @@
 			var str = document.frm.message.value;
 			//location.reload();
 			//去后台
-			location.href = "ChartServlet?method=saveserver&content=" + str;
+			location.href = "${basePath }ChartServlet?method=saveserver&content="
+					+ str;
 			;
 		}
 		function moveEnd(obj) {

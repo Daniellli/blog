@@ -1,29 +1,31 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 895311923
-  Date: 2019/4/21
-  Time: 22:00
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <html>
 <head>
+
+
+<base href="<%=basePath%>">
 <meta charset="UTF-8">
 <title>用户注册</title>
-<link rel="stylesheet" type="text/css" href="../css/uGlobal.css" />
-<link rel="stylesheet" type="text/css" href="../css/uRegiest.css" />
+<link rel="stylesheet" type="text/css" href="${basePath }css/uGlobal.css" />
+<link rel="stylesheet" type="text/css" href="${basePath }css/uRegiest.css" />
 
-<script src="../tools/jquery-3.4.1.min.js"></script>
-<script src="../js/cxregister.js"></script>
+<script src="${basePath }tools/jquery-3.4.1.min.js"></script>
+<script src="${basePath }js/cxregister.js"></script>
 
 <style>
 body {
-	background: url(../img/header-bg.jpg)  center;
+	background: url(${basePath }img/header-bg.jpg) center;
 	background-size: cover;
 }
 
 .g_register .g_r_style span.pwderror {
-	background: url(../img/ver_error.png) center;
+	background: url(${basePath }img/ver_error.png) center;
 }
 
 .clearfix:after {
@@ -35,9 +37,10 @@ body {
 .file {
 	margin-bottom: 20px;
 }
+
 #form p {
 	margin: 0;
-	margin-bottom:10px;
+	margin-bottom: 10px;
 }
 </style>
 </head>

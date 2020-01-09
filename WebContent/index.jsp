@@ -1,17 +1,20 @@
-下·
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
+<base href="<%=basePath%>">
 <!-- Mobile Specific Meta -->
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="img/fav.png">
+<link rel="shortcut icon" href="${basePath }img/fav.png">
 <!-- Author Meta -->
 <meta name="author" content="colorlib">
 <!-- Meta Description -->
@@ -22,33 +25,29 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <title>Blogger</title>
-<script>
-	if (window.location.href != "http://localhost:8080/blog/index.jsp")
-		window.location.href = "http://localhost:8080/blog/index.jsp";
-</script>
+
 
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
 	rel="stylesheet">
-<!--
-			CSS
-			============================================= -->
-<link rel="stylesheet" href="css/linearicons.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/owl.carousel.css">
-<link rel="stylesheet" href="css/main.css">
+
+<link rel="stylesheet" href="${basePath}css/linearicons.css">
+<link rel="stylesheet" href="${basePath}css/font-awesome.min.css">
+<link rel="stylesheet" href="${basePath}css/bootstrap.css">
+<link rel="stylesheet" href="${basePath}css/owl.carousel.css">
+<link rel="stylesheet" href="${basePath}css/main.css">
 
 <style>
 .post-lists {
 	width: 0px;
 	height: 100%;
-	background: yellow;
+	background-color: lightblue;
+	background-size: cover;
 	transition: all 0.3s linear;
 	position: fixed;
 	right: 0;
-	top: 75px;
-	z-index:9999;
+	top: 60px;
+	z-index: 9999;
 }
 </style>
 </head>
@@ -59,8 +58,8 @@
 	<header class="default-header">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html"> <img
-					src="img/logo.png" alt="">
+				<a class="navbar-brand" href="${basePath }index.jsp"> <img
+					src="${basePath}img/logo.png" alt="">
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
@@ -73,16 +72,16 @@
 					class="collapse navbar-collapse justify-content-end align-items-center"
 					id="navbarSupportedContent">
 					<ul class="navbar-nav">
-						<li><a href="#home">Home</a></li>
-						<li><a href="#news">News</a></li>
-						<li><a href="#travel">Travel</a></li>
+						<li><a href="${basePath }index.jsp">Home</a></li>
+						<!-- <li><a href="#news">News</a></li>
+						<li><a href="#travel">Travel</a></li> -->
 						<!-- <li><a href="#fashion">fashion</a></li>
 						<li><a href="#team">team</a></li> -->
-						<li><a href="content/postBlog.jsp">PostBlog</a></li>
+						<li><a href="${basePath }content/postBlog.jsp">PostBlog</a></li>
 						<c:if test="${not empty sessionScope.currentUser}">
-							<li><a href="GetMoments">Moments</a></li>
+							<li><a href="${basePath }GetMoments">Moments</a></li>
 						</c:if>
-						<li><a href="http://localhost:8080/blog/GetAllBlog">Refresh</a></li>
+						<li><a href="${basePath }GetAllBlog">Refresh</a></li>
 						<li><a href="#" class="show">Following</a></li>
 
 						<!-- Dropdown -->
@@ -91,12 +90,17 @@
 							<div class="dropdown-menu">
 								<c:choose>
 									<c:when test="${not empty sessionScope.currentUser  }">
-										<a class="dropdown-item" href="content/login.jsp">Logout</a>
+										<a class="dropdown-item" href="${basePath }LogoutServlet">Logout</a>
 									</c:when>
 									<c:otherwise>
-										<a class="dropdown-item" href="content/login.jsp">Login</a>
+										<a class="dropdown-item" href="${basePath }content/login.jsp">Login</a>
 									</c:otherwise>
 								</c:choose>
+
+								<c:if test="${not empty sessionScope.currentUser }">
+									<a
+										href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">Personal</a>
+								</c:if>
 							</div></li>
 						<c:if
 							test="${not empty sessionScope.currentUser and sessionScope.currentUser.userType == 1 }">
@@ -104,7 +108,8 @@
 								id="navbardrop" data-toggle="dropdown"> Welcome
 									${sessionScope.currentUser.userName } </a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="content/newCategory.jsp">AddCategory</a>
+									<a class="dropdown-item"
+										href="${basePath }content/newCategory.jsp">AddCategory</a>
 								</div></li>
 						</c:if>
 					</ul>
@@ -115,14 +120,14 @@
 	<!-- End Header Area -->
 	<!-- start banner Area -->
 	<section class="banner-area relative" id="home" data-parallax="scroll"
-		data-image-src="img/header-bg.jpg">
+		data-image-src="${basePath}img/header-bg.jpg">
 		<div class="overlay-bg overlay"></div>
 		<div class="container">
 			<div class="row fullscreen">
 				<div
 					class="banner-content d-flex align-items-center col-lg-12 col-md-12">
 					<h1>
-						A Discount Toner Cartridge <br> Is Better Than Ever.
+						A Better You <br> A Bigger World.
 					</h1>
 				</div>
 				<div
@@ -141,7 +146,8 @@
 							<h4 class="text-white">Mark wiens</h4>
 							<p>12 Dec, 2017 11:21 am</p>
 						</div>
-						<img class="img-fluid user-img" src="img/user.jpg" alt="">
+						<img class="img-fluid user-img" src="${basePath}img/user.jpg"
+							alt="">
 					</div>
 				</div>
 			</div>
@@ -165,21 +171,21 @@
 			</div>
 			<div class="active-cat-carusel">
 				<div class="item single-cat">
-					<img src="img/c1.jpg" alt="">
+					<img src="${basePath}img/c1.jpg" alt="">
 					<p class="date">10 Jan 2018</p>
 					<h4>
 						<a href="#">It S Hurricane Season Visiting Hilton</a>
 					</h4>
 				</div>
 				<div class="item single-cat">
-					<img src="img/c2.jpg" alt="">
+					<img src="${basePath}img/c2.jpg" alt="">
 					<p class="date">10 Jan 2018</p>
 					<h4>
 						<a href="#">What Makes A Hotel Boutique</a>
 					</h4>
 				</div>
 				<div class="item single-cat">
-					<img src="img/c3.jpg" alt="">
+					<img src="${basePath}img/c3.jpg" alt="">
 					<p class="date">10 Jan 2018</p>
 					<h4>
 						<a href="#">Les Houches The Hidden Gem Valley</a>
@@ -206,7 +212,8 @@
 			<div class="row">
 				<div class="col-lg-6 travel-left">
 					<div class="single-travel media pb-70">
-						<img class="img-fluid d-flex  mr-3" src="img/t1.jpg" alt="">
+						<img class="img-fluid d-flex  mr-3" src="${basePath}img/t1.jpg"
+							alt="">
 						<div class="dates">
 							<span>20</span>
 							<p>Dec</p>
@@ -228,7 +235,8 @@
 						</div>
 					</div>
 					<div class="single-travel media">
-						<img class="img-fluid d-flex  mr-3" src="img/t3.jpg" alt="">
+						<img class="img-fluid d-flex  mr-3" src="${basePath}img/t3.jpg"
+							alt="">
 						<div class="dates">
 							<span>20</span>
 							<p>Dec</p>
@@ -252,7 +260,8 @@
 				</div>
 				<div class="col-lg-6 travel-right">
 					<div class="single-travel media pb-70">
-						<img class="img-fluid d-flex  mr-3" src="img/t2.jpg" alt="">
+						<img class="img-fluid d-flex  mr-3" src="${basePath}img/t2.jpg"
+							alt="">
 						<div class="dates">
 							<span>20</span>
 							<p>Dec</p>
@@ -274,7 +283,8 @@
 						</div>
 					</div>
 					<div class="single-travel media">
-						<img class="img-fluid d-flex  mr-3" src="img/t4.jpg" alt="">
+						<img class="img-fluid d-flex  mr-3" src="${basePath}img/t4.jpg"
+							alt="">
 						<div class="dates">
 							<span>20</span>
 							<p>Dec</p>
@@ -321,7 +331,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-3 col-md-6 single-fashion">
-					<img class="img-fluid" src="img/f1.jpg" alt="">
+					<img class="img-fluid" src="${basePath}img/f1.jpg" alt="">
 					<p class="date">10 Jan 2018</p>
 					<h4>
 						<a href="#">Addiction When Gambling Becomes A Problem</a>
@@ -337,7 +347,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 single-fashion">
-					<img class="img-fluid" src="img/f2.jpg" alt="">
+					<img class="img-fluid" src="${basePath}img/f2.jpg" alt="">
 					<p class="date">10 Jan 2018</p>
 					<h4>
 						<a href="#">Addiction When Gambling Becomes A Problem</a>
@@ -353,7 +363,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 single-fashion">
-					<img class="img-fluid" src="img/f3.jpg" alt="">
+					<img class="img-fluid" src="${basePath}img/f3.jpg" alt="">
 					<p class="date">10 Jan 2018</p>
 					<h4>
 						<a href="#">Addiction When Gambling Becomes A Problem</a>
@@ -369,7 +379,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 single-fashion">
-					<img class="img-fluid" src="img/f4.jpg" alt="">
+					<img class="img-fluid" src="${basePath}img/f4.jpg" alt="">
 					<p class="date">10 Jan 2018</p>
 					<h4>
 						<a href="#">Addiction When Gambling Becomes A Problem</a>
@@ -420,7 +430,7 @@
 					<div class="row active-team-carusel">
 						<div class="single-team">
 							<div class="thumb">
-								<img class="img-fluid" src="img/team1.jpg" alt="">
+								<img class="img-fluid" src="${basePath}img/team1.jpg" alt="">
 								<div class="align-items-center justify-content-center d-flex">
 									<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
 										class="fa fa-twitter"></i></a> <a href="#"><i
@@ -434,7 +444,7 @@
 						</div>
 						<div class="single-team">
 							<div class="thumb">
-								<img class="img-fluid" src="img/team2.jpg" alt="">
+								<img class="img-fluid" src="${basePath}img/team2.jpg" alt="">
 								<div class="align-items-center justify-content-center d-flex">
 									<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
 										class="fa fa-twitter"></i></a> <a href="#"><i
@@ -505,19 +515,18 @@
 					<div class="single-footer-widget mail-chimp">
 						<h6 class="mb-20">Instragram Feed</h6>
 						<ul class="instafeed d-flex flex-wrap">
-							<li><img src="img/i1.jpg" alt=""></li>
-							<li><img src="img/i2.jpg" alt=""></li>
-							<li><img src="img/i3.jpg" alt=""></li>
-							<li><img src="img/i4.jpg" alt=""></li>
-							<li><img src="img/i5.jpg" alt=""></li>
-							<li><img src="img/i6.jpg" alt=""></li>
-							<li><img src="img/i7.jpg" alt=""></li>
-							<li><img src="img/i8.jpg" alt=""></li>
+							<li><img src="${basePath}img/i1.jpg" alt=""></li>
+							<li><img src="${basePath}img/i2.jpg" alt=""></li>
+							<li><img src="${basePath}img/i3.jpg" alt=""></li>
+							<li><img src="${basePath}img/i4.jpg" alt=""></li>
+							<li><img src="${basePath}img/i5.jpg" alt=""></li>
+							<li><img src="${basePath}img/i6.jpg" alt=""></li>
+							<li><img src="${basePath}img/i7.jpg" alt=""></li>
+							<li><img src="${basePath}img/i8.jpg" alt=""></li>
 						</ul>
 					</div>
 				</div>
 			</div>
-
 			<div class="row footer-bottom d-flex justify-content-between">
 
 				<p class="col-lg-8 col-sm-12 footer-text">
@@ -541,18 +550,18 @@
 		</div>
 	</footer>
 	<!-- End footer Area -->
-	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="${basePath}js/vendor/jquery-2.2.4.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
 		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
 		crossorigin="anonymous"></script>
-	<script src="js/vendor/bootstrap.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/parallax.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/jquery.sticky.js"></script>
-	<script src="js/main.js"></script>
+	<script src="${basePath}js/vendor/bootstrap.min.js"></script>
+	<script src="${basePath}js/jquery.ajaxchimp.min.js"></script>
+	<script src="${basePath}js/parallax.min.js"></script>
+	<script src="${basePath}js/owl.carousel.min.js"></script>
+	<script src="${basePath}js/jquery.magnific-popup.min.js"></script>
+	<script src="${basePath}js/jquery.sticky.js"></script>
+	<script src="${basePath}js/main.js"></script>
 	<script>
 		$('.show')
 				.on(
@@ -565,7 +574,7 @@
 										.ajax({
 											type : 'get',
 											datatype : 'json',
-											url : 'http://localhost:8080/blog/GetFrientList',
+											url : '${basePath}GetFrientList',
 											success : function(data) {
 												console.log(data)
 												$('.single-list').remove()
@@ -575,9 +584,9 @@
 													$(
 															'<div class="single-list flex-row d-flex"><div class="thumb" onclick="goPersonalInfo('
 																	+ data[i].userId
-																	+ ')"><img src="img/asset/c3.jpg" alt=""><p><a href="#">'
+																	+ ')"><img src="${basePath}img/asset/c3.jpg" alt=""><p><a href="#">'
 																	+ data[i].userName
-																	+ '</a></p></div></div><hr />')
+																	+ '</a></p></div></div>')
 															.appendTo(
 																	$('.post-lists'))
 												}
@@ -604,7 +613,7 @@
 			form.appendChild(input);
 
 			form.method = 'POST';
-			form.action = "http://localhost:8080/blog/GetPersonalInfo";
+			form.action = "${basePath}GetPersonalInfo";
 			form.submit();
 			document.body.removeChild(form);
 		}

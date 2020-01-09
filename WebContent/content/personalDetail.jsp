@@ -1,21 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<base href="<%=basePath%>">
 <!-- Mobile Specific Meta -->
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="../img/fav.png">
+<link rel="shortcut icon" href="${basePath }img/fav.png">
 <!-- Author Meta -->
 <meta name="author" content="colorlib">
 <!-- Meta Description -->
@@ -33,11 +31,11 @@
 <!--
             CSS
             ============================================= -->
-<link rel="stylesheet" href="../css/linearicons.css">
-<link rel="stylesheet" href="../css/font-awesome.min.css">
-<link rel="stylesheet" href="../css/bootstrap.css">
-<link rel="stylesheet" href="../css/owl.carousel.css">
-<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="${basePath }css/linearicons.css">
+<link rel="stylesheet" href="${basePath }css/font-awesome.min.css">
+<link rel="stylesheet" href="${basePath }css/bootstrap.css">
+<link rel="stylesheet" href="${basePath }css/owl.carousel.css">
+<link rel="stylesheet" href="${basePath }css/main.css">
 </head>
 <body>
 
@@ -46,7 +44,7 @@
 		class="navbar navbar-expand-lg navbar-light">
 	<div class="container">
 		<a class="navbar-brand" href="index.html"> <img
-			src="../img/logo.png" alt="">
+			src="${basePath }img/logo.png" alt="">
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -60,6 +58,7 @@
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
 				<li><a href="javascript:window.history.go(-1)">Back</a></li>
+				<li><a href="index.jsp">home</a></li>
 
 			</ul>
 		</div>
@@ -86,44 +85,54 @@
 		<!-- Start post Area -->
 
 		<!-- 显示用户详情 -->
-
 		<section class="post-area">
 		<div class="single_widget about_widget">
-			<img src="../img/asset/s-img.jpg"
+			<img src="${basePath }img/asset/s-img.jpg"
 				alt="${sessionScope.userDetail.userId }">
 			<h2 class="text-uppercase">${sessionScope.userDetail.userName }</h2>
 			<div class="social-link">
+				<c:choose>
 
-				<c:if test="${sessionScope.currentUser.userName!=null}">
-					<a onclick="chat()"><button class="btn">
-							<i class="fa fa-facebook" aria-hidden="true"></i> Private Chat
-						</button></a>
-					<script>
-						var b=null;
-							function chat(){
-								b=window.open("Clientchart.jsp","","width=750 height=550");
-							}
-							function chatclose(){
-								b.close();
-							
-							}
-					</script>
-				</c:if>
-				<c:if test="${sessionScope.currentUser.userName==null}">
-					<a onclick="javascript:alert('Please Login First')"><button
-							class="btn">
-							<i class="fa fa-facebook" aria-hidden="true"></i> Private Chat
-						</button></a>
-				</c:if>
+					<c:when test="${not empty sessionScope.currentUser}">
+						<c:if
+							test="${sessionScope.currentUser.userId != sessionScope.userDetail.userId}">
+							<a onclick="chat()"><button class="btn">
+									<i class="fa fa-facebook" aria-hidden="true"></i> Private Chat
+								</button></a>
+							<script>
+								var b=null;
+									function chat(){
+										b=window.open("Clientchart.jsp","","width=750 height=550");
+									}
+									function chatclose(){
+										b.close();
+									
+									}
+							</script>
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<a onclick="javascript:alert('Please Login First')"><button
+								class="btn">
+								<i class="fa fa-facebook" aria-hidden="true"></i> Private Chat
+							</button></a>
+					</c:otherwise>
+				</c:choose>
 
 				<c:choose>
 					<c:when test="${not empty sessionScope.currentUser }">
-						<a href="javascript:follow(${sessionScope.userDetail.userId},${sessionScope.currentUser.userId })"><button id="followButton" class="btn">
-								<i class="fa fa-twitter" aria-hidden="true"></i>Follow
-							</button></a>
+						<c:if
+							test="${sessionScope.currentUser.userId != sessionScope.userDetail.userId}">
+							<a
+								href="javascript:follow(${sessionScope.userDetail.userId},${sessionScope.currentUser.userId })"><button
+									id="followButton" class="btn">
+									<i class="fa fa-twitter" aria-hidden="true"></i>Follow
+								</button></a>
+						</c:if>
 					</c:when>
 					<c:otherwise>
-						<a href="javascript:alert('login first ,thank you !')" ><button id="followButton" class="btn">
+						<a href="javascript:alert('login first ,thank you !')"><button
+								id="followButton" class="btn">
 								<i class="fa fa-twitter" aria-hidden="true"></i>Follow
 							</button></a>
 					</c:otherwise>
@@ -218,14 +227,14 @@
 				<div class="single-footer-widget mail-chimp">
 					<h6 class="mb-20">Instragram Feed</h6>
 					<ul class="instafeed d-flex flex-wrap">
-						<li><img src="../img/i1.jpg" alt=""></li>
-						<li><img src="../img/i2.jpg" alt=""></li>
-						<li><img src="../img/i3.jpg" alt=""></li>
-						<li><img src="../img/i4.jpg" alt=""></li>
-						<li><img src="../img/i5.jpg" alt=""></li>
-						<li><img src="../img/i6.jpg" alt=""></li>
-						<li><img src="../img/i7.jpg" alt=""></li>
-						<li><img src="../img/i8.jpg" alt=""></li>
+						<li><img src="${basePath }img/i1.jpg" alt=""></li>
+						<li><img src="${basePath }img/i2.jpg" alt=""></li>
+						<li><img src="${basePath }img/i3.jpg" alt=""></li>
+						<li><img src="${basePath }img/i4.jpg" alt=""></li>
+						<li><img src="${basePath }img/i5.jpg" alt=""></li>
+						<li><img src="${basePath }img/i6.jpg" alt=""></li>
+						<li><img src="${basePath }img/i7.jpg" alt=""></li>
+						<li><img src="${basePath }img/i8.jpg" alt=""></li>
 					</ul>
 				</div>
 			</div>
@@ -243,24 +252,24 @@
 	</footer>
 	<!-- End footer Area -->
 
-	<script src="../js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="${basePath }js/vendor/jquery-2.2.4.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
 		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
 		crossorigin="anonymous"></script>
-	<script src="../js/vendor/bootstrap.min.js"></script>
-	<script src="../js/jquery.ajaxchimp.min.js"></script>
-	<script src="../js/parallax.min.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/jquery.magnific-popup.min.js"></script>
-	<script src="../js/jquery.sticky.js"></script>
-	<script src="../js/main.js"></script>
+	<script src="${basePath }js/vendor/bootstrap.min.js"></script>
+	<script src="${basePath }js/jquery.ajaxchimp.min.js"></script>
+	<script src="${basePath }js/parallax.min.js"></script>
+	<script src="${basePath }js/owl.carousel.min.js"></script>
+	<script src="${basePath }js/jquery.magnific-popup.min.js"></script>
+	<script src="${basePath }js/jquery.sticky.js"></script>
+	<script src="${basePath }js/main.js"></script>
 	<script>
 	function priase(articleid, commentid, praiseN) {
 		var type = "json";
 		var praiseNum = parseInt(document.getElementById(praiseN).innerHTML); //获取点赞数
 		$.ajax({
-					url : "http://localhost:8080/blog/RecivePraiseServlet?sendType=post&dataType="
+					url : "${basePath }RecivePraiseServlet?sendType=post&dataType="
 							+ type,
 					data : {
 						"anthorid" : '${sessionScope.currentUser.userId}',
@@ -288,7 +297,7 @@
 	function follow(followedUserId,mainUserId){
 		$.ajax({
 			type:'post',
-			url:'http://localhost:8080/blog/FollowServlet',
+			url:'${basePath }FollowServlet',
 			data:{
 				"followedUserId":followedUserId,
 				"mainUserId":mainUserId

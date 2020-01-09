@@ -2,15 +2,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html>
+
 <html lang="zxx" class="no-js">
 <head>
+<base href="<%=basePath%>">
 <!-- Mobile Specific Meta -->
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="img/fav.png">
+<link rel="shortcut icon" href="${basePath }img/fav.png">
 <!-- Author Meta -->
 <meta name="author" content="colorlib">
 <!-- Meta Description -->
@@ -21,7 +27,7 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <title>Blogger</title>
-<link rel="stylesheet" href="../tools/jsuggest/jsuggest.css">
+<link rel="stylesheet" href="${basePath }tools/jsuggest/jsuggest.css">
 
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
@@ -29,11 +35,11 @@
 <!--
             CSS
             ============================================= -->
-<link rel="stylesheet" href="../css/linearicons.css">
-<link rel="stylesheet" href="../css/font-awesome.min.css">
-<link rel="stylesheet" href="../css/bootstrap.css">
-<link rel="stylesheet" href="../css/owl.carousel.css">
-<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="${basePath }css/linearicons.css">
+<link rel="stylesheet" href="${basePath }css/font-awesome.min.css">
+<link rel="stylesheet" href="${basePath }css/bootstrap.css">
+<link rel="stylesheet" href="${basePath }css/owl.carousel.css">
+<link rel="stylesheet" href="${basePath }css/main.css">
 </head>
 <body>
 
@@ -41,8 +47,8 @@
 	<header class="default-header">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html"> <img
-					src="../img/logo.png" alt="">
+				<a class="navbar-brand" href="${basePath }index.jsp"> <img
+					src="${basePath }img/logo.png" alt="">
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
@@ -54,7 +60,9 @@
 					class="collapse navbar-collapse justify-content-end align-items-center"
 					id="navbarSupportedContent">
 					<ul class="navbar-nav scrollable-menu">
-						<li><a href="../index.jsp">Back</a></li>
+						<li><a href="javascript:window.history.go(-1)">Back</a></li>
+						<li><a
+							href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">Personal</a></li>
 					</ul>
 				</div>
 			</div>
@@ -89,7 +97,7 @@
 									<!-- 图片 -->
 									<div class="thumb"
 										onclick="goPersonalInfo(${blog.user.userId})">
-										<img src="../img/asset/c3.jpg" alt="">
+										<img src="${basePath }img/asset/c3.jpg" alt="">
 										<p>
 											<a href="#">${blog.user.userName }</a>
 										</p>
@@ -100,31 +108,40 @@
 										<div>${blog.user.userPortrait }</div> --%>
 									</div>
 									<div class="detail" id="showDetail">
-										<a
-											href="http://localhost:8080/blog/GetBlogDetail?bid=${blog.blogId }">
-											<!-- 标题 -->
+										<a href="${basePath }GetBlogDetail?bid=${blog.blogId }"> <!-- 标题 -->
 											<h4 class="pb-20">${blog.blogName }</h4>
 										</a>
 										<!-- 文章内容 -->
 										<p>${blog.blogContent }</p>
 										<!-- 喜欢和评论 -->
-										<p class="footer pt-20">
+
+
+
+										<p class="social-link">
 											<!-- 评论数和点赞数 -->
-											<i class="fa fa-heart-o" aria-hidden="true"></i> <a
-												href="javascript:void(0)"
-												onclick="priase(${blog.blogId },0,'${blog.blogId }')">Likes
+											<button class="btn">
+												<i class="fa fa-facebook" aria-hidden="true"> <a
+													href="javascript:void(0)"
+													onclick="priase(${blog.blogId },0,'${blog.blogId }')">Likes</i>
+											</button>
 											</a><span id="${blog.blogId }">${blog.blogThumbup }</span> <i
-												class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a
-												href="http://localhost:8080/blog/GetBlogDetail?bid=${blog.blogId }">
-												Comments ${blog.blogCommentNumber } </a>
+												class="fa fa-twitter" aria-hidden="true"><a
+												href="${basePath }GetBlogDetail?bid=${blog.blogId }">
+													Comments ${blog.blogCommentNumber } </a></i>
+											<!-- 收藏 -->
+											<i class="fa fa-heart-o" aria-hidden="true"></i> <a
+												href="javascript:void(0)" class="collect"> <img
+												height="20" width="20" src="${basePath }img/asset/x1.jpg"
+												alt="" /> collect
+											</a>
 										</p>
 									</div>
 								</div>
 							</c:forEach>
-							<!-- <div class="justify-content-center d-flex">
+							<div class="justify-content-center d-flex">
 								<a class="text-uppercase primary-btn loadmore-btn mt-40 mb-60"
 									href="#"> Load More Post</a>
-							</div> -->
+							</div>
 						</div>
 					</div>
 					<div class="col-lg-4 sidebar-area">
@@ -155,6 +172,9 @@
 		<!-- End post Area -->
 	</div>
 	<!-- End post Area -->
+
+
+
 	<!-- start footer Area -->
 	<footer class="footer-area section-gap">
 		<div class="container">
@@ -207,14 +227,14 @@
 					<div class="single-footer-widget mail-chimp">
 						<h6 class="mb-20">Instragram Feed</h6>
 						<ul class="instafeed d-flex flex-wrap">
-							<li><img src="../img/i1.jpg" alt=""></li>
-							<li><img src="../img/i2.jpg" alt=""></li>
-							<li><img src="../img/i3.jpg" alt=""></li>
-							<li><img src="../img/i4.jpg" alt=""></li>
-							<li><img src="../img/i5.jpg" alt=""></li>
-							<li><img src="../img/i6.jpg" alt=""></li>
-							<li><img src="../img/i7.jpg" alt=""></li>
-							<li><img src="../img/i8.jpg" alt=""></li>
+							<li><img src="${basePath }img/i1.jpg" alt=""></li>
+							<li><img src="${basePath }img/i2.jpg" alt=""></li>
+							<li><img src="${basePath }img/i3.jpg" alt=""></li>
+							<li><img src="${basePath }img/i4.jpg" alt=""></li>
+							<li><img src="${basePath }img/i5.jpg" alt=""></li>
+							<li><img src="${basePath }img/i6.jpg" alt=""></li>
+							<li><img src="${basePath }img/i7.jpg" alt=""></li>
+							<li><img src="${basePath }img/i8.jpg" alt=""></li>
 						</ul>
 					</div>
 				</div>
@@ -236,26 +256,26 @@
 	</footer>
 	<!-- End footer Area -->
 
-	<script src="../js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="${basePath }js/vendor/jquery-2.2.4.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
 		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
 		crossorigin="anonymous"></script>
-	<script src="../js/vendor/bootstrap.min.js"></script>
-	<script src="../js/jquery.ajaxchimp.min.js"></script>
-	<script src="../js/parallax.min.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/jquery.magnific-popup.min.js"></script>
-	<script src="../js/jquery.sticky.js"></script>
-	<script src="../js/main.js"></script>
-	<script src="../tools/jsuggest/jSuggest.js"></script>
+	<script src="${basePath }js/vendor/bootstrap.min.js"></script>
+	<script src="${basePath }js/jquery.ajaxchimp.min.js"></script>
+	<script src="${basePath }js/parallax.min.js"></script>
+	<script src="${basePath }js/owl.carousel.min.js"></script>
+	<script src="${basePath }js/jquery.magnific-popup.min.js"></script>
+	<script src="${basePath }js/jquery.sticky.js"></script>
+	<script src="${basePath }js/main.js"></script>
+	<script src="${basePath }tools/jsuggest/jSuggest.js"></script>
 	<script>
 		//praiseN,pra为span的id 
 		function searchByBlogName(){
 			var blogName =document.getElementById("searchField").value
 			$.ajax({
 				type:'get',
-				url:'http://localhost:8080/blog/GetBlogByName?bName='+blogName,
+				url:'${basePath }GetBlogByName?bName='+blogName,
 				datatype:'json',
 				success:function(data){
 					if(data!=null){
@@ -263,7 +283,7 @@
 						data=JSON.parse(data)
 						let len = data.length
 						for(let i = 0 ;i<len;i++){
-							$('<div class="single-list flex-row d-flex"><div class="thumb" onclick="goPersonalInfo('+data[i].user.userId+')">\<img src="../img/asset/c3.jpg" alt=""><p><a href="#">'+data[i].user.userName+'</a></p></div><div class="detail" id="showDetail"><a href="http://localhost:8080/blog/GetBlogDetail?bid='+data[i].blogId+'"><h4 class="pb-20">'+data[i].blogName+'</h4></a><p>'+data[i].blogContent+'</p><p class="footer pt-20"><i class="fa fa-heart-o" aria-hidden="true"></i> <a href="javascript:void(0)"onclick="priase('+data[i].blogId+',0,'+data[i].blogId+')">Likes</a><span id="'+data[i].blogId+'">'+data[i].blogThumbup+'</span> <iclass="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="http://localhost:8080/blog/GetBlogDetail?bid='+data[i].blogId+'">Comments '+data[i].blogCommentNumber+' </a></p></div></div>').prependTo($('#showall'))
+							$('<div class="single-list flex-row d-flex"><div class="thumb" onclick="goPersonalInfo('+data[i].user.userId+')">\<img src="${basePath }img/asset/c3.jpg" alt=""><p><a href="#">'+data[i].user.userName+'</a></p></div><div class="detail" id="showDetail"><a href="${basePath }GetBlogDetail?bid='+data[i].blogId+'"><h4 class="pb-20">'+data[i].blogName+'</h4></a><p>'+data[i].blogContent+'</p><p class="footer pt-20"><i class="fa fa-heart-o" aria-hidden="true"></i> <a href="javascript:void(0)"onclick="priase('+data[i].blogId+',0,'+data[i].blogId+')">Likes</a><span id="'+data[i].blogId+'">'+data[i].blogThumbup+'</span> <iclass="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="${basePath }GetBlogDetail?bid='+data[i].blogId+'">Comments '+data[i].blogCommentNumber+' </a></p></div></div>').prependTo($('#showall'))
 							}
 						
 					}
@@ -278,7 +298,7 @@
 			var type = "json";
 			var praiseNum = parseInt(document.getElementById(praiseN).innerHTML); //获取点赞数
 			$.ajax({
-						url : "http://localhost:8080/blog/RecivePraiseServlet?sendType=post&dataType="
+						url : "${basePath }RecivePraiseServlet?sendType=post&dataType="
 								+ type,
 						data : {
 							"anthorid" : '${sessionScope.currentUser.userId}',
@@ -319,7 +339,7 @@
 			      form.appendChild(input);
 			  
 			  form.method = 'POST';
-			  form.action = "http://localhost:8080/blog/GetPersonalInfo";
+			  form.action = "${basePath }GetPersonalInfo";
 			  form.submit();
 			  document.body.removeChild(form);
 		}
@@ -328,7 +348,7 @@
 		function getByCategoryId(cId){
 			$.ajax({
 				type:'get',
-				url:"http://localhost:8080/blog/GetBlogByCategoryId?cid="+cId,
+				url:"${basePath }GetBlogByCategoryId?cid="+cId,
 				datatype:'json',
 				success:function(data){
 					if(data!=null){
@@ -336,7 +356,7 @@
 						data=JSON.parse(data)
 						let len = data.length
 						for (let i = 0; i < len; i++) {
-							$('<div class="single-list flex-row d-flex"><div class="thumb" onclick="goPersonalInfo('+data[i].user.userId+')">\<img src="../img/asset/c3.jpg" alt=""><p><a href="#">'+data[i].user.userName+'</a></p></div><div class="detail" id="showDetail"><a href="http://localhost:8080/blog/GetBlogDetail?bid='+data[i].blogId+'"><h4 class="pb-20">'+data[i].blogName+'</h4></a><p>'+data[i].blogContent+'</p><p class="footer pt-20"><i class="fa fa-heart-o" aria-hidden="true"></i> <a href="javascript:void(0)"onclick="priase('+data[i].blogId+',0,'+data[i].blogId+')">Likes</a><span id="'+data[i].blogId+'">'+data[i].blogThumbup+'</span> <iclass="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="http://localhost:8080/blog/GetBlogDetail?bid='+data[i].blogId+'">Comments '+data[i].blogCommentNumber+' </a></p></div></div>').prependTo($('#showall'))
+							$('<div class="single-list flex-row d-flex"><div class="thumb" onclick="goPersonalInfo('+data[i].user.userId+')">\<img src="${basePath }img/asset/c3.jpg" alt=""><p><a ="#">'+data[i].user.userName+'</a></p></div><div class="detail" id="showDetail"><a href="${basePath }GetBlogDetail?bid='+data[i].blogId+'"><h4 class="pb-20">'+data[i].blogName+'</h4></a><p>'+data[i].blogContent+'</p><p class="footer pt-20"><i class="fa fa-heart-o" aria-hidden="true"></i> <a href="javascript:void(0)"onclick="priase('+data[i].blogId+',0,'+data[i].blogId+')">Likes</a><span id="'+data[i].blogId+'">'+data[i].blogThumbup+'</span> <iclass="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="${basePath }GetBlogDetail?bid='+data[i].blogId+'">Comments '+data[i].blogCommentNumber+' </a></p></div></div>').prependTo($('#showall'))
 						} 
 					}
 				}
@@ -349,9 +369,9 @@
 				//#textfield表示你输入框的id名称，比如当前输入框id是textfield
 				$("#searchField").jSuggest({
 					//url指的是后台的服务地址
-					url : "http://localhost:8080/blog/AutoComplete",
+					url : "${basePath }AutoComplete",
 					type : "post",
-					loadingImg : '../img/ajax-loader.gif',
+					loadingImg : '${basePath }img/ajax-loader.gif',
 					data : "key",
 					delay : 500,
 					autoChange : true

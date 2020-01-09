@@ -11,6 +11,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<base href="<%=basePath%>">
 <!-- Mobile Specific Meta -->
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,11 +34,11 @@
 <!--
             CSS
             ============================================= -->
-<link rel="stylesheet" href="../css/linearicons.css">
-<link rel="stylesheet" href="../css/font-awesome.min.css">
-<link rel="stylesheet" href="../css/bootstrap.css">
-<link rel="stylesheet" href="../css/owl.carousel.css">
-<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="${basePath }css/linearicons.css">
+<link rel="stylesheet" href="${basePath }css/font-awesome.min.css">
+<link rel="stylesheet" href="${basePath }css/bootstrap.css">
+<link rel="stylesheet" href="${basePath }css/owl.carousel.css">
+<link rel="stylesheet" href="${basePath }css/main.css">
 </head>
 <body>
 
@@ -45,8 +46,8 @@
 	<header class="default-header"> <nav
 		class="navbar navbar-expand-lg navbar-light">
 	<div class="container">
-		<a class="navbar-brand" href="index.html"> <img src="img/logo.png"
-			alt="">
+		<a class="navbar-brand" href="index.html"> <img
+			src="${basePath }img/logo.png" alt="">
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -59,9 +60,14 @@
 			class="collapse navbar-collapse justify-content-end align-items-center"
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
-				<li><a href="../index.jsp">Back</a></li>
-				<!-- 	<li><a href="category.jsp">分类</a></li>
-				<li><a href="#travel">热搜</a></li>
+				<li><a href="javascript:window.history.go(-1)">Back</a></li>
+
+				<c:if test="${not empty sessionScope.currentUser }">
+					<li><a
+						href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">Personal</a>
+					</li>
+				</c:if>
+				<!-- 	<li><a href="#travel">热搜</a></li>
 				Dropdown
 				<li class="dropdown"><a class="dropdown-toggle" href="#"
 					id="navbardrop" data-toggle="dropdown"> 个人 </a>
@@ -80,7 +86,7 @@
 	<div class="container">
 		<div class="row justify-content-between align-items-center d-flex">
 			<div class="col-lg-8 top-left">
-				<h1 class="text-white mb-20">发布博客</h1>
+				<h1 class="text-white mb-20">Post Blog</h1>
 				<!-- <ul>
 					<li><a href="">分类</a><span class="lnr lnr-arrow-right"></span></li>
 					<li><a href="">内容</a></li>
@@ -101,20 +107,17 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-8">
-						<div class="single-page-post">
-							<img class="img-fluid" src="../img/single.jpg" alt="">
-							<div class="top-wrapper ">
-								<div class="row d-flex justify-content-between">
-									<h2 class="col-lg-8 col-md-12 text-uppercase">
-										<p>
-											标题： <input type="text" placeholder="标题" name="title">
-										</p>
-									</h2>
+						<div class="single-page-content">
+							<img class="img-fluid" src="${basePath }img/single.jpg" alt="">
+							<div class="top-wrapper "></div>
 
-								</div>
-							</div>
 
 							<!-- 分类 -->
+
+							<div class="single-post-content">
+								TITLE<input type="text" placeholder="Your title" name="title"
+									class="common-input mb-20 form-control">
+							</div>
 							<div class="category">
 								<label for="">category</label> <select name="category">
 									<c:forEach var="cat" items="${sessionScope.category }">
@@ -144,31 +147,7 @@
 	</form>
 
 	<!-- 右边 -->
-	<div class="col-lg-4 sidebar-area ">
-
-		<div class="single_widget about_widget">
-			<img src="../img/asset/s-img.jpg" alt="">
-			<!--<h2 class="text-uppercase"></h2>
-			<p>hello world</p>
-			 <div class="social-link">
-				<a href="#"><button class="btn">
-						<i class="fa fa-facebook" aria-hidden="true"></i> Like
-					</button></a> <a href="#"><button class="btn">
-						<i class="fa fa-twitter" aria-hidden="true"></i> follow
-					</button></a>
-			</div> -->
-		</div>
-		<div class="single_widget cat_widget">
-			<h4 class="text-uppercase pb-20">分类</h4>
-			<ul>
-				<c:forEach var="cat" items="${sessionScope.category }">
-					<li><a href="#">${cat.cName }<span>37</span></a></li>
-				</c:forEach>
-			</ul>
-		</div>
-	</div>
-	</div>
-	</div>
+	<div class="col-lg-4 sidebar-area "></div>
 	</section>
 
 	</div>
@@ -226,14 +205,14 @@
 				<div class="single-footer-widget mail-chimp">
 					<h6 class="mb-20">Instragram Feed</h6>
 					<ul class="instafeed d-flex flex-wrap">
-						<li><img src="../img/i1.jpg" alt=""></li>
-						<li><img src="../img/i2.jpg" alt=""></li>
-						<li><img src="../img/i3.jpg" alt=""></li>
-						<li><img src="../img/i4.jpg" alt=""></li>
-						<li><img src="../img/i5.jpg" alt=""></li>
-						<li><img src="../img/i6.jpg" alt=""></li>
-						<li><img src="../img/i7.jpg" alt=""></li>
-						<li><img src="../img/i8.jpg" alt=""></li>
+						<li><img src="${basePath }img/i1.jpg" alt=""></li>
+						<li><img src="${basePath }img/i2.jpg" alt=""></li>
+						<li><img src="${basePath }img/i3.jpg" alt=""></li>
+						<li><img src="${basePath }img/i4.jpg" alt=""></li>
+						<li><img src="${basePath }img/i5.jpg" alt=""></li>
+						<li><img src="${basePath }img/i6.jpg" alt=""></li>
+						<li><img src="${basePath }img/i7.jpg" alt=""></li>
+						<li><img src="${basePath }img/i8.jpg" alt=""></li>
 					</ul>
 				</div>
 			</div>
@@ -244,17 +223,17 @@
 
 
 
-	<script src="../js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="${basePath }js/vendor/jquery-2.2.4.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
 		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
 		crossorigin="anonymous"></script>
-	<script src="../js/vendor/bootstrap.min.js"></script>
-	<script src="../js/jquery.ajaxchimp.min.js"></script>
-	<script src="../js/parallax.min.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/jquery.magnific-popup.min.js"></script>
-	<script src="../js/jquery.sticky.js"></script>
-	<script src="../js/main.js"></script>
+	<script src="${basePath }js/vendor/bootstrap.min.js"></script>
+	<script src="${basePath }js/jquery.ajaxchimp.min.js"></script>
+	<script src="${basePath }js/parallax.min.js"></script>
+	<script src="${basePath }js/owl.carousel.min.js"></script>
+	<script src="${basePath }js/jquery.magnific-popup.min.js"></script>
+	<script src="${basePath }js/jquery.sticky.js"></script>
+	<script src="${basePath }js/main.js"></script>
 </body>
 </html>

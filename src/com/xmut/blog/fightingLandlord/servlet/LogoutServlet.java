@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.xmut.blog.fightingLandlord.biz.UserBiz;
-import com.xmut.blog.fightingLandlord.bizImp.UserBizImp;
-import com.xmut.blog.fightingLandlord.entity.User;
-
 /**
  * Servlet implementation class LogoutServlet
  */
@@ -25,10 +21,14 @@ public class LogoutServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+				+ "/";
+
 		HttpSession session = request.getSession();
 		session.invalidate();
 		PrintWriter out = response.getWriter();
 		out.println("<script>alert('logout successfully!')</script>");
-		out.println("<script>window.location.href='http://localhost:8080/blog/index.jsp'</script>");
+		out.println("<script>window.location.href='" + basePath + "index.jsp'</script>");
 	}
 }

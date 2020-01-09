@@ -1,22 +1,5 @@
 package com.xmut.blog.fightingLandlord.servlet;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
-import com.xmut.blog.fightingLandlord.bizImp.BlogBizImp;
-import com.xmut.blog.fightingLandlord.entity.Blog;
-import com.xmut.blog.fightingLandlord.entity.Category;
-import com.xmut.blog.fightingLandlord.entity.User;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,11 +9,30 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.xmut.blog.fightingLandlord.bizImp.BlogBizImp;
+import com.xmut.blog.fightingLandlord.entity.Blog;
+import com.xmut.blog.fightingLandlord.entity.Category;
+import com.xmut.blog.fightingLandlord.entity.User;
+
 @WebServlet("/UploadServlet")
 public class UploadServlet extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ request.getContextPath() + "/";
 
 		// 获得磁盘文件条目工厂。
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -101,12 +103,6 @@ public class UploadServlet extends HttpServlet {
 					System.out.println("path" + path);
 					System.out.println("accessAddress" + photoAddress);
 					System.out.println("accessAddress" + vedioAddress);
-					
-					
-					
-
-
-					
 
 					// 取到最后一个反斜杠。
 
@@ -162,7 +158,7 @@ public class UploadServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if (new BlogBizImp().addBlog(b)) {
 			out.print("<script>alert('post successfully')</script>");
-			out.print("<script>window.location.href='http://localhost:8080/blog/content/postBlog.jsp'</script>");
+			out.print("<script>window.location.href='" + basePath + "content/postBlog.jsp'</script>");
 		} else {
 			out.print("<script>alert('fail to post')</script>");
 			out.print("<script>window.history.go(-1)</script>");

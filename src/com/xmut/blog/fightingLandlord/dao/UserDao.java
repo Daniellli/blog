@@ -26,4 +26,13 @@ public interface UserDao {
 	// 查询所有关注的好友
 	public List<User> queryFriends(int id);
 
+	// 修改密码
+	public boolean modifyUser(User user);
+
+	// 找回密码
+	public User findPassword(String name, String question, String answer);
+
+	// get question获取密保问题
+	public String getQuestionByUserName(String name);
+
 }

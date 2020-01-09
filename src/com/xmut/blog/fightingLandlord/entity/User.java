@@ -3,27 +3,26 @@ package com.xmut.blog.fightingLandlord.entity;
 import java.util.List;
 
 /**
- * User table 
+ * User table
+ * 
  * @author Daniel
  * @since 2019年12月31日 下午1:40:03
  */
 
 public class User {
-	private Integer userId; //用户id
-	private String userName;//用户名
-	private String userPwd;//用户密码
-	private Integer userSex;//用户性别
-	private Integer userAge;//用户年龄
-	private String userEmail;//用户邮箱
-	private Integer userType;//用户类型，用户、管理员
-	private String userQuestion;//密保问题
-	private String userAnswer;//密保答案
-	private String userTelephone;//密保答案
-	private String userPortrait;//密保答案
-	
-	private List<Blog> blogs;//该用户发布的所有博客
-	
-	
+	private Integer userId; // 用户id
+	private String userName;// 用户名
+	private String userPwd;// 用户密码
+	private Integer userSex;// 用户性别
+	private Integer userAge;// 用户年龄
+	private String userEmail;// 用户邮箱
+	private Integer userType;// 用户类型，用户、管理员
+	private String userQuestion;// 密保问题
+	private String userAnswer;// 密保答案
+	private String userTelephone;// 密保答案
+	private String userPortrait;// 密保答案
+
+	private List<Blog> blogs;// 该用户发布的所有博客
 
 	public String getUserQuestion() {
 		return userQuestion;
@@ -52,8 +51,6 @@ public class User {
 	public User() {
 		super();
 	}
-
-
 
 	public User(Integer userId, String userName, String userPwd) {
 		super();
@@ -86,11 +83,10 @@ public class User {
 		this.userId = userId;
 	}
 
-	
-	public User(Integer userId, String userName) {
+	public User(Integer userId, String userPwd) {
 		super();
 		this.userId = userId;
-		this.userName = userName;
+		this.userPwd = userPwd;
 	}
 
 	public void setUserId(Integer userId) {
@@ -153,7 +149,8 @@ public class User {
 	}
 
 	/**
-	 * @param userPortrait the userPortrait to set
+	 * @param userPortrait
+	 *            the userPortrait to set
 	 */
 	public void setUserPortrait(String userPortrait) {
 		this.userPortrait = userPortrait;
@@ -167,7 +164,8 @@ public class User {
 	}
 
 	/**
-	 * @param blogs the blogs to set
+	 * @param blogs
+	 *            the blogs to set
 	 */
 	public void setBlogs(List<Blog> blogs) {
 		this.blogs = blogs;

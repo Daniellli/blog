@@ -97,4 +97,29 @@ public class UserBizImp implements UserBiz {
 		return null;
 	}
 
+	@Override
+	public boolean modifyUser(User user) {
+
+		if (user != null) {
+			return userdao.modifyUser(user);
+		}
+		return false;
+	}
+
+	@Override
+	public User findPassword(String name, String question, String answer) {
+		if (name != null && question != null && answer != null) {
+			return userdao.findPassword(name, question, answer);
+		}
+		return null;
+	}
+
+	@Override
+	public String getQuestionByUserName(String name) {
+		if (name != null) {
+			return userdao.getQuestionByUserName(name);
+		}
+		return null;
+	}
+
 }

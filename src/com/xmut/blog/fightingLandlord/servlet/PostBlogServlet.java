@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.xmut.blog.fightingLandlord.bizImp.BlogBizImp;
-import com.xmut.blog.fightingLandlord.bizImp.CategoryBizImp;
 import com.xmut.blog.fightingLandlord.entity.Blog;
 import com.xmut.blog.fightingLandlord.entity.Category;
 import com.xmut.blog.fightingLandlord.entity.User;
@@ -27,7 +26,9 @@ public class PostBlogServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+				+ "/";
 		String title = request.getParameter("title");
 		int category = Integer.parseInt(request.getParameter("category"));
 		String content = request.getParameter("content");
@@ -43,7 +44,7 @@ public class PostBlogServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if (new BlogBizImp().addBlog(b)) {
 			out.print("<script>alert('post successfully')</script>");
-			out.print("<script>window.location.href='http://localhost:8080/blog/content/postBlog.jsp'</script>");
+			out.print("<script>window.location.href='" + basePath + "content/postBlog.jsp'</script>");
 		} else {
 			out.print("<script>alert('fail to post')</script>");
 			out.print("<script>window.history.go(-1)</script>");

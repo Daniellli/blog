@@ -211,4 +211,49 @@ public class UserDaoImp implements UserDao {
 		return list;
 	}
 
+	public User findPassword(String name, String question, String answer) {
+		User user = null;
+		try {
+			ResultSet res = util.query("select * from user where u_name = ? and u_question = ? and u_answer = ? ", name,
+					question, answer);
+
+			if (res.next()) {
+				user = new User(res.getInt("u_id"), res.getString("u_name"), res.getString("u_pwd"),
+						res.getInt("u_sex"), res.getInt("u_age"), res.getString("u_email"), res.getInt("u_type"),
+						res.getString("u_question"), res.getString("u_answer"), res.getString("u_telephone"));
+			}
+			util.closeAll();// 关闭连接
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	@Override
+	public boolean modifyUser(User user) {
+		boolean flag = false;
+		try {
+			flag = util.update("update user set  u_pwd=?  where u_id = ?", user.getUserPwd(), user.getUserId());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public String getQuestionByUserName(String name) {
+		String question = null;
+		try {
+			ResultSet res = util.query("select * from user where u_name = ?  ", name);
+
+			if (res.next()) {
+				question = res.getString("u_question");
+			}
+			util.closeAll();// 关闭连接
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return question;
+	}
+
 }

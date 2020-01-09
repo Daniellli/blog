@@ -26,6 +26,11 @@ public class GetMoments extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
+				+ "/";
+
 		HttpSession session = request.getSession();
 
 		BlogBiz blog = new BlogBizImp();
@@ -35,7 +40,7 @@ public class GetMoments extends HttpServlet {
 		List<Blog> list = blog.Moments(user.getUserId());
 
 		session.setAttribute("blog", list);
-		response.sendRedirect("http://localhost:8080/blog/content/showAll.jsp");
+		response.sendRedirect(basePath + "content/showAll.jsp");
 
 	}
 }
