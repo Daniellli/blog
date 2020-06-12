@@ -71,7 +71,9 @@ public class UserBizImp implements UserBiz {
 
 	@Override
 	public boolean updateUser(User user) {
-		// TODO Auto-generated method stub
+		if (user != null) {
+			return userdao.updateUser(user);
+		}
 		return false;
 	}
 
@@ -79,6 +81,22 @@ public class UserBizImp implements UserBiz {
 	public User queryUserById(Integer id) {
 		if (id != null) {
 			return userdao.queryUserById(id);
+		}
+		return null;
+	}
+
+	@Override
+	public User queryUserByIdSimple(Integer id) {
+		if (id != null) {
+			return userdao.queryUserById(id);
+		}
+		return null;
+	}
+
+	@Override
+	public User queryUserByName(String name) {
+		if (name != null) {
+			return userdao.queryUserByName(name);
 		}
 		return null;
 	}
@@ -120,6 +138,15 @@ public class UserBizImp implements UserBiz {
 			return userdao.getQuestionByUserName(name);
 		}
 		return null;
+	}
+
+	@Override
+	public boolean updateUserSimply(User user) {
+		if (user != null) {
+			return userdao.updateUserSimply(user);
+		}
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

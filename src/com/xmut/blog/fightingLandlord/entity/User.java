@@ -21,7 +21,6 @@ public class User {
 	private String userAnswer;// 密保答案
 	private String userTelephone;// 密保答案
 	private String userPortrait;// 密保答案
-
 	private List<Blog> blogs;// 该用户发布的所有博客
 
 	public String getUserQuestion() {

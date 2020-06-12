@@ -107,10 +107,9 @@ public class UserDaoImp implements UserDao {
 		boolean flag = false;
 		try {
 			flag = util.update(
-					"update user set u_name = ? and u_pwd=? and u_sex= ? and u_age= ? and u_email = ? and u_type=? u_question = ? u_answer = ? u_telephone=? where u_id = ?",
+					"update user set u_name = ? , u_pwd=? , u_sex= ? , u_age= ? , u_email = ? , u_question = ? , u_answer = ? , u_telephone=? where u_id = ?",
 					user.getUserName(), user.getUserPwd(), user.getUserSex(), user.getUserAge(), user.getUserEmail(),
-					user.getUserType(), user.getUserId(), user.getUserQuestion(), user.getUserAnswer(),
-					user.getUserTelephone());
+					user.getUserQuestion(), user.getUserAnswer(), user.getUserTelephone(), user.getUserId());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -159,6 +158,45 @@ public class UserDaoImp implements UserDao {
 		}
 		return user;
 	}
+
+	@Override
+	public User queryUserByIdSimple(Integer id) {
+		User user = null;
+		try {
+			ResultSet res = util.query("select * from user where u_id = ?", id);
+
+			if (res.next()) {
+				user = new User(res.getInt("u_id"), res.getString("u_name"), res.getString("u_pwd"),
+						res.getInt("u_sex"), res.getInt("u_age"), res.getString("u_email"), res.getInt("u_type"),
+						res.getString("u_question"), res.getString("u_answer"), res.getString("u_telephone"));
+			}
+			util.closeAll();// 关闭连接
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	@Override
+	public User queryUserByName(String name) {
+		User user = null;
+		try {
+			ResultSet res = util.query("select * from user where u_name = ?", name);
+			if (res.next()) {
+				user = new User(res.getInt("u_id"), res.getString("u_name"), res.getString("u_pwd"),
+						res.getInt("u_sex"), res.getInt("u_age"), res.getString("u_email"), res.getInt("u_type"),
+						res.getString("u_question"), res.getString("u_answer"), res.getString("u_telephone"));
+			}
+			util.closeAll();// 关闭连接
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	/**
+	 * 根据名字查找user
+	 */
 
 	/**
 	 * 
@@ -254,6 +292,17 @@ public class UserDaoImp implements UserDao {
 			e.printStackTrace();
 		}
 		return question;
+	}
+
+	@Override
+	public boolean updateUserSimply(User user) {
+		boolean flag = false;
+		try {
+			flag = util.update("update user set u_pwd=?  where u_name = ?", user.getUserPwd(), user.getUserName());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return flag;
 	}
 
 }

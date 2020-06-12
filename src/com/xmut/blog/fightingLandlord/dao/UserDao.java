@@ -20,6 +20,12 @@ public interface UserDao {
 	// 根据id查询返回一条用户
 	public User queryUserById(Integer id);
 
+	// 根据id查询返回一条用户
+	public User queryUserByIdSimple(Integer id);
+
+	// 根据name查询返回一条用户
+	public User queryUserByName(String name);
+
 	// 查询所有用户
 	public List<User> queryAllUser();
 
@@ -34,5 +40,10 @@ public interface UserDao {
 
 	// get question获取密保问题
 	public String getQuestionByUserName(String name);
+
+	/**
+	 * 客户端修改密码 简洁版
+	 */
+	public boolean updateUserSimply(User user);
 
 }

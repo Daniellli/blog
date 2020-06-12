@@ -163,7 +163,7 @@
 							<h4 class="text-uppercase pb-20">post categories</h4>
 							<ul>
 								<c:forEach var="category" items="${sessionScope.category }">
-									<li><a href="javascript:getByCategoryId(${category.cId })">${category.cName }<span>37</span></a></li>
+									<li><a href="javascript:getByCategoryId(${category.cId })">${category.cName }</a></li>
 								</c:forEach>
 							</ul>
 						</div>

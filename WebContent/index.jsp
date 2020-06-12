@@ -106,7 +106,11 @@
 								</c:choose>
 
 								<c:if test="${not empty sessionScope.currentUser }">
-									<a href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">Personal</a>
+									<a href="${basePath }content/personal.jsp"
+										class="dropdown-item">UpdateInfo</a>
+									<a
+										href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">Personal</a>
+
 								</c:if>
 							</div></li>
 						<c:if

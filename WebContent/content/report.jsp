@@ -211,7 +211,7 @@
 				}
 				var option = {
 					title : {
-						text : '商品数量占比',
+						text : '各分类博客数量占比',
 						subtext : '数据库数据',
 						left : 'center'
 					},
@@ -274,7 +274,7 @@
 				}
 				var option = {
 					title : {
-						text : '商品价格对象',
+						text : '各分类博客数量',
 						subtext : '数据库数据',
 						left : 'center'
 					},

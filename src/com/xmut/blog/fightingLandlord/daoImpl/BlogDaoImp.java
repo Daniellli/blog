@@ -31,7 +31,6 @@ public class BlogDaoImp implements BlogDao {
 	public boolean addBlog(Blog blog) {
 		boolean flag = false;
 		try {
-
 			// thumbs-up无效
 			flag = util.update(
 					"insert into blog(b_id,b_name,u_id,b_thumbs_up,b_content,b_audio,b_video,b_photo,b_category_id)values(?,?,?,?,?,?,?,?,?)",

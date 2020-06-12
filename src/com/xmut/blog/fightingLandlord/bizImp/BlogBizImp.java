@@ -94,4 +94,5 @@ public class BlogBizImp implements BlogBiz {
 		}
 		return null;
 	}
+
 }

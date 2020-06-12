@@ -70,7 +70,6 @@ public class UploadServlet extends HttpServlet {
 					// 获取用户具体输入的字符串，
 					String value = item.getString();
 					value = new String(value.getBytes("ISO8859_1"), "utf-8");
-					String parameterName = item.getFieldName();
 					if (item.getFieldName().equals("title")) // 标题字段
 						title = value;
 
