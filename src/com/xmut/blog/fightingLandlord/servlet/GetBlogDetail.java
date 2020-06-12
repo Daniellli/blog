@@ -26,29 +26,18 @@ public class GetBlogDetail extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-<<<<<<< HEAD
+
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 				+ "/";
-=======
 
-		
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 		String bid = request.getParameter("bid");
 
-		
-		String path = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-				+ path + "/";
-		
-		
 		Blog blogDetail = biz.getBlogById(Integer.parseInt(bid));
 		HttpSession session = request.getSession();
 		session.setAttribute("blogDetail", blogDetail);
-<<<<<<< HEAD
+
 		response.sendRedirect(basePath + "content/singleBlog.jsp");
-=======
-		response.sendRedirect(basePath+"content/singleBlog.jsp");
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
+
 	}
 }

@@ -5,11 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
+
 <html>
 <head>
 <base href="<%=basePath%>">
@@ -39,11 +35,8 @@ body {
 		<div class="message">Blog-Login</div>
 		<div id="darkbannerwrap"></div>
 
-<<<<<<< HEAD
 		<form method="post" action="${basePath}LoginServlet"
-=======
-		<form method="post" action="${basePath }LoginServlet"
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
+
 			autocomplete="off">
 			<input name="action" value="login" type="hidden"> <input
 				name="username" placeholder="User Name" required type="text">
@@ -56,16 +49,11 @@ body {
 			<input value="Login" style="width: 100%;" type="submit">
 			<!-- 此处type可以写button ,加上函数onClick="xx"  script写xx函数$("#form").submit();-->
 			<hr class="hr20">
-<<<<<<< HEAD
 			<a href="${basePath}content/register.jsp">No account?Register
 				promptly</a> 
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<br/>
 				<a href="${basePath }content/forgetPassCheck.jsp">Forget Password</a>
-=======
-			<a href="${basePath }register.jsp">无账号?立即注册</a>
-			<!-- 帮助 <a onClick="alert('请联系管理员')">忘记密码</a> -->
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 		</form>
 	</div>
 

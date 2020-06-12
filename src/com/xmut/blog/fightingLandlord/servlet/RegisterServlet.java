@@ -24,18 +24,11 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-<<<<<<< HEAD
+
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 				+ "/";
-=======
-		
-		String path = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-				+ path + "/";
-		
 
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 		String telephone = request.getParameter("phoneNumber");
 		String username = request.getParameter("userName");
 		String pwd = request.getParameter("password");
@@ -60,11 +53,8 @@ public class RegisterServlet extends HttpServlet {
 
 		if (userBiz.register(user)) {
 			out.println("<script>alert('register successfully!')</script>");
-<<<<<<< HEAD
 			out.println("<script>window.location.href='" + basePath + "content/login.jsp'</script>");
-=======
-			out.println("<script>window.location.href='${basePath }content/login.jsp'</script>");
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
+
 		} else {
 			out.println("<script>alert('fail to register!')</script>");
 			out.println("<script>window.history.go(-1)</script>");

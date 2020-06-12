@@ -6,11 +6,7 @@
 			+ path + "/";
 %>
 
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
+
 
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -35,9 +31,6 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
 	rel="stylesheet">
-<!--
-			CSS
-			============================================= -->
 <link rel="stylesheet" href="${basePath }css/linearicons.css">
 <link rel="stylesheet" href="${basePath }css/owl.carousel.css">
 <link rel="stylesheet" href="${basePath }css/font-awesome.min.css">
@@ -67,29 +60,9 @@
 						class="collapse navbar-collapse justify-content-end align-items-center"
 						id="navbarSupportedContent">
 						<ul class="navbar-nav scrollable-menu">
-<<<<<<< HEAD
 							<li><a href="${basePath }index.jsp">Back</a></li>
 
 							<li><a href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">personal</a></li>
-=======
-							<li><a href="../index.jsp">Back</a></li>
-							<li><a href="${basePath }">personal</a></li>
-							<!-- <li><a href="index.html#news">News</a></li>
-							<li><a href="index.html#travel">Travel</a></li>
-							<li><a href="index.html#fashion">fashion</a></li>
-							<li><a href="index.html#team">team</a></li>
-							Dropdown
-							<li class="dropdown"><a class="dropdown-toggle" href="#"
-								id="navbardrop" data-toggle="dropdown"> Pages </a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="single.html">Single</a> <a
-										class="dropdown-item" href="category.html">Category</a> <a
-										class="dropdown-item" href="search.html">Search</a> <a
-										class="dropdown-item" href="archive.html">Archive</a> <a
-										class="dropdown-item" href="generic.html">Generic</a> <a
-										class="dropdown-item" href="elements.html">Elements</a>
-								</div></li> -->
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 						</ul>
 					</div>
 				</div>

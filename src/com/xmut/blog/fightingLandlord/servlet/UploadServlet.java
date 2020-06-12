@@ -45,11 +45,6 @@ public class UploadServlet extends HttpServlet {
 		factory.setSizeThreshold(1024 * 1024);
 		// 上传处理工具类（高水平API上传处理？）
 		ServletFileUpload upload = new ServletFileUpload(factory);
-		
-		String path = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-				+ path + "/";
-		
 
 		String title = null;
 		int category = 0;
@@ -162,11 +157,7 @@ public class UploadServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if (new BlogBizImp().addBlog(b)) {
 			out.print("<script>alert('post successfully')</script>");
-<<<<<<< HEAD
 			out.print("<script>window.location.href='" + basePath + "content/postBlog.jsp'</script>");
-=======
-			out.print("<script>window.location.href='${basePath }content/postBlog.jsp'</script>");
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 		} else {
 			out.print("<script>alert('fail to post')</script>");
 			out.print("<script>window.history.go(-1)</script>");

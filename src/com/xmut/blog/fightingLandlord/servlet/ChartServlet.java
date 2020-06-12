@@ -28,10 +28,6 @@ public class ChartServlet extends HttpServlet {
 				+ "/";
 
 		String method = request.getParameter("method");
-		
-		String path = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-				+ path + "/";
 
 		if (method.equals("receive")) {
 
@@ -47,11 +43,8 @@ public class ChartServlet extends HttpServlet {
 				sc.setAttribute("message", amessage + userName + ":" + request.getParameter("message") + "\r\n");
 			else
 				sc.setAttribute("message", userName + ":" + request.getParameter("message") + "\r\n");
-<<<<<<< HEAD
+
 			response.sendRedirect("\r\n" + basePath + "content/Clientchart.jsp");
-=======
-			response.sendRedirect("\r\n" + basePath+"content/Clientchart.jsp");
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 
 		} else if (method.equals("send")) {
 			ServletContext sc = this.getServletContext();
@@ -62,11 +55,7 @@ public class ChartServlet extends HttpServlet {
 
 			sc.setAttribute("message", amessage + userName + ":" + request.getParameter("message") + "\r\n");
 
-<<<<<<< HEAD
 			response.sendRedirect(basePath + "content/Serverchart.jsp");
-=======
-			response.sendRedirect(basePath+"content/Serverchart.jsp");
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 
 		} else if (method.equals("saveclient")) {
 
@@ -76,7 +65,7 @@ public class ChartServlet extends HttpServlet {
 
 			request.setAttribute("content", outStr);
 
-			request.getRequestDispatcher(basePath+"content/Clientchart.jsp").forward(request, response);
+			request.getRequestDispatcher(basePath + "content/Clientchart.jsp").forward(request, response);
 
 		} else if (method.equals("saveserver")) {
 			String content = request.getParameter("content");
@@ -85,7 +74,7 @@ public class ChartServlet extends HttpServlet {
 
 			request.setAttribute("content", outStr);
 
-			request.getRequestDispatcher(basePath+"content/Serverchart.jsp").forward(request, response);
+			request.getRequestDispatcher(basePath + "content/Serverchart.jsp").forward(request, response);
 
 		}
 	}

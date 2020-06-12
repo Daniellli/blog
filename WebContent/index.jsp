@@ -25,14 +25,11 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <title>Blogger</title>
-<<<<<<< HEAD
 
-=======
 <!-- <script>
 	if (window.location.href != "http://localhost:8080/blog/index.jsp")
 		window.location.href = "http://localhost:8080/blog/index.jsp";
 </script> -->
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
@@ -49,18 +46,6 @@
 	width: 0px;
 	height: 100%;
 	background-color: #b0c4de;
-<<<<<<< HEAD
-	background-size: cover;
-	transition: all 0.3s linear;
-	position: fixed;
-	right: 0;
-	top: 60px;
-=======
-	transition: all 0.3s linear;
-	position: fixed;
-	right: 0;
-	top: 75px;
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 	z-index: 9999;
 }
 </style>
@@ -86,11 +71,8 @@
 					class="collapse navbar-collapse justify-content-end align-items-center"
 					id="navbarSupportedContent">
 					<ul class="navbar-nav">
-<<<<<<< HEAD
 						<li><a href="${basePath }index.jsp">Home</a></li>
-=======
-						<li><a href="#home">Home</a></li>
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
+
 						<!-- <li><a href="#news">News</a></li>
 						<li><a href="#travel">Travel</a></li> -->
 						<!-- <li><a href="#fashion">fashion</a></li>
@@ -100,9 +82,6 @@
 							<li><a href="${basePath }content/postBlog.jsp">PostBlog</a></li>
 							<li><a href="${basePath }GetMoments">Moments</a></li>
 						</c:if>
-<<<<<<< HEAD
-
-
 
 						<li><a href="${basePath }GetAllBlog">Refresh</a></li>
 
@@ -110,10 +89,6 @@
 							<li><a href="javascript:void()" class="show">Following</a></li>
 						</c:if>
 
-=======
-						<li><a href="${basePath}GetAllBlog">Refresh</a></li>
-						<li><a href="#" class="show">Following</a></li>
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 
 						<!-- Dropdown -->
 						<li class="dropdown"><a class="dropdown-toggle" href="#"
@@ -121,7 +96,6 @@
 							<div class="dropdown-menu">
 								<c:choose>
 									<c:when test="${not empty sessionScope.currentUser  }">
-<<<<<<< HEAD
 										<a class="dropdown-item" href="${basePath }LogoutServlet">Logout</a>
 									</c:when>
 									<c:otherwise>
@@ -134,34 +108,23 @@
 										class="dropdown-item">UpdateInfo</a>
 									<a
 										href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">Personal</a>
-
 								</c:if>
-							</div></li>
-=======
-										<a class="dropdown-item" href="${basePath}content/login.jsp">Logout</a>
-									</c:when>
-									<c:otherwise>
-										<a class="dropdown-item" href="${basePath}content/login.jsp">Login</a>
-									</c:otherwise>
-								</c:choose>
-								<a href="${basePath}">personal</a>
 							</div>
-						</li>
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
+							</li>
 						<c:if
 							test="${not empty sessionScope.currentUser and sessionScope.currentUser.userType == 1 }">
 							<li class="dropdown"><a class="dropdown-toggle" href="#"
 								id="navbardrop" data-toggle="dropdown"> Welcome
 									${sessionScope.currentUser.userName } </a>
 								<div class="dropdown-menu">
-<<<<<<< HEAD
+								
+								 
 									<a class="dropdown-item"
 										href="${basePath }content/newCategory.jsp">AddCategory</a> <a
 										class="dropdown-item" href="${basePath }content/report.jsp">Report</a>
-=======
-									<a class="dropdown-item" href="${basePath}content/newCategory.jsp">AddCategory</a>
->>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
-								</div></li>
+							
+								</div>
+								</li>
 						</c:if>
 					</ul>
 				</div>
