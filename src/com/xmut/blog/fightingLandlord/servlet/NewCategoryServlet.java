@@ -20,9 +20,17 @@ public class NewCategoryServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+<<<<<<< HEAD
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 				+ "/";
+=======
+		
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ path + "/";
+		
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 		String name = request.getParameter("name");
 
 		Category ca = new Category();
@@ -30,7 +38,11 @@ public class NewCategoryServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if (new CategoryBizImp().addCategory(ca)) {
 			out.print("<script>alert('add successfully ')</script>");
+<<<<<<< HEAD
 			out.print("<script>window.location.href= '" + basePath + "content/newCategory.jsp'</script>");
+=======
+			out.print("<script>window.location.href= '${basePath }content/newCategory.jsp'</script>");
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 		} else {
 			out.print("<script>alert('fail to add ')</script>");
 			out.print("<script>window.history.go(-1)</script>");

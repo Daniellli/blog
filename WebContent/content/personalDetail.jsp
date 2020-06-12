@@ -58,7 +58,11 @@
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
 				<li><a href="javascript:window.history.go(-1)">Back</a></li>
+<<<<<<< HEAD
 				<li><a href="${basePath }index.jsp">home</a></li>
+=======
+				<li><a href="index.jsp">home</a></li>
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 
 			</ul>
 		</div>

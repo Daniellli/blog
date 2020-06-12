@@ -21,14 +21,27 @@ public class LogoutServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+<<<<<<< HEAD
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path
 				+ "/";
 
+=======
+		
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ path + "/";
+		
+		
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 		HttpSession session = request.getSession();
 		session.invalidate();
 		PrintWriter out = response.getWriter();
 		out.println("<script>alert('logout successfully!')</script>");
+<<<<<<< HEAD
 		out.println("<script>window.location.href='" + basePath + "index.jsp'</script>");
+=======
+		out.println("<script>window.location.href='${basePath }index.jsp'</script>");
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 	}
 }

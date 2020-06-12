@@ -60,6 +60,7 @@
 			class="collapse navbar-collapse justify-content-end align-items-center"
 			id="navbarSupportedContent">
 			<ul class="navbar-nav scrollable-menu">
+<<<<<<< HEAD
 				<li><a href="${basePath }index.jsp">Back</a></li>
 
 				<c:if test="${not empty sessionScope.currentUser }">
@@ -67,6 +68,10 @@
 						href="${basePath }GetPersonalInfo?userId=${sessionScope.currentUser.userId}">Personal</a>
 					</li>
 				</c:if>
+=======
+				<li><a href="javascript:window.history.go(-1)">Back</a></li>
+				<li><a href="content/personalDetail.jsp">personal</a></li>
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 				<!-- 	<li><a href="#travel">热搜</a></li>
 				Dropdown
 				<li class="dropdown"><a class="dropdown-toggle" href="#"
@@ -96,8 +101,8 @@
 	</div>
 	</section>
 	<!-- 主要内容 -->
-	<form action="http://localhost:8080/blog/UploadServlet" method="post"
-		enctype="multipart/form-data" class="post-wrapper pt-100">
+	<form action="${basePath }UploadServlet" method="post"
+	       	enctype="multipart/form-data" class="post-wrapper pt-100">
 		<input type="hidden" value="${sessionScope.currentUser.userName }"
 			name="userName">
 
@@ -108,6 +113,7 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-8">
 						<div class="single-page-content">
+<<<<<<< HEAD
 							<img class="img-fluid" src="${basePath }img/single.jpg" alt="">
 							<div class="top-wrapper "></div>
 
@@ -117,6 +123,18 @@
 							<div class="single-post-content">
 								TITLE<input type="text" placeholder="Your title" name="title"
 									class="common-input mb-20 form-control">
+=======
+							<img class="img-fluid" src="../img/single.jpg" alt="">
+								<div class="top-wrapper ">
+								
+							</div>
+							
+
+							<!-- 分类 -->
+						
+							<div class="single-post-content">
+								TITLE<input type="text" placeholder="Your title" name="title"class="common-input mb-20 form-control">
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 							</div>
 							<div class="category">
 								<label for="">category</label> <select name="category">
@@ -147,7 +165,13 @@
 	</form>
 
 	<!-- 右边 -->
+<<<<<<< HEAD
 	<div class="col-lg-4 sidebar-area "></div>
+=======
+	<div class="col-lg-4 sidebar-area ">
+
+	</div>
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 	</section>
 
 	</div>

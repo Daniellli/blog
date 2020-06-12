@@ -259,7 +259,11 @@
 									<script>
 												var b=null;
 													function chat(){
+<<<<<<< HEAD
 														b=window.open("${basePath }content/Clientchart.jsp","","width=750 height=550");
+=======
+														b=window.open("${basePath}Clientchart.jsp","","width=750 height=550");
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 													}
 													function chatclose(){
 														b.close();
@@ -423,7 +427,11 @@
 		var content = document.getElementById(textareaId).value;
 		$.ajax({
 			type: 'post',
+<<<<<<< HEAD
 			url : "${basePath }AddComment",
+=======
+			url : "${basePath}AddComment",
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 			data:{
 				"userId" : userId,
 				"bId" : blogId,
@@ -482,7 +490,11 @@
 			
 	 	 	$.ajax({
 				type:'post',
+<<<<<<< HEAD
 				url:'${basePath }ReplyServlet',
+=======
+				url:'${basePath}ReplyServlet',
+>>>>>>> 5911844bc64f219ea8a234ddf021e271762e0394
 				datatype:'json',
 				data:{
 					'content':content,
